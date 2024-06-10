@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbw.reservation.mappers.ParkingLotMapper">
+    <select id="selectParkingLotByCoords" resultType="com.jbw.reservation.entities.ParkingLotRegisterEntity">
+        SELECT `index`                  AS `index`,
+               `contractor_email`       AS `contractorEmail`,
+               `contractor_name`        AS `contractorName`,
+               `thumbnail`              AS `thumbnail`,
+               `thumbnail_file_name`    AS `thumbnailFileName`,
+               `thumbnail_content_type` AS `thumbnailContentType`,
+               `name`                   AS `name`,
+               `category_code`          AS `categoryCode`,
+               `contact_first`          AS `contactFirst`,
+               `contact_second`         AS `contactSecond`,
+               `contact_third`          AS `contactThird`,
+               `address_postal`         AS `addressPostal`,
+               `address_primary`        AS `addressPrimary`,
+               `address_secondary`      AS `addressSecondary`,
+               `latitude`               AS `latitude`,
+               `longitude`              AS `longitude`,
+               `general_car_number`     AS `generalCarNumber`,
+               `dp_car_number`          AS `dpCarNumber`,
+               `description`            AS `description`,
+               `price`                  AS `price`,
+               `day_max_price`          AS `dayMaxPrice`,
+               `created_at`             AS `createdAt`,
+               `modified_at`            AS `modifiedAt`
+        FROM `reservation`.`parking_lots_register` AS `parkingLotsRegister`
+        WHERE `parkingLotsRegister`.`latitude` BETWEEN #{minLat} AND #{maxLat}
+          AND `parkingLotsRegister`.`longitude` BETWEEN #{minLng} AND #{maxLng}
+        GROUP BY `parkingLotsRegister`.`index`
+    </select>
+
+    <select id="selectParkingLotByIndex" resultType="com.jbw.reservation.entities.ParkingLotRegisterEntity">
+        SELECT `index`                  AS `index`,
+               `contractor_email`       AS `contractorEmail`,
+               `contractor_name`        AS `contractorName`,
+               `thumbnail`              AS `thumbnail`,
+               `thumbnail_file_name`    AS `thumbnailFileName`,
+               `thumbnail_content_type` AS `thumbnailContentType`,
+               `name`                   AS `name`,
+               `category_code`          AS `categoryCode`,
+               `contact_first`          AS `contactFirst`,
+               `contact_second`         AS `contactSecond`,
+               `contact_third`          AS `contactThird`,
+               `address_postal`         AS `addressPostal`,
+               `address_primary`        AS `addressPrimary`,
+               `address_secondary`      AS `addressSecondary`,
+               `latitude`               AS `latitude`,
+               `longitude`              AS `longitude`,
+               `general_car_number`     AS `generalCarNumber`,
+               `dp_car_number`          AS `dpCarNumber`,
+               `description`            AS `description`,
+               `price`                  AS `price`,
+               `day_max_price`          AS `dayMaxPrice`,
+               `created_at`             AS `createdAt`,
+               `modified_at`            AS `modifiedAt`
+        FROM `reservation`.`parking_lots_register` AS `parkingLotsRegister`
+        WHERE `parkingLotsRegister`.`index` = #{index}
+        LIMIT 1
+    </select>
+</mapper>

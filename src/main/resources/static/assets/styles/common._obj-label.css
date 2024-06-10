@@ -1,0 +1,40 @@
+._obj-label {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  justify-content: flex-start;
+}
+._obj-label > .__text {
+  color: #757575;
+  font-size: 1rem;
+}
+._obj-label > .__horizontal {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  gap: 0.375rem;
+  justify-content: flex-start;
+}
+._obj-label > .__horizontal > .-spring {
+  flex: 1;
+}
+
+._obj-label:hover > .__text {
+  color: #424242;
+}
+._obj-label:focus-within > .__text {
+  color: #3498db;
+}
+._obj-label.-invalid .__field {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+._obj-label.-invalid > .__text {
+  color: #e74c3c;
+}
+._obj-label.-invalid > .__warning {
+  max-height: 2rem;
+}
+
+/*# sourceMappingURL=common._obj-label.css.map */

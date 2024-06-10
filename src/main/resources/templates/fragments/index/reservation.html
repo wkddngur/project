@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<aside class="aside reservation" id="reservation" th:fragment="reservation">
+    <h2 class="title">
+        <i class="closer fa-solid fa-angle-left" rel="closer"></i>
+        주차장 예약
+    </h2>
+    <div class="image-container">
+        <img class="image thumbnail"
+             src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA1MDNfMTI3%2FMDAxNTI1Mjc5NzY1MjMx.urv7bcIrDG3hTdqb0xQNG0s7338LMXrylPgdVDkambUg.Ey2Ert5ADg7wxI1q-IKXTVWU1k1nEvi0Iqx596aR-aMg.JPEG.jjung10479%2FDSC03310.JPG&type=a340"
+             alt="">
+    </div>
+
+    <div class="info-container">
+        <div class="name-container">
+            <span class="name" rel="name">동성로 228공원 주차장</span>
+            <span class="category" rel="category">공영주차장</span>
+            <br>
+            <span class="item" rel="address">대구 중구 동성로2길 80 228공원 주차장</span>
+        </div>
+    </div>
+
+    <p>--------------------------------------------------------------</p>
+
+    <div class="info-container">
+        <h3 class="title">예약정보 입력</h3>
+        <br>
+        <label class="date">
+            <span>입차일자</span>
+            <input class="date-reservation" placeholder="예약 입차일을 선택해주세요." type="datetime-local">
+        </label>
+    </div>
+
+    <div>
+        <label>
+            <span>출차일자</span>
+            <input class="date-reservation" placeholder="예약 출차일을 선택해주세요." type="datetime-local">
+        </label>
+    </div>
+
+    <!--  보류  <div>-->
+    <!--        <label>-->
+    <!--            <span>차량종류</span>-->
+    <!--            <select class="_obj-input">-->
+    <!--                <option value="일반차량">일반차량</option>-->
+    <!--                <option value="장애인차량">장애인차량</option>-->
+    <!--            </select>-->
+    <!--        </label>-->
+    <!--    </div>-->
+
+    <p>--------------------------------------------------------------</p>
+    <div>
+        <h3 class="title">예약정보</h3>
+        <br>
+        <label>
+            <span>예약날짜</span>
+            <input type="text" value="2024-05-23 11:00">
+        </label>
+    </div>
+
+    <div>
+        <label>
+            <span>예약주차</span>
+            <input type="text" value="동성로 228공원 주차장 ">
+        </label>
+    </div>
+
+    <div>
+        <label>
+            <span>차량번호</span>
+            <input type="text" placeholder="예) 00가0000, 서울00가0000, 외교000000">
+        </label>
+    </div>
+
+    <div>
+        <label>
+            <span>휴대전화번호</span>
+            <input type="text" placeholder="예) 01012345678">
+        </label>
+    </div>
+
+    <p>--------------------------------------------------------------</p>
+
+    <button type="button">예약</button>
+
+</aside>
+</html>

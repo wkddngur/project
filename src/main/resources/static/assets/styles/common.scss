@@ -1,0 +1,26 @@
+@charset "UTF-8";
+@import "common._obj-message";
+@import "common._obj-button";
+@import "common._obj-input";
+@import "common._obj-label";
+@import "common._obj-check-label";
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+body {
+  cursor: default;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font: inherit;
+  margin-block: initial;
+  margin-inline: initial;
+}
+
+ol, ul {
+  list-style-type: none;
+  margin-block: inherit;
+  margin-inline: initial;
+  padding-inline: initial;
+}

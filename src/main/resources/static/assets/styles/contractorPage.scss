@@ -1,0 +1,218 @@
+@charset "UTF-8";
+
+body {
+  background-color: #0B005C;
+}
+
+#contractorPage {
+  background-color: #f5f5f5;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 90%;
+  border-radius: 0.375rem;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  > .contractorTitleDiv {
+    background-color: #f5f5f5;
+    top: 0;
+    position: sticky;
+    z-index: 9;
+
+
+    > .titleDiv {
+      font-size: 2rem;
+      font-weight: 400;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    > .type-wrapper {
+      padding: 0 2rem;
+      display: grid;
+      gap: 0.5rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      //&:focus-within {
+      //  > .type {
+      //    background-color: #0B005C;
+      //    color: #e0e0e0;
+      //  }
+      //}
+
+      > .type {
+        background-color: darken(#e0e0e0, 1%);
+        border: 0.0625rem solid darken(#e0e0e0, 5%);
+        border-radius: 0.25rem;
+        cursor: pointer;
+        padding: 0.75rem 1rem;
+        user-select: none;
+
+        align-items: stretch;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        justify-content: flex-start;
+
+        > [name="type"] {
+          display: none;
+        }
+
+        > .title {
+          font-size: 1.2rem;
+          white-space: nowrap;
+          text-align: center;
+        }
+
+        > .message {
+          color: #757575;
+          font-size: 0.8rem;
+          line-height: 1.25;
+        }
+
+        &:hover {
+          border-color: #212121;
+        }
+
+        &:has([name="type"]:checked) {
+          border-color: #0B005C;
+        }
+      }
+    }
+    &:has([name="type"][value="contractorInfo"]:checked) ~ .div.contractorInfo {
+      display: flex;
+    }
+
+    &:has([name="type"][value="parkingLotAdd"]:checked) ~ .div.parkingLotAdd {
+      display: flex;
+    }
+
+    &:has([name="type"][value="parkingLotInfo"]:checked) ~ .div.parkingLotInfo {
+      display: flex;
+    }
+  }
+}
+
+#contractorInfo {
+  display: none;
+}
+
+#parkingLotAdd {
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 90%;
+  border-radius: 0.375rem;
+  padding: 1rem 2rem;
+  position: relative;
+  transform: translate(-50%, -50%);
+
+  align-items: stretch;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+
+  > .parkingLotAddForm {
+    padding-bottom: 2rem;
+
+    align-items: stretch;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.5rem;
+
+    > ._obj-label {
+      > .__horizontal {
+        > .space {
+          padding-top: 1rem;
+        }
+      }
+    }
+
+    > .thumbnail {
+
+      > .image-wrapper {
+        align-items: stretch;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        > .empty {
+          width: 100%;
+          aspect-ratio: 16/9;
+          background-color: lighten(#757575, 40%);
+          border-radius: 0.25rem;
+          color: darken(#757575, 30%);
+          cursor: pointer;
+
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        > .image {
+          width: 100%;
+          aspect-ratio: 16/9;
+          border-radius: 0.25rem;
+          cursor: pointer;
+          display: none;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+  }
+}
+
+#parkingLotInfo {
+  display: none;
+}
+
+#addressFinder {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #212121a0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  transition: opacity 250ms;
+  z-index: 9;
+
+  > .dialog {
+    top: calc(50% + 0.5rem);
+    left: 50%;
+    width: 22.5rem;
+    height: 27.5rem;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transition: top 250ms;
+  }
+
+  &.-visible {
+    opacity: 1;
+    pointer-events: all;
+
+    > .dialog {
+      top: 50%;
+    }
+  }
+}

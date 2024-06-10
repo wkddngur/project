@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>협력업체 회원가입</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/access.contractorRegister.css}">
+
+    <script defer type="text/javascript" th:src="@{/assets/scripts/common.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/access.contractorRegister.js}"></script>
+</head>
+<body th:with="ContractorRegex=${T(com.jbw.reservation.regexes.ContractorRegex)},emailAuthRegex=${T(com.jbw.reservation.regexes.EmailAuthRegex)}">
+
+<div class="contractorRegisterDiv" id="contractorRegisterDiv">
+
+    <div class="titleDiv">
+        <h2>협력업체 회원가입</h2>
+    </div>
+
+    <form novalidate class="form" id="contractorRegisterForm" rel="contractorRegisterForm">
+        <input hidden name="emailSalt" type="hidden">
+
+        <label class="_obj-label" rel="emailLabel">
+            <span class="__text">이메일</span>
+            <input required autofocus autocomplete="email" name="email" maxlength="50" minlength="5"
+                   class="_obj-input __field" placeholder="이메일 (user@sample.com)" spellcheck="false"
+                   type="email"
+                   th:attrappend="data-regex=${ContractorRegex.email.expression}">
+            <button class="_obj-button" name="emailSend" type="button">인증번호 전송</button>
+
+            <input disabled required autocomplete="one-time-code" class="_obj-input __field" maxlength="6"
+                   minlength="6" name="emailCode" placeholder="인증번호 (숫자 6자리)" spellcheck="false" type="text"
+                   th:attrappend="data-regex=${emailAuthRegex.code.expression}">
+            <button disabled class="_obj-button" name="emailVerify" type="button">인증번호 확인</button>
+        </label>
+
+        <label class="_obj-label" rel="passwordLabel">
+            <span class="__text">비밀번호</span>
+            <input required autocomplete="new-password" class="_obj-input __field" maxlength="20" minlength="5"
+                   name="password" placeholder="비밀번호 (숫자, 영어 대소문자 특수기호 5자이상 20자 이하)" spellcheck="false" type="password"
+                   th:attrappend="data-regex=${ContractorRegex.password.expression}">
+
+            <input required autocomplete="off" class="_obj-input __field" maxlength="20"
+                   minlength="5" name="passwordCheck" placeholder="비밀번호 재입력" spellcheck="false" type="password">
+        </label>
+
+        <label class="_obj-label" rel="contractorNameLabel">
+            <span class="__text">협력업체 이름</span>
+            <input required autocomplete="off" class="_obj-input __field" maxlength="10" minlength="2"
+                   name="contractorName" placeholder="가입하시는 협력업체 이름을 입력해 주세요." spellcheck="false" type="text"
+                   th:attrappend="data-regex=${ContractorRegex.contractorName.expression}">
+        </label>
+
+        <label class="_obj-label" rel="contactLabel">
+            <span class="__text">협력업체 대표번호</span>
+            <span class="__horizontal">
+                <input required class="_obj-input __field" name="contactFirst" maxlength="4" minlength="4" type="text"
+                       th:attrappend="data-regex=${ContractorRegex.contactFirst.expression}">
+                <span class="space">-</span>
+                <input maxlength="4" minlength="3" required class="_obj-input __field" name="contactSecond" type="text"
+                       th:attrappend="data-regex=${ContractorRegex.contactSecond.expression}">
+                <span class="space">-</span>
+                <input maxlength="4" minlength="4" required class="_obj-input __field" name="contactThird" type="text"
+                       th:attrappend="data-regex=${ContractorRegex.contactThird.expression}">
+            </span>
+        </label>
+
+        <label class="_obj-label" rel="tinLabel">
+            <span class="__text">사업자 등록번호</span>
+            <span class="__horizontal">
+                <input required class="_obj-input __field" name="tinFirst" maxlength="3" minlength="3" type="text"
+                   th:attrappend="data-regex=${ContractorRegex.tinFirst.expression}">
+                <span class="space">-</span>
+                <input required class="_obj-input __field" name="tinSecond" maxlength="2" minlength="2" type="text"
+                   th:attrappend="data-regex=${ContractorRegex.tinSecond.expression}">
+                <span class="space">-</span>
+                <input required class="_obj-input __field" name="tinThird" maxlength="5" minlength="5" type="text"
+                   th:attrappend="data-regex=${ContractorRegex.tinThird.expression}">
+            </span>
+        </label>
+
+        <label class="_obj-check-label">
+            <input name="agree" type="checkbox">
+            <span class="__box"></span>
+            <span class="__text">
+                <a target="_blank" href="#">서비스이용약관 </a> 및 <a target="_blank" href="#">개인정보 처리방침</a>을 읽어보았으며 이해하였고 동의합니다.
+            </span>
+        </label>
+
+        <button class="_obj-button" type="submit">회원가입</button>
+    </form>
+
+    <button class="_obj-button" rel="goLoginCaller" type="button">로그인으로 돌아가기</button>
+</div>
+
+</body>
+</html>

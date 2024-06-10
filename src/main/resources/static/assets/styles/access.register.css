@@ -1,0 +1,51 @@
+body {
+  background-color: #0B005C;
+}
+
+#registerDiv {
+  background-color: #f5f5f5;
+  top: 50%;
+  left: 50%;
+  width: 27rem;
+  border-radius: 0.375rem;
+  padding: 1.5rem 2rem;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: flex-start;
+}
+#registerDiv > .titleDiv {
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+}
+#registerDiv .type-wrapper {
+  text-align: center;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+#registerDiv .type-wrapper > .__text {
+  background-color: #d8d8d8;
+  width: 50%;
+  height: 50%;
+  border: 0.0625rem solid #757575;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  padding: 2rem 2rem;
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #212121;
+  text-decoration: none;
+}
+#registerDiv .type-wrapper > .__text:hover {
+  background-color: #dddddd;
+  border-color: #0B005C;
+}
+
+/*# sourceMappingURL=access.register.css.map */

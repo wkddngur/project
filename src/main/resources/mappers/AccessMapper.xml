@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbw.reservation.mappers.AccessMapper">
+
+    <insert id="insertUser" parameterType="com.jbw.reservation.entities.UserEntity">
+        INSERT INTO `reservation`.`users` (`email`, `password`, `name`, `gender`, `nickname`, `ssn_birth`, `created_at`, `is_deleted`, `is_suspended`, `is_admin`, `is_agree`)
+        VALUES (#{email}, #{password}, #{name}, #{gender}, #{nickname}, #{ssnBirth}, #{createdAt}, #{isDeleted}, #{isSuspended}, #{isAdmin}, #{isAgree})
+    </insert>
+
+    <insert id="insertContractor" parameterType="com.jbw.reservation.entities.ContractorEntity">
+        INSERT INTO `reservation`.`contractors` (`email`, `password`, `contractor_name`, `contact_first`,`contact_second`,`contact_third`,`tin_first`,`tin_second`,`tin_third`,`created_at`,`is_deleted`,`is_suspended`,`is_agree`)
+        VALUES (#{email}, #{password}, #{contractorName}, #{contactFirst}, #{contactSecond}, #{contactThird}, #{tinFirst}, #{tinSecond}, #{tinThird}, #{createdAt}, #{isDeleted}, #{isSuspended}, #{isAgree})
+    </insert>
+
+    <insert id="insertEmailAuth" parameterType="com.jbw.reservation.entities.EmailAuthEntity">
+        INSERT INTO `reservation`.`email_auth`(`email`, `code`, `salt`, `created_at`, `expires_at`, `is_expired`, `is_verified`, `is_used`)
+        VALUES (#{email}, #{code}, #{salt}, #{createdAt}, #{expiresAt}, #{isExpired}, #{isVerified}, #{isUsed})
+    </insert>
+
+    <update id="updateEmailAuth" parameterType="com.jbw.reservation.entities.EmailAuthEntity">
+        UPDATE `reservation`.`email_auth`
+        SET `created_at`  = #{createdAt},
+            `expires_at`  = #{expiresAt},
+            `is_expired`  = #{isExpired},
+            `is_verified` = #{isVerified},
+            `is_used`     = #{isUsed}
+        WHERE BINARY `email` = #{email}
+          AND BINARY `code` = #{code}
+          AND BINARY `salt` = #{salt}
+    </update>
+
+    <update id="updateUser" parameterType="com.jbw.reservation.entities.UserEntity">
+        UPDATE `reservation`.`users`
+        SET `password`     = #{password},
+            `name`         = #{name},
+            `gender`       = #{gender},
+            `nickname`     = #{nickname},
+            `ssn_birth`    = #{ssnBirth},
+            `created_at`   = #{createdAt},
+            `is_deleted`   = #{isDeleted},
+            `is_suspended` = #{isSuspended},
+            `is_admin`     = #{isAdmin},
+            `is_agree`     = #{isAgree}
+        WHERE BINARY `email` = #{email}
+        LIMIT 1
+    </update>
+
+    <select id="selectEmailAuthEmailCodeSalt" resultType="com.jbw.reservation.entities.EmailAuthEntity">
+        SELECT `email`       AS `email`,
+               `code`        AS code,
+               `salt`        AS salt,
+               `created_at`  AS `createdAt`,
+               `expires_at`  AS `expiresAt`,
+               `is_expired`  AS `isExpired`,
+               `is_verified` AS isVerified,
+               `is_used`     AS `isUsed`
+        FROM `reservation`.`email_auth`
+        WHERE BINARY `email` = #{email}
+          AND BINARY `code` = #{code}
+          AND BINARY `salt` = #{salt}
+        LIMIT 1
+    </select>
+
+    <select id="selectUserByEmail" resultType="com.jbw.reservation.entities.UserEntity">
+        SELECT `email`        AS `email`,
+               `password`     AS `password`,
+               `name`         AS `name`,
+               `gender`       AS `gender`,
+               `nickname`     AS `nickname`,
+               `ssn_birth`    AS ssnBirth,
+               `created_at`   AS createdAt,
+               `is_deleted`   AS isDeleted,
+               `is_suspended` AS isSuspended,
+               `is_admin`     AS `isAdmin`,
+               `is_agree`     AS `isAgree`
+        FROM `reservation`.`users`
+        WHERE BINARY `email` = #{email}
+        LIMIT 1
+    </select>
+
+    <select id="selectUserByNickname" resultType="com.jbw.reservation.entities.UserEntity">
+        SELECT `email`        AS `email`,
+               `password`     AS `password`,
+               `name`         AS `name`,
+               `gender`       AS `gender`,
+               `nickname`     AS `nickname`,
+               `ssn_birth`    AS `ssnBirth`,
+               `created_at`   AS `createdAt`,
+               `is_deleted`   AS `isDeleted`,
+               `is_suspended` AS `isSuspended`,
+               `is_admin`     AS `isAdmin`,
+               `is_agree`     AS `isAgree`
+        FROM `reservation`.`users`
+        WHERE `nickname` = #{nickname}
+        LIMIT 1
+    </select>
+
+    <select id="selectUserByNameGenderSsnBirth" resultType="com.jbw.reservation.entities.UserEntity">
+        SELECT `email`        AS `email`,
+               `password`     AS `password`,
+               `name`         AS `name`,
+               `gender`       AS `gender`,
+               `nickname`     AS `nickname`,
+               `ssn_birth`    AS `ssnBirth`,
+               `created_at`   AS `createdAt`,
+               `is_deleted`   AS `isDeleted`,
+               `is_suspended` AS `isSuspended`,
+               `is_admin`     AS `isAdmin`,
+               `is_agree`     AS `isAgree`
+        FROM `reservation`.`users`
+        WHERE `name` = #{name}
+          AND BINARY `gender` = #{gender}
+          AND `ssn_birth` = #{ssnBirth}
+        LIMIT 1
+    </select>
+
+    <select id="selectContractorByEmail" resultType="com.jbw.reservation.entities.ContractorEntity">
+        SELECT `email`           AS `email`,
+               `password`        AS `password`,
+               `contractor_name` AS `contractorName`,
+               `contact_first`   AS `contactFirst`,
+               `contact_second`  AS `contactSecond`,
+               `contact_third`   AS `contactThird`,
+               `tin_first`       AS `tinFirst`,
+               `tin_second`      AS `tinSecond`,
+               `tin_third`       AS `tinThird`,
+               `created_at`      AS `createdAt`,
+               `is_deleted`      AS `isDeleted`,
+               `is_suspended`    AS `idSuspended`,
+               `is_agree`        AS `isAgree`
+        FROM `reservation`.`contractors`
+        WHERE BINARY `email` = #{email}
+        LIMIT 1
+    </select>
+
+    <select id="selectContractorByContact" resultType="com.jbw.reservation.entities.ContractorEntity">
+        SELECT `email`           AS `email`,
+               `password`        AS `password`,
+               `contractor_name` AS `contractorName`,
+               `contact_first`   AS `contactFirst`,
+               `contact_second`  AS `contactSecond`,
+               `contact_third`   AS `contactThird`,
+               `tin_first`       AS `tinFirst`,
+               `tin_second`      AS `tinSecond`,
+               `tin_Third`       AS `tinThird`,
+               `created_at`      AS `createdAt`,
+               `is_deleted`      AS `isDeleted`,
+               `is_suspended`    AS `isSuspended`,
+               `is_agree`        AS `isAgree`
+        FROM `reservation`.`contractors`
+        WHERE BINARY `contact_first` = #{contactFirst}
+          AND BINARY `contact_second` = #{contactSecond}
+          AND BINARY `contact_third` = #{contactThird}
+        LIMIT 1
+    </select>
+
+    <select id="selectContractorByTin" resultType="com.jbw.reservation.entities.ContractorEntity">
+        SELECT `email`           AS `email`,
+               `password`        AS `password`,
+               `contractor_name` AS `contractorName`,
+               `contact_first`   AS `contactFirst`,
+               `contact_second`  AS `contactSecond`,
+               `contact_third`   AS `contactThird`,
+               `tin_first`       AS `tinFirst`,
+               `tin_second`      AS `tinSecond`,
+               `tin_Third`       AS `tinThird`,
+               `created_at`      AS `createdAt`,
+               `is_deleted`      AS `isDeleted`,
+               `is_suspended`    AS `isSuspended`,
+               `is_agree`        AS `isAgree`
+        FROM `reservation`.`contractors`
+        WHERE BINARY `tin_first` = #{tinFirst}
+          AND BINARY `tin_second` = #{tinSecond}
+          AND BINARY `tin_third` = #{tinThird}
+        LIMIT 1
+    </select>
+
+    <select id="selectContractorByContractorName" resultType="com.jbw.reservation.entities.ContractorEntity">
+        SELECT `email`           AS `email`,
+               `password`        AS `password`,
+               `contractor_name` AS `contractorName`,
+               `contact_first`   AS `contactFirst`,
+               `contact_second`  AS `contactSecond`,
+               `contact_third`   AS `contactThird`,
+               `tin_first`       AS `tinFirst`,
+               `tin_second`      AS `tinSecond`,
+               `tin_Third`       AS `tinThird`,
+               `created_at`      AS `createdAt`,
+               `is_deleted`      AS `isDeleted`,
+               `is_suspended`    AS `isSuspended`,
+               `is_agree`        AS `isAgree`
+        FROM `reservation`.`contractors`
+        WHERE BINARY `contractor_name` = #{contractorName}
+        LIMIT 1
+    </select>
+
+
+
+
+
+
+
+
+</mapper>

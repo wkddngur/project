@@ -1,0 +1,160 @@
+@charset "UTF-8";
+@import "index.detailAside";
+@import "index.listAside";
+
+$aside-width: 27rem;
+$nav-height: 4.5rem;
+
+body {
+  height: 100vh;
+  background-color: #f5f5f5;
+  margin: initial;
+  overflow: hidden;
+
+  > .aside {
+    top: 0;
+    left: 0;
+    width: $aside-width;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 0 1.5rem 0.0625rem #21212160;
+    box-sizing: border-box;
+    opacity: 0;
+    overflow: hidden auto;
+    pointer-events: none;
+    position: fixed;
+    transition-duration: 250ms;
+    transition-property: opacity;
+    z-index: 2;
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    > .title {
+      top: 0;
+      backdrop-filter: blur(0.5rem);
+      background-color: #0B005C;
+      border-bottom: 0.0625rem solid #eeeeee;
+      color: #ffffff;
+      font-weight: 400;
+      font-size: 1rem;
+      padding: 0.75rem;
+      position: sticky;// 자리는 지키는데 스크롤 할시 top 0 에 고정되어 같이 움직임.
+      text-align: center;
+      z-index: 9;
+
+      > .closer {
+        top: 50%;
+        left: 0.625rem;
+        width: 1.75rem;
+        height: 1.75rem;
+        box-sizing: border-box;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        color: #ffffff;
+        cursor: pointer;
+        position: absolute;
+        transform: translateY(-50%);
+
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        &:hover {
+          background-color: #eeeeee;
+          color: #212121;
+        }
+      }
+    }
+    &.-visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+}
+
+#nav {
+  top: 0;
+  margin-left: $aside-width;
+  width: 100%;
+  height: $nav-height;
+  position: absolute;
+  z-index: 3;
+
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+
+  #searchForm {
+    width: 40rem;
+    height: 3rem;
+    left: calc(50% + $aside-width / 2);
+    transform: translateX(-50%);
+    border-radius: 99rem;
+    border: 0.2rem solid #0B005C;
+    background-color: #f5f5f5;
+    margin: 1rem 0 1rem 0;
+    position: fixed;
+
+    display: flex;
+    gap: 1rem;
+
+    > .searchLabel > .searchInput {
+      width: 33rem;
+      height: 3rem;
+      margin-left: 2rem;
+      font-size: 1rem;
+      border: none;
+      outline: none;
+      background-color: #f5f5f5;
+    }
+
+    > .searchButton {
+      width: 3rem;
+      height: 3rem;
+      border: none;
+      background-color: #f5f5f5;
+      color: #0B005C;
+      border-radius: 999rem;
+      font-size: 1.3rem;
+      font-weight: 500;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #eeeeee;
+      }
+    }
+  }
+
+  > .button-container {
+    right: 2rem;
+    position: fixed;
+
+    display: flex;
+    gap: 0.625rem;
+
+    > .button {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 999rem;
+      border: 0.0625rem solid #ffffff;
+      background-color: #0B005C;
+      font-weight: 300;
+      font-size: 1.4rem;
+      color: #ffffff;
+      cursor: pointer;
+    }
+  }
+
+
+}
+
+
+#map {
+  height: 100%;
+  margin-left: $aside-width;
+}

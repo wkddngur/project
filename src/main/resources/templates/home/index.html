@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ParkingLot</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{assets/styles/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{assets/styles/index.css}">
+
+    <!--카카오 지도 API 끌어온것.-->
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=20117416fbae8ce050ee1dcc56db2c71&libraries=services"
+            type="text/javascript"></script>
+
+    <!--폰트어썸 임폴트 스크립트-->
+    <script src="https://kit.fontawesome.com/bb143610b4.js" crossorigin="anonymous" type="text/javascript"></script>
+
+    <script defer type="text/javascript" th:src="@{/assets/scripts/common.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.detailAside.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.listAside.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.reservation.js}"></script>
+</head>
+
+<body>
+
+<th:block th:replace="~{fragments/index/nav.html :: nav}"></th:block>
+
+<th:block th:replace="~{fragments/index/listAside.html :: listAside}"></th:block>
+
+<th:block th:replace="~{fragments/index/detailAside.html :: detailAside}"></th:block>
+
+<th:block th:replace="~{fragments/index/map.html :: map}"></th:block>
+
+<th:block th:replace="~{fragments/index/reservation :: reservation}"></th:block>
+
+</body>
+
+</html>

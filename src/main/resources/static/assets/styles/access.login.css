@@ -1,0 +1,101 @@
+body {
+  background-color: #0B005C;
+}
+
+#loginDiv {
+  background-color: #f5f5f5;
+  top: 50%;
+  left: 50%;
+  width: 27rem;
+  border-radius: 0.375rem;
+  padding: 1.5rem 2rem;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+#loginDiv > .titleDiv {
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+}
+#loginDiv > .type-wrapper {
+  display: grid;
+  gap: 0.1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+#loginDiv > .type-wrapper > .type {
+  background-color: #dddddd;
+  border: 0.0625rem solid lightgray;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  user-select: none;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  justify-content: flex-start;
+}
+#loginDiv > .type-wrapper > .type > [name=type] {
+  display: none;
+}
+#loginDiv > .type-wrapper > .type > .title {
+  font-size: 1rem;
+  white-space: nowrap;
+  text-align: center;
+}
+#loginDiv > .type-wrapper > .type:hover {
+  border-color: #212121;
+}
+#loginDiv > .type-wrapper > .type:has([name=type]:checked) {
+  border-color: #0B005C;
+}
+#loginDiv > .type-wrapper:has([name=type][value=userLogin]:checked) ~ .loginForm.userLogin {
+  display: flex;
+}
+#loginDiv > .type-wrapper:has([name=type][value=contractorLogin]:checked) ~ .loginForm.contractorLogin {
+  display: flex;
+}
+#loginDiv > .loginForm {
+  background-color: #ffffff;
+  align-items: stretch;
+  display: none;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+#loginDiv > .loginForm > .titleDiv {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+#loginDiv > .loginForm > .loginBox {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+#loginDiv > .menu {
+  list-style-type: none;
+  margin-block: unset;
+  margin-inline: unset;
+  padding-inline: unset;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3rem;
+}
+#loginDiv > .menu > .item > .link {
+  color: #757575;
+  text-decoration: none;
+}
+#loginDiv > .menu > .item > .link:hover {
+  color: #0B005C;
+  text-decoration: underline;
+}
+
+/*# sourceMappingURL=access.login.css.map */

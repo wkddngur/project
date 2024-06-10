@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<nav id="nav" th:fragment="nav">
+    <form id="searchForm">
+        <label class="searchLabel">
+            <input class="searchInput" autocomplete="off" minlength="1" maxlength="255" name="keyword" type="search"
+                   placeholder="검색어를 입력해 주세요.">
+        </label>
+        <button class="searchButton" type="submit">
+            <i class="icon fa-solid fa-magnifying-glass"></i>
+        </button>
+    </form>
+
+    <div class="button-container">
+        <button class="category button">
+            <i class="fa-solid fa-list"></i>
+        </button>
+
+        <button class="logout button">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
+    </div>
+
+</nav>
+
+</html>
