@@ -26,6 +26,10 @@
       gap: 1rem;
       justify-content: flex-start;
 
+      &:hover {
+        background-color: lighten(#e0e0e0, 7%);
+      }
+
       > .thumbnail {
         width: 5rem;
         aspect-ratio: 1/1;
@@ -41,7 +45,7 @@
         align-items: flex-start;
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.4rem;
         justify-content: flex-start;
 
         > .title {
@@ -51,20 +55,32 @@
           gap: 0.25rem;
           justify-content: flex-start;
 
-          > .title {
+          > .parkingLotName {
             color: #0B005C;
             font-size: 1.125rem;
             font-weight: 400;
           }
 
-          > .category {
+          > .parkingLotCategory {
             color: #757575;
             font-size: 1rem;
           }
         }
 
         > .address {
-          color: #757575;
+
+          display: flex;
+          flex-direction: column;
+          gap: 0.0625rem;
+          > .addressPrimary {
+            font-weight: 400;
+            color: #757575;
+          }
+
+          > .addressSecondary {
+            color: #757575;
+            font-size: 0.95rem;
+          }
         }
 
         > .menu {

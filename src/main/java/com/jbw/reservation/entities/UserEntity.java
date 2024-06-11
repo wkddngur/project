@@ -19,6 +19,7 @@ public class UserEntity {
     private String nickname;
     private String ssnBirth;
     private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
     private boolean isDeleted;
     private boolean isSuspended;
     private boolean isAdmin;

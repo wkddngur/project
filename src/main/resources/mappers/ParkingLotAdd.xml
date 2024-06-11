@@ -8,13 +8,13 @@
             useGeneratedKeys="true"
             keyColumn="index"
             keyProperty="index"
-            parameterType="com.jbw.reservation.entities.ParkingLotRegisterEntity">
-        INSERT INTO `reservation`.`parking_lots_register` (`contractor_email`, `contractor_name`, `thumbnail`, `thumbnail_file_name`, `thumbnail_content_type`, `name`, `category_code`, `contact_first`, `contact_second`, `contact_third`, `address_postal`, `address_primary`, `address_secondary`, `latitude`, `longitude`, `general_car_number`, `dp_car_number`, `description`, `price`, `day_max_price`, `created_at`, `modified_at`)
-        VALUES (#{contractorEmail}, #{contractorName}, #{thumbnail}, #{thumbnailFileName}, #{thumbnailContentType}, #{name}, #{categoryCode}, #{contactFirst}, #{contactSecond}, #{contactThird}, #{addressPostal}, #{addressPrimary}, #{addressSecondary}, #{latitude}, #{longitude}, #{generalCarNumber}, #{dpCarNumber}, #{description}, #{price}, #{dayMaxPrice}, #{createdAt}, #{modifiedAt})
+            parameterType="com.jbw.reservation.entities.ParkingLotEntity">
+        INSERT INTO `reservation`.`parking_lots` (`contractor_email`, `contractor_name`, `thumbnail`, `thumbnail_file_name`, `thumbnail_content_type`, `name`, `category_code`, `contact_first`, `contact_second`, `contact_third`, `address_postal`, `address_primary`, `address_secondary`, `latitude`, `longitude`, `general_car_number`, `dp_car_number`, `description`, `price`, `day_max_price`, `created_at`, `modified_at`, `is_deleted`)
+        VALUES (#{contractorEmail}, #{contractorName}, #{thumbnail}, #{thumbnailFileName}, #{thumbnailContentType}, #{name}, #{categoryCode}, #{contactFirst}, #{contactSecond}, #{contactThird}, #{addressPostal}, #{addressPrimary}, #{addressSecondary}, #{latitude}, #{longitude}, #{generalCarNumber}, #{dpCarNumber}, #{description}, #{price}, #{dayMaxPrice}, #{createdAt}, #{modifiedAt}, #{isDeleted})
     </insert>
 
-    <select id="selectParkingLotByAddress" resultType="com.jbw.reservation.entities.ParkingLotRegisterEntity">
-        SELECT `index`                AS `index`,
+    <select id="selectParkingLotByAddress" resultType="com.jbw.reservation.entities.ParkingLotEntity">
+        SELECT `index`                  AS `index`,
                `contractor_email`       AS `contractorEmail`,
                `contractor_name`        AS `contractorName`,
                `thumbnail`              AS `thumbnail`,
@@ -36,8 +36,9 @@
                `price`                  AS `price`,
                `day_max_price`          AS `dayMaxPrice`,
                `created_at`             AS `createdAt`,
-               `modified_at`            AS `modifiedAt`
-        FROM `reservation`.`parking_lots_register`
+               `modified_at`            AS `modifiedAt`,
+               `is_deleted`             AS `isDeleted`
+        FROM `reservation`.`parking_lots`
         WHERE `address_postal` = #{addressPostal}
           AND `address_primary` = #{addressPrimary}
         LIMIT 1

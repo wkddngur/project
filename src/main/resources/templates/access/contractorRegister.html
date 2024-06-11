@@ -47,11 +47,11 @@
                    minlength="5" name="passwordCheck" placeholder="비밀번호 재입력" spellcheck="false" type="password">
         </label>
 
-        <label class="_obj-label" rel="contractorNameLabel">
+        <label class="_obj-label" rel="nameLabel">
             <span class="__text">협력업체 이름</span>
             <input required autocomplete="off" class="_obj-input __field" maxlength="10" minlength="2"
-                   name="contractorName" placeholder="가입하시는 협력업체 이름을 입력해 주세요." spellcheck="false" type="text"
-                   th:attrappend="data-regex=${ContractorRegex.contractorName.expression}">
+                   name="name" placeholder="가입하시는 협력업체 이름을 입력해 주세요." spellcheck="false" type="text"
+                   th:attrappend="data-regex=${ContractorRegex._name.expression}">
         </label>
 
         <label class="_obj-label" rel="contactLabel">

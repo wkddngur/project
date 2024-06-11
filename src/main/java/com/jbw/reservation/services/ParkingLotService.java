@@ -1,6 +1,7 @@
 package com.jbw.reservation.services;
 
-import com.jbw.reservation.entities.ParkingLotRegisterEntity;
+import com.jbw.reservation.dtos.ParkingLotDto;
+import com.jbw.reservation.entities.ParkingLotEntity;
 import com.jbw.reservation.mappers.ParkingLotMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,11 @@ public class ParkingLotService {
         this.parkingLotMapper = parkingLotMapper;
     }
 
-    public ParkingLotRegisterEntity[] getByCoords(double minLat, double minLng, double maxLat, double maxLng) {
-        return this.parkingLotMapper.selectParkingLotByCoords(minLat, minLng, maxLat, maxLng);
+    public ParkingLotDto[] getByCoords(double minLat, double minLng, double maxLat, double maxLng) {
+        return this.parkingLotMapper.selectParkingLotDtoByCoords(minLat, minLng, maxLat, maxLng);
     }
 
-    public ParkingLotRegisterEntity getThumbnail(int index) {
+    public ParkingLotEntity getThumbnail(int index) {
         return this.parkingLotMapper.selectParkingLotByIndex(index);
     }
 }

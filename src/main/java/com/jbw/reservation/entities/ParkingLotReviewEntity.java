@@ -20,4 +20,5 @@ public class ParkingLotReviewEntity {
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+    private boolean isDeleted;
 }

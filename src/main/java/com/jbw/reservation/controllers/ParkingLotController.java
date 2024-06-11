@@ -1,6 +1,7 @@
 package com.jbw.reservation.controllers;
 
-import com.jbw.reservation.entities.ParkingLotRegisterEntity;
+import com.jbw.reservation.dtos.ParkingLotDto;
+import com.jbw.reservation.entities.ParkingLotEntity;
 import com.jbw.reservation.services.ParkingLotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -23,24 +24,24 @@ public class ParkingLotController {
 
     @RequestMapping(value = "/byCoords", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ParkingLotRegisterEntity[] getByCoords(@RequestParam("minLat") double minLat,
-                                                  @RequestParam("minLng") double minLng,
-                                                  @RequestParam("maxLat") double maxLat,
-                                                  @RequestParam("maxLng") double maxLng) {
+    public ParkingLotDto[] getByCoords(@RequestParam("minLat") double minLat,
+                                       @RequestParam("minLng") double minLng,
+                                       @RequestParam("maxLat") double maxLat,
+                                       @RequestParam("maxLng") double maxLng) {
         return this.parkingLotService.getByCoords(minLat, minLng, maxLat, maxLng);
     }
 
     @RequestMapping(value = "thumbnail", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getThumbnail(@RequestParam("index") int index) {
-        ParkingLotRegisterEntity parkingLotRegister = this.parkingLotService.getThumbnail(index);
+        ParkingLotEntity parkingLot = this.parkingLotService.getThumbnail(index);
 
-        if (parkingLotRegister == null) {
+        if (parkingLot == null) {
             return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(parkingLotRegister.getThumbnailContentType()))
-                .contentLength(parkingLotRegister.getThumbnail().length)
-                .body(parkingLotRegister.getThumbnail());
+                .contentType(MediaType.parseMediaType(parkingLot.getThumbnailContentType()))
+                .contentLength(parkingLot.getThumbnail().length)
+                .body(parkingLot.getThumbnail());
     }
 }

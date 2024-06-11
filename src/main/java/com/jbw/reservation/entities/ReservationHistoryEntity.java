@@ -20,6 +20,8 @@ public class ReservationHistoryEntity {
     private String schedule;
     private String carNumber;
     private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
+    private boolean isDeleted;
     private boolean paymentStatus;
     private boolean refundStatus;
 }

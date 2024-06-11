@@ -4,7 +4,7 @@ contractorRegisterDiv.contractorRegisterForm = contractorRegisterDiv.querySelect
 
 contractorRegisterDiv.contractorRegisterForm.emailLabel = new LabelObj(contractorRegisterDiv.contractorRegisterForm.querySelector('[rel="emailLabel"]'));
 contractorRegisterDiv.contractorRegisterForm.passwordLabel = new LabelObj(contractorRegisterDiv.contractorRegisterForm.querySelector('[rel="passwordLabel"]'));
-contractorRegisterDiv.contractorRegisterForm.contractorNameLabel = new LabelObj(contractorRegisterDiv.contractorRegisterForm.querySelector('[rel="contractorNameLabel"]'));
+contractorRegisterDiv.contractorRegisterForm.nameLabel = new LabelObj(contractorRegisterDiv.contractorRegisterForm.querySelector('[rel="nameLabel"]'));
 contractorRegisterDiv.contractorRegisterForm.contactLabel = new LabelObj(contractorRegisterDiv.contractorRegisterForm.querySelector('[rel="contactLabel"]'));
 contractorRegisterDiv.contractorRegisterForm.tinLabel = new LabelObj(contractorRegisterDiv.contractorRegisterForm.querySelector('[rel="tinLabel"]'));
 
@@ -106,7 +106,7 @@ contractorRegisterDiv.contractorRegisterForm.onsubmit = (e) => {
 
     contractorRegisterDiv.contractorRegisterForm.emailLabel.setValid(contractorRegisterDiv.contractorRegisterForm['email'].tests());
     contractorRegisterDiv.contractorRegisterForm.passwordLabel.setValid(contractorRegisterDiv.contractorRegisterForm['password'].tests());
-    contractorRegisterDiv.contractorRegisterForm.contractorNameLabel.setValid(contractorRegisterDiv.contractorRegisterForm['contractorName'].tests());
+    contractorRegisterDiv.contractorRegisterForm.nameLabel.setValid(contractorRegisterDiv.contractorRegisterForm['name'].tests());
     contractorRegisterDiv.contractorRegisterForm.contactLabel.setValid(contractorRegisterDiv.contractorRegisterForm['contactFirst'].tests());
     contractorRegisterDiv.contractorRegisterForm.contactLabel.setValid(contractorRegisterDiv.contractorRegisterForm['contactSecond'].tests());
     contractorRegisterDiv.contractorRegisterForm.contactLabel.setValid(contractorRegisterDiv.contractorRegisterForm['contactThird'].tests());
@@ -130,7 +130,7 @@ contractorRegisterDiv.contractorRegisterForm.onsubmit = (e) => {
         }).show();
         return;
     }
-    if(!contractorRegisterDiv.contractorRegisterForm.contractorNameLabel.isValid()) {
+    if(!contractorRegisterDiv.contractorRegisterForm.nameLabel.isValid()) {
         MessageObj.createSimpleOk('경고','올바른 협력업체 이름을 입력해 주세요.', () => {
             contractorRegisterDiv.contractorRegisterForm['contractorName'].focus();
         }).show();
@@ -158,7 +158,7 @@ contractorRegisterDiv.contractorRegisterForm.onsubmit = (e) => {
     formData.append("code",contractorRegisterDiv.contractorRegisterForm['emailCode'].value);
     formData.append("salt",contractorRegisterDiv.contractorRegisterForm['emailSalt'].value);
     formData.append("password",contractorRegisterDiv.contractorRegisterForm['password'].value);
-    formData.append("contractorName",contractorRegisterDiv.contractorRegisterForm['contractorName'].value);
+    formData.append("name",contractorRegisterDiv.contractorRegisterForm['name'].value);
     formData.append("contactFirst",contractorRegisterDiv.contractorRegisterForm['contactFirst'].value);
     formData.append("contactSecond",contractorRegisterDiv.contractorRegisterForm['contactSecond'].value);
     formData.append("contactThird",contractorRegisterDiv.contractorRegisterForm['contactThird'].value);
@@ -185,8 +185,9 @@ contractorRegisterDiv.contractorRegisterForm.onsubmit = (e) => {
                 contractorRegisterDiv.contractorRegisterForm['emailCode'].disable().value='';
                 contractorRegisterDiv.contractorRegisterForm['emailVerify'].disable();
             }],
-            failure_duplicate_contractor_name: ['경고',`입력하신 협력업체 이름<b>${contractorRegisterDiv.contractorRegisterForm['contractorName'].value}</b>은 이미 사용중 입니다, 다른 협력업체 이름을 사용해 주세요.`,() => {
-                contractorRegisterDiv.contractorRegisterForm['contractorName'].focus();
+            failure_duplicate_contractor_name: ['경고',`입력하신 협력업체 이름<b>${contractorRegisterDiv.contractorRegisterForm['name'].value}</b>은 이미 사용중 입니다, 다른 협력업체 이름을 사용해 주세요.`,() => {
+                contractorRegisterDiv.contractorRegisterForm['name'].value = '';
+                contractorRegisterDiv.contractorRegisterForm['name'].focus();
             }],
             failure_duplicate_contact: ['경고', '입력하신 협력업체 대표번호는 이미 사용중 입니다. 다시 확인해 주세요.', () => contractorRegisterDiv.contractorRegisterForm['contactFirst'].focus()],
 

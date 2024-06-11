@@ -190,15 +190,17 @@ public class AccessService {
         if (!passwordComparison) {
             return CommonResult.FAILURE;
         }
-
-        user.setSsnBirth(dbUser.getSsnBirth());
         user.setEmail(dbUser.getEmail());
         user.setPassword(dbUser.getPassword());
+        user.setName(dbUser.getName());
+        user.setGender(dbUser.getGender());
         user.setNickname(dbUser.getNickname());
+        user.setSsnBirth(dbUser.getSsnBirth());
         user.setCreatedAt(dbUser.getCreatedAt());
-        user.setAdmin(dbUser.isAdmin());
+        user.setModifiedAt(dbUser.getModifiedAt());
         user.setDeleted(dbUser.isDeleted());
         user.setSuspended(dbUser.isSuspended());
+        user.setAdmin(dbUser.isAdmin());
         user.setAgree(dbUser.isAgree());
 
         return CommonResult.SUCCESS;
@@ -228,7 +230,9 @@ public class AccessService {
             return CommonResult.FAILURE;
         }
 
-        contractor.setContractorName(dbContractor.getContractorName());
+        contractor.setEmail(dbContractor.getEmail());
+        contractor.setPassword(dbContractor.getPassword());
+        contractor.setName(dbContractor.getName());
         contractor.setContactFirst(dbContractor.getContactFirst());
         contractor.setContactSecond(dbContractor.getContactSecond());
         contractor.setContactThird(dbContractor.getContactThird());
@@ -236,9 +240,11 @@ public class AccessService {
         contractor.setTinSecond(dbContractor.getTinSecond());
         contractor.setTinThird(dbContractor.getTinThird());
         contractor.setCreatedAt(dbContractor.getCreatedAt());
+        contractor.setModifiedAt(dbContractor.getModifiedAt());
         contractor.setDeleted(dbContractor.isDeleted());
         contractor.setSuspended(dbContractor.isSuspended());
         contractor.setAgree(dbContractor.isAgree());
+        contractor.setApproved(dbContractor.isApproved());
 
         return CommonResult.SUCCESS;
     }
@@ -278,6 +284,7 @@ public class AccessService {
 
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setCreatedAt(LocalDateTime.now());
+        user.setModifiedAt(null);
         user.setDeleted(false);
         user.setSuspended(false);
         user.setAdmin(false);
@@ -300,7 +307,7 @@ public class AccessService {
                 !EmailAuthRegex.salt.tests(emailAuth.getSalt()) ||
                 !ContractorRegex.email.tests(contractor.getEmail()) ||
                 !ContractorRegex.password.tests(contractor.getPassword()) ||
-                !ContractorRegex.contractorName.tests(contractor.getContractorName()) ||
+                !ContractorRegex._name.tests(contractor.getName()) ||
                 !ContractorRegex.contactFirst.tests(contractor.getContactFirst()) ||
                 !ContractorRegex.contactSecond.tests(contractor.getContactSecond()) ||
                 !ContractorRegex.contactThird.tests(contractor.getContactThird()) ||
@@ -321,7 +328,7 @@ public class AccessService {
             return RegisterResult.FAILURE_DUPLICATE_EMAIL;
         }
 
-        if (this.accessMapper.selectContractorByContractorName(contractor.getContractorName()) != null) {
+        if (this.accessMapper.selectContractorByName(contractor.getName()) != null) {
             return RegisterResult.FAILURE_DUPLICATE_CONTRACTOR_NAME;
         }
 
@@ -336,9 +343,11 @@ public class AccessService {
 
         contractor.setPassword(new BCryptPasswordEncoder().encode(contractor.getPassword()));
         contractor.setCreatedAt(LocalDateTime.now());
+        contractor.setModifiedAt(null);
         contractor.setDeleted(false);
         contractor.setSuspended(false);
         contractor.setAgree(contractor.isAgree());
+        contractor.setApproved(false);
 
         this.accessMapper.insertContractor(contractor);
 

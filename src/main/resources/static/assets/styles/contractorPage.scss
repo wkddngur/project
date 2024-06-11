@@ -175,6 +175,70 @@ body {
         }
       }
     }
+
+    > .attachedImage {
+
+      > .image-container {
+        $item-size: 10rem;
+        background-color: #f5f5f5;
+        border: 0.0625rem solid #eeeeee;
+        border-radius: 0.25rem;
+        box-sizing: border-box;
+        overflow: auto hidden; // 스크롤까지 자동으로 되는 느낌?
+        padding: 0.5rem;
+
+        align-items: stretch;
+        display: flex;
+        flex-direction: row;
+        gap: 0.375rem;
+        justify-content: flex-start;
+
+        > .empty {
+          height: $item-size;
+          color: #757575;
+          flex: 1;
+          text-align: center;
+
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+        }
+
+        > .image-wrapper {
+          > .image{
+            width: $item-size;
+            height: $item-size;
+            border: 0.15rem solid #e0e0e0;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            object-fit: cover;
+            object-position: center;
+          }
+
+          > [type="checkbox"] {
+            display: none;
+          }
+
+          > [type="checkbox"]:checked + .image {
+            border: 0.15rem solid #3498db;
+          }
+        }
+      }
+
+      > .button-container {
+        align-items: stretch;
+        display: flex;
+        flex-direction: row;
+        gap: 0.375rem;
+        justify-content: flex-start;
+
+        > .spring {
+          flex: 1;
+        }
+
+      }
+    }
   }
 }
 

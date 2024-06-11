@@ -44,7 +44,7 @@ public interface AccessMapper {
                                            @Param("tinSecond") String tinSecond,
                                            @Param("tinThird") String tinThird);
 
-    ContractorEntity selectContractorByContractorName(@Param("contractorName") String contractorName);
+    ContractorEntity selectContractorByName(@Param("name") String name);
 
 
 

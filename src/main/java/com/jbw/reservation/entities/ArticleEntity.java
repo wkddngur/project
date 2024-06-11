@@ -19,5 +19,6 @@ public class ArticleEntity {
     private String content;
     private int view;
     private LocalDateTime createdAt;
-    private  LocalDateTime modifiedAt;
+    private LocalDateTime modifiedAt;
+    private boolean isDeleted;
 }

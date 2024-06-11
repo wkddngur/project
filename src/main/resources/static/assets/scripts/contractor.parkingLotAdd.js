@@ -62,6 +62,7 @@ parkingLotAdd.parkingLotAddForm['thumbnail'].onchange = () => {
 }
 
 parkingLotAdd.parkingLotAddForm.thumbnailLabel = new LabelObj(parkingLotAdd.parkingLotAddForm.querySelector('[rel="thumbnailLabel"]'));
+parkingLotAdd.parkingLotAddForm.attachedImageLabel = new LabelObj(parkingLotAdd.parkingLotAddForm.querySelector('[rel="attachedImageLabel"]'));
 parkingLotAdd.parkingLotAddForm.nameLabel = new LabelObj(parkingLotAdd.parkingLotAddForm.querySelector('[rel="nameLabel"]'));
 parkingLotAdd.parkingLotAddForm.categoryLabel = new LabelObj(parkingLotAdd.parkingLotAddForm.querySelector('[rel="categoryLabel"]'));
 parkingLotAdd.parkingLotAddForm.contactLabel = new LabelObj(parkingLotAdd.parkingLotAddForm.querySelector('[rel="contactLabel"]'));
@@ -72,10 +73,86 @@ parkingLotAdd.parkingLotAddForm.dpCarNumberLabel = new LabelObj(parkingLotAdd.pa
 parkingLotAdd.parkingLotAddForm.priceLabel = new LabelObj(parkingLotAdd.parkingLotAddForm.querySelector('[rel="priceLabel"]'));
 parkingLotAdd.parkingLotAddForm.dayMaxPriceLabel = new LabelObj(parkingLotAdd.parkingLotAddForm.querySelector('[rel="dayMaxPriceLabel"]'));
 
+parkingLotAdd.reviewImages = [];
+console.log(1 + '+' + parkingLotAdd.reviewImages.length);
+
+parkingLotAdd.parkingLotAddForm['clearButton'].onclick = () => {
+    parkingLotAdd.reviewImages = [];
+
+    const imageContainerEl = parkingLotAdd.parkingLotAddForm.querySelector(':scope > .attachedImage > .image-container');
+
+    imageContainerEl.querySelector(':scope > .empty').style.display = 'flex';
+    imageContainerEl.querySelectorAll(':scope > .image-wrapper').forEach(x => x.remove());
+    parkingLotAdd.parkingLotAddForm['images'].value = '';
+};
+
+parkingLotAdd.parkingLotAddForm['deleteButton'].onclick = () => {
+    const imageContainerEl = parkingLotAdd.parkingLotAddForm.querySelector(':scope > .attachedImage > .image-container');
+    const imageWrapperElArray = Array.from(imageContainerEl.querySelectorAll(':scope > .image-wrapper'));
+
+    if (imageWrapperElArray.length === 0) {
+        MessageObj.createSimpleOk('경고', '삭제 할 이미지가 없습니다.').show();
+        return;
+    }
+    if (imageWrapperElArray.every(x => !x.querySelector(':scope > [type="checkbox"]').checked)) {
+        MessageObj.createSimpleOk('경고', '삭제 할 이미지를 한 개 이상 선택해 주세요.').show();
+        return;
+    }
+
+    for (let i = imageWrapperElArray.length -1; i >= 0; i--) {
+        if (imageWrapperElArray[i].querySelector(':scope > [type="checkbox"]').checked) {
+            imageWrapperElArray[i].remove();
+            parkingLotAdd.reviewImages.splice(i, 1);
+        }
+    }
+
+    console.log(parkingLotAdd.reviewImages.length);
+    if (parkingLotAdd.reviewImages.length === 0) {
+        imageContainerEl.querySelector(':scope > .empty').style.display = 'flex';
+    }
+    parkingLotAdd.parkingLotAddForm['images'].value = '';
+};
+
+
+parkingLotAdd.parkingLotAddForm['images'].onchange = () => {
+    // 아무것도 안하고 취소누른 상황.
+    if (parkingLotAdd.parkingLotAddForm['images'].files.length === 0) {
+        return;
+    }
+
+    // 파일업로더에서 확인을 누른 상황.
+    const imageContainerEl = parkingLotAdd.parkingLotAddForm.querySelector(':scope > .attachedImage > .image-container');
+    imageContainerEl.querySelector(':scope > .empty').style.display = 'none';
+
+    for (const file of parkingLotAdd.parkingLotAddForm['images'].files) {
+        const fileReader = new FileReader();
+        fileReader.onload = () => {
+            const imageWrapperEl = new DOMParser().parseFromString(`
+            <label class="image-wrapper">
+                <input type="checkbox">
+                <img alt="" class="image" src="">
+            </label>
+            `, "text/html").querySelector('.image-wrapper');
+
+            imageWrapperEl.querySelector('.image').src = fileReader.result;
+            imageContainerEl.append(imageWrapperEl);
+            parkingLotAdd.reviewImages.push(file);
+            console.log(2 + '+' + parkingLotAdd.reviewImages.length);
+
+        }
+        fileReader.readAsDataURL(file);
+    }
+};
+
+parkingLotAdd.parkingLotAddForm['addButton'].onclick = () => {
+    parkingLotAdd.parkingLotAddForm['images'].click();
+};
+
 parkingLotAdd.parkingLotAddForm.onsubmit = (e) => {
     e.preventDefault();
 
     parkingLotAdd.parkingLotAddForm.thumbnailLabel.setValid(parkingLotAdd.parkingLotAddForm['thumbnail'].files.length > 0);
+    parkingLotAdd.parkingLotAddForm.attachedImageLabel.setValid(parkingLotAdd.parkingLotAddForm['images'].files.length > 2);
     parkingLotAdd.parkingLotAddForm.nameLabel.setValid(parkingLotAdd.parkingLotAddForm['name'].tests());
     parkingLotAdd.parkingLotAddForm.categoryLabel.setValid(parkingLotAdd.parkingLotAddForm['categoryCode'].value !== '-1');
     parkingLotAdd.parkingLotAddForm.contactLabel.setValid(parkingLotAdd.parkingLotAddForm['contactFirst'].tests() && parkingLotAdd.parkingLotAddForm['contactSecond'].tests() && parkingLotAdd.parkingLotAddForm['contactThird'].tests());
@@ -88,6 +165,12 @@ parkingLotAdd.parkingLotAddForm.onsubmit = (e) => {
 
     if (parkingLotAdd.parkingLotAddForm['thumbnail'].files.length === 0) {
         MessageObj.createSimpleOk('경고', '대표 이미지를 선택해 주세요.').show();
+        parkingLotAdd.scrollTop = 0;
+        return;
+    }
+
+    if (!parkingLotAdd.parkingLotAddForm.attachedImageLabel.isValid()) {
+        MessageObj.createSimpleOk('경고', '첨부 이미지를 3장 이상 선택해 주세요.').show();
         parkingLotAdd.scrollTop = 0;
         return;
     }
@@ -179,6 +262,10 @@ parkingLotAdd.parkingLotAddForm.onsubmit = (e) => {
     formData.append('price', parkingLotAdd.parkingLotAddForm['price'].value);
     formData.append('dayMaxPrice', parkingLotAdd.parkingLotAddForm['dayMaxPrice'].value);
 
+    for (const image of parkingLotAdd.parkingLotAddForm['images'].files) {
+        formData.append('_images', image);
+    }
+
     xhr.onreadystatechange = function () { 
         if (xhr.readyState !== XMLHttpRequest.DONE) {
             return;
@@ -190,6 +277,8 @@ parkingLotAdd.parkingLotAddForm.onsubmit = (e) => {
         const responseObject = JSON.parse(xhr.responseText);
         const [dTitle, dContent, dOnclick] = {
             failure: ['경고', '알 수 없는 이유로 주차장을 등록하지 못하였습니다. 잠시 후 다시 시도해 주세요.'],
+
+            failure_not_images_count: ['경고', '첨부 이미지를 3장 이상 선택해 주세요.', () => parkingLotAdd.scrollTop = 0],
 
             failure_not_contractor_login: ['경고', '협력업체 로그인이 되어 있지 않습니다.', () => location.href = '/access/'],
 

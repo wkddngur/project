@@ -17,5 +17,6 @@ public class CommentEntity {
     private String userEmail;
     private String content;
     private LocalDateTime createdAt;
-    private  LocalDateTime modifiedAt;
+    private LocalDateTime modifiedAt;
+    private boolean isDeleted;
 }

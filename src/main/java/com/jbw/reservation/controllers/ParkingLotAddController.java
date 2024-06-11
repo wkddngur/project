@@ -1,13 +1,12 @@
 package com.jbw.reservation.controllers;
 
 import com.jbw.reservation.entities.ContractorEntity;
-import com.jbw.reservation.entities.ParkingLotRegisterEntity;
+import com.jbw.reservation.entities.ParkingLotEntity;
 import com.jbw.reservation.results.Result;
 import com.jbw.reservation.services.ParkingLotAddService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,13 +28,14 @@ public class ParkingLotAddController {
     @ResponseBody
     public String postParkingLotRegister(@SessionAttribute(value = "contractor") ContractorEntity contractor,
                                          @RequestParam("_thumbnail") MultipartFile thumbnail,
-                                         ParkingLotRegisterEntity parkingLotRegister) throws IOException {
-        parkingLotRegister.setThumbnail(thumbnail.getBytes());
-        parkingLotRegister.setThumbnailFileName(thumbnail.getOriginalFilename());
-        parkingLotRegister.setThumbnailContentType(thumbnail.getContentType());
+                                         @RequestParam("_images") MultipartFile[] images,
+                                         ParkingLotEntity parkingLot) throws IOException {
+        parkingLot.setThumbnail(thumbnail.getBytes());
+        parkingLot.setThumbnailFileName(thumbnail.getOriginalFilename());
+        parkingLot.setThumbnailContentType(thumbnail.getContentType());
 
         JSONObject responseObject = new JSONObject();
-        Result result = this.parkingLotAddService.parkingLotRegister(contractor, parkingLotRegister);
+        Result result = this.parkingLotAddService.parkingLotRegister(contractor, parkingLot, images);
         responseObject.put("result", result.name().toLowerCase());
         return responseObject.toString();
     }

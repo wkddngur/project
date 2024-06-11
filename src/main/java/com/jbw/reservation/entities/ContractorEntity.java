@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class ContractorEntity {
     private String email;
     private String password;
-    private String contractorName;
+    private String name;
     private String contactFirst;
     private String contactSecond;
     private String contactThird;
@@ -22,7 +22,9 @@ public class ContractorEntity {
     private String tinSecond;
     private String tinThird;
     private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
     private boolean isDeleted;
     private boolean isSuspended;
     private boolean isAgree;
+    private boolean isApproved;
 }

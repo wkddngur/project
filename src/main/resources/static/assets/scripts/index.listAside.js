@@ -36,15 +36,25 @@ const loadParkingLots = () => {
                 <img alt="" class="thumbnail" src="./parkingLot/thumbnail?index=${parkingLotObject['index']}">
                 <div class="info">
                     <h3 class="title">
-                        <span class="title">${parkingLotObject['name']}</span>
-                        <span class="category">${parkingLotObject['categoryCode']}</span>
+                        <span class="parkingLotName">${parkingLotObject['name']}</span>
+                        <span class="parkingLotCategory">${parkingLotObject['parkingLotCategoryText']}</span>
                     </h3>
-                    <span class="address">${parkingLotObject['addressPrimary']} ${parkingLotObject['addressSecondary']}</span>
+                    
+                    <div class="address">
+                        <span class="addressPrimary">${parkingLotObject['addressPrimary']}</span>
+                        <span class="addressSecondary">${parkingLotObject['addressSecondary']}</span>
+                    </div>
+                    
                     <a class="contact" href="tel:${parkingLotObject['contactFirst']}-${parkingLotObject['contactSecond']}-${parkingLotObject['contactThird']}">${parkingLotObject['contactFirst']}-${parkingLotObject['contactSecond']}-${parkingLotObject['contactThird']}</a>
-                    <span class="generalCarNumber">일반 차량 주차가능 대수 : ${parkingLotObject['reserveGeneralCarNumber']} / ${parkingLotObject['generalCarNumber']}</span>
-                    <span class="dpCarNumber">장애인 차량 주차가능 대수 : ${parkingLotObject['reserveDpCarNumber']} / ${parkingLotObject['dpCarNumber']}</span>
-                    <span class="price">기준가격(10분) : ${parkingLotObject['price']}</span>
-                    <span class="dayMaxPrice">하루 최대 요금(24시간) : ${parkingLotObject['dayMaxPrice']}</span>
+                    
+                    <span class="generalCarNumber">일반 차량 : ${parkingLotObject['reserveGeneralCarNumber']} / ${parkingLotObject['generalCarNumber']}</span>
+                    
+                    <span class="dpCarNumber">장애인 차량 : ${parkingLotObject['reserveDpCarNumber']} / ${parkingLotObject['dpCarNumber']}</span>
+                    
+                    <span class="price">기준가격(10분) : ${parkingLotObject['price']}원</span>
+                    
+                    <span class="dayMaxPrice">하루 최대 요금(24시간) : ${parkingLotObject['dayMaxPrice']}원</span>
+                    
                     <ul class="menu">
                         <li class="item favorite">
                             <i class="icon fa-solid fa-star"></i>
