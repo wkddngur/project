@@ -112,6 +112,7 @@ body {
   padding-top: 1rem;
 }
 #parkingLotAdd > .parkingLotAddForm > .thumbnail > .image-wrapper {
+  padding: 0.5rem;
   align-items: stretch;
   display: flex;
   flex-direction: column;
@@ -153,9 +154,12 @@ body {
 }
 #parkingLotAdd > .parkingLotAddForm > .attachedImage > .image-container > .empty {
   height: 10rem;
-  color: #757575;
+  background-color: #dbdbdb;
   flex: 1;
   text-align: center;
+  border-radius: 0.25rem;
+  color: #292929;
+  cursor: pointer;
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -185,6 +189,10 @@ body {
 }
 #parkingLotAdd > .parkingLotAddForm > .attachedImage > .button-container > .spring {
   flex: 1;
+}
+#parkingLotAdd > .parkingLotAddForm > ._obj-label > .description {
+  height: 10rem;
+  resize: none;
 }
 
 #parkingLotInfo {

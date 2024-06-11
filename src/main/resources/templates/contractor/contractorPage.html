@@ -88,7 +88,7 @@
                 <input hidden multiple accept="image/*" name="images" type="file">
                 <span class="__text">첨부 이미지</span>
                 <span class="image-container">
-                    <span class="empty">이미지가 없습니다.</span>
+                    <span class="empty">이미지가 없습니다. <br><br>3장 이상 선택해 주세요.</span>
                 </span>
 
                 <span class="button-container">
@@ -177,7 +177,7 @@
 
             <label class="_obj-label" rel="descriptionLabel">
                 <span class="__text">주차장 안내사항</span>
-                <textarea required autocomplete="off" class="_obj-input __field" name="description"
+                <textarea required autocomplete="off" class="_obj-input __field description" name="description"
                           placeholder="안내사항을 입력해 주세요."
                           spellcheck="false"
                           th:attrappend="data-regex=${parkingLotRegex.description.expression}"></textarea>

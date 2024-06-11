@@ -33,27 +33,10 @@ const loadParkingLots = () => {
         for (let parkingLotObject of parkingLotArray) {
             const parkingLotEl = new DOMParser().parseFromString(`
             <li class="item">
-                <img alt="" class="thumbnail" src="./parkingLot/thumbnail?index=${parkingLotObject['index']}">
-                <div class="info">
-                    <h3 class="title">
-                        <span class="parkingLotName">${parkingLotObject['name']}</span>
-                        <span class="parkingLotCategory">${parkingLotObject['parkingLotCategoryText']}</span>
-                    </h3>
-                    
-                    <div class="address">
-                        <span class="addressPrimary">${parkingLotObject['addressPrimary']}</span>
-                        <span class="addressSecondary">${parkingLotObject['addressSecondary']}</span>
-                    </div>
+                <div class="thumbnailInfo">
+                    <img alt="" class="thumbnail" src="./parkingLot/thumbnail?index=${parkingLotObject['index']}">
                     
                     <a class="contact" href="tel:${parkingLotObject['contactFirst']}-${parkingLotObject['contactSecond']}-${parkingLotObject['contactThird']}">${parkingLotObject['contactFirst']}-${parkingLotObject['contactSecond']}-${parkingLotObject['contactThird']}</a>
-                    
-                    <span class="generalCarNumber">일반 차량 : ${parkingLotObject['reserveGeneralCarNumber']} / ${parkingLotObject['generalCarNumber']}</span>
-                    
-                    <span class="dpCarNumber">장애인 차량 : ${parkingLotObject['reserveDpCarNumber']} / ${parkingLotObject['dpCarNumber']}</span>
-                    
-                    <span class="price">기준가격(10분) : ${parkingLotObject['price']}원</span>
-                    
-                    <span class="dayMaxPrice">하루 최대 요금(24시간) : ${parkingLotObject['dayMaxPrice']}원</span>
                     
                     <ul class="menu">
                         <li class="item favorite">
@@ -65,6 +48,25 @@ const loadParkingLots = () => {
                             <span class="text">${parkingLotObject['reviewCount']}</span>
                         </li>
                     </ul>
+                </div>
+                <div class="info">
+                    <h3 class="title">
+                        <span class="parkingLotName">${parkingLotObject['name']}</span>
+                        <span class="parkingLotCategory">${parkingLotObject['parkingLotCategoryText']}</span>
+                    </h3>
+                    
+                    <div class="address">
+                        <span class="addressPrimary">${parkingLotObject['addressPrimary']}</span>
+                        <span class="addressSecondary">${parkingLotObject['addressSecondary']}</span>
+                    </div>
+                    
+                    <span class="generalCarNumber">일반 차량 : ${parkingLotObject['reserveGeneralCarNumber']} / ${parkingLotObject['generalCarNumber']}</span>
+                    
+                    <span class="dpCarNumber">장애인 차량 : ${parkingLotObject['reserveDpCarNumber']} / ${parkingLotObject['dpCarNumber']}</span>
+                    
+                    <span class="price">기준 가격 (10분) : ${parkingLotObject['price']}원</span>
+                    
+                    <span class="dayMaxPrice">최대 요금 (24시간) : ${parkingLotObject['dayMaxPrice']}원</span>
                 </div>
             </li>
             `, "text/html").querySelector('li.item');

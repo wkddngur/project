@@ -2,7 +2,10 @@ package com.jbw.reservation.controllers;
 
 import com.jbw.reservation.entities.ContractorEntity;
 import com.jbw.reservation.entities.ParkingLotEntity;
+import com.jbw.reservation.entities.ParkingLotImageEntity;
 import com.jbw.reservation.results.Result;
+import com.jbw.reservation.results.access.CommonResult;
+import com.jbw.reservation.results.contractorPage.ParkingLotAddResult;
 import com.jbw.reservation.services.ParkingLotAddService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +38,7 @@ public class ParkingLotAddController {
         parkingLot.setThumbnailContentType(thumbnail.getContentType());
 
         JSONObject responseObject = new JSONObject();
-        Result result = this.parkingLotAddService.parkingLotRegister(contractor, parkingLot, images);
+        Result result = this.parkingLotAddService.parkingLotRegister(contractor, images, parkingLot);
         responseObject.put("result", result.name().toLowerCase());
         return responseObject.toString();
     }

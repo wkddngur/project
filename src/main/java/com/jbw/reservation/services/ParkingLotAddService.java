@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @Service
 public class ParkingLotAddService {
@@ -27,8 +28,8 @@ public class ParkingLotAddService {
 
     @Transactional
     public Result parkingLotRegister(ContractorEntity contractor,
-                                     ParkingLotEntity parkingLot,
-                                     MultipartFile[] images) throws IOException {
+                                     MultipartFile[] images,
+                                     ParkingLotEntity parkingLot) throws IOException {
         if (contractor == null) {
             return ParkingLotAddResult.FAILURE_NOT_CONTRACTOR_LOGIN;
         }
@@ -65,27 +66,18 @@ public class ParkingLotAddService {
         parkingLot.setModifiedAt(null);
         parkingLot.setDeleted(false);
 
-        int parkingLotResult = this.parkingLotAddMapper.insertParkingLot(parkingLot);
-
-        ParkingLotEntity dbParkingLotResult = this.parkingLotAddMapper.selectParkingLotByAddress(parkingLot.getAddressPostal(), parkingLot.getAddressPrimary());
-        System.out.println(dbParkingLotResult);
-
-        ParkingLotImageEntity[] parkingLotImages = new ParkingLotImageEntity[images.length];
+        this.parkingLotAddMapper.insertParkingLot(parkingLot);
 
         for (int i = 0; i < images.length; i++) {
             ParkingLotImageEntity parkingLotImage = new ParkingLotImageEntity();
-            parkingLotImage.setParkingLotIndex(dbParkingLotResult.getIndex());
+            parkingLotImage.setParkingLotIndex(parkingLot.getIndex());
             parkingLotImage.setData(images[i].getBytes());
             parkingLotImage.setName(images[i].getOriginalFilename());
             parkingLotImage.setContentType(images[i].getContentType());
-            parkingLotImages[i] = parkingLotImage;
+            this.parkingLotAddMapper.insertParkingLotImage(parkingLotImage);
         }
 
-        if (parkingLotResult > 0) {
-            return CommonResult.SUCCESS;
-        } else {
-            return CommonResult.FAILURE;
-        }
+        return CommonResult.SUCCESS;
     }
 
 }

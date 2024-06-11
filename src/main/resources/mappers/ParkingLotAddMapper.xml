@@ -13,6 +13,23 @@
         VALUES (#{contractorEmail}, #{contractorName}, #{thumbnail}, #{thumbnailFileName}, #{thumbnailContentType}, #{name}, #{categoryCode}, #{contactFirst}, #{contactSecond}, #{contactThird}, #{addressPostal}, #{addressPrimary}, #{addressSecondary}, #{latitude}, #{longitude}, #{generalCarNumber}, #{dpCarNumber}, #{description}, #{price}, #{dayMaxPrice}, #{createdAt}, #{modifiedAt}, #{isDeleted})
     </insert>
 
+    <insert id="insertParkingLotImage"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="com.jbw.reservation.entities.ParkingLotImageEntity">
+        INSERT INTO `reservation`.`parking_lot_images` (`parking_lot_index`, `data`, `name`, `content_type`)
+        VALUES (#{parkingLotIndex}, #{data}, #{name}, #{contentType})
+    </insert>
+
+<!--    <delete id="deleteParkingLot">-->
+<!--        DELETE-->
+<!--        FROM `reservation`.`parking_lots`-->
+<!--        WHERE `index` = #{index}-->
+<!--        LIMIT 1-->
+<!--    </delete>-->
+
+
     <select id="selectParkingLotByAddress" resultType="com.jbw.reservation.entities.ParkingLotEntity">
         SELECT `index`                  AS `index`,
                `contractor_email`       AS `contractorEmail`,

@@ -145,6 +145,9 @@ body {
     > .thumbnail {
 
       > .image-wrapper {
+        padding: 0.5rem;
+
+
         align-items: stretch;
         display: flex;
         flex-direction: column;
@@ -195,9 +198,12 @@ body {
 
         > .empty {
           height: $item-size;
-          color: #757575;
+          background-color: lighten(#757575, 40%);
           flex: 1;
           text-align: center;
+          border-radius: 0.25rem;
+          color: darken(#757575, 30%);
+          cursor: pointer;
 
           align-items: center;
           display: flex;
@@ -237,6 +243,13 @@ body {
           flex: 1;
         }
 
+      }
+    }
+
+    > ._obj-label {
+      > .description {
+        height: 10rem;
+        resize: none;
       }
     }
   }

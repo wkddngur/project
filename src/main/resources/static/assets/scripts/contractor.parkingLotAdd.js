@@ -74,7 +74,6 @@ parkingLotAdd.parkingLotAddForm.priceLabel = new LabelObj(parkingLotAdd.parkingL
 parkingLotAdd.parkingLotAddForm.dayMaxPriceLabel = new LabelObj(parkingLotAdd.parkingLotAddForm.querySelector('[rel="dayMaxPriceLabel"]'));
 
 parkingLotAdd.reviewImages = [];
-console.log(1 + '+' + parkingLotAdd.reviewImages.length);
 
 parkingLotAdd.parkingLotAddForm['clearButton'].onclick = () => {
     parkingLotAdd.reviewImages = [];
@@ -103,16 +102,18 @@ parkingLotAdd.parkingLotAddForm['deleteButton'].onclick = () => {
         if (imageWrapperElArray[i].querySelector(':scope > [type="checkbox"]').checked) {
             imageWrapperElArray[i].remove();
             parkingLotAdd.reviewImages.splice(i, 1);
+
         }
     }
-
-    console.log(parkingLotAdd.reviewImages.length);
     if (parkingLotAdd.reviewImages.length === 0) {
         imageContainerEl.querySelector(':scope > .empty').style.display = 'flex';
     }
     parkingLotAdd.parkingLotAddForm['images'].value = '';
 };
 
+parkingLotAdd.parkingLotAddForm['addButton'].onclick = () => {
+    parkingLotAdd.parkingLotAddForm['images'].click();
+};
 
 parkingLotAdd.parkingLotAddForm['images'].onchange = () => {
     // 아무것도 안하고 취소누른 상황.
@@ -137,22 +138,17 @@ parkingLotAdd.parkingLotAddForm['images'].onchange = () => {
             imageWrapperEl.querySelector('.image').src = fileReader.result;
             imageContainerEl.append(imageWrapperEl);
             parkingLotAdd.reviewImages.push(file);
-            console.log(2 + '+' + parkingLotAdd.reviewImages.length);
 
-        }
+        };
         fileReader.readAsDataURL(file);
     }
-};
-
-parkingLotAdd.parkingLotAddForm['addButton'].onclick = () => {
-    parkingLotAdd.parkingLotAddForm['images'].click();
 };
 
 parkingLotAdd.parkingLotAddForm.onsubmit = (e) => {
     e.preventDefault();
 
     parkingLotAdd.parkingLotAddForm.thumbnailLabel.setValid(parkingLotAdd.parkingLotAddForm['thumbnail'].files.length > 0);
-    parkingLotAdd.parkingLotAddForm.attachedImageLabel.setValid(parkingLotAdd.parkingLotAddForm['images'].files.length > 2);
+    parkingLotAdd.parkingLotAddForm.attachedImageLabel.setValid(parkingLotAdd.reviewImages.length > 2);
     parkingLotAdd.parkingLotAddForm.nameLabel.setValid(parkingLotAdd.parkingLotAddForm['name'].tests());
     parkingLotAdd.parkingLotAddForm.categoryLabel.setValid(parkingLotAdd.parkingLotAddForm['categoryCode'].value !== '-1');
     parkingLotAdd.parkingLotAddForm.contactLabel.setValid(parkingLotAdd.parkingLotAddForm['contactFirst'].tests() && parkingLotAdd.parkingLotAddForm['contactSecond'].tests() && parkingLotAdd.parkingLotAddForm['contactThird'].tests());
@@ -262,7 +258,7 @@ parkingLotAdd.parkingLotAddForm.onsubmit = (e) => {
     formData.append('price', parkingLotAdd.parkingLotAddForm['price'].value);
     formData.append('dayMaxPrice', parkingLotAdd.parkingLotAddForm['dayMaxPrice'].value);
 
-    for (const image of parkingLotAdd.parkingLotAddForm['images'].files) {
+    for (const image of parkingLotAdd.reviewImages) {
         formData.append('_images', image);
     }
 
