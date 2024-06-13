@@ -1,4 +1,5 @@
 const map = document.getElementById('map');
+const cover = document.getElementById('cover');
 
 const loadMap = (lat, lng, lv) => {
     lat ??= 35.8715411;
@@ -29,6 +30,12 @@ const loadMap = (lat, lng, lv) => {
     });
 }
 
+// 기본적으로 cover 를 보여주는 역할을 하지만 show() 사용 시 괄호안에 클릭 이벤트가 들어왔을 때 행할 함수들을 지정해 줄수 있다는 메서드.
+cover.show = (onclick) => {
+    cover.onclick = onclick;
+    cover.classList.add(HTMLElement.VISIBLE_CLASS_NAME);
+}
+
 
 if (!isNaN(parseFloat(localStorage.getItem('mapLastLat'))) &&
     !isNaN(parseFloat(localStorage.getItem('mapLastLng'))) &&
@@ -47,3 +54,20 @@ if (!isNaN(parseFloat(localStorage.getItem('mapLastLat'))) &&
         loadMap();
     });
 }
+
+// const applyFlickity = () => {
+//     document.body.querySelectorAll('[data-flickity]').forEach(el => {
+//         new Flickity(el, {
+//             cellAlign: 'left',
+//             contain: true,
+//             pageDots: false,
+//             wrapAround: true
+//         });
+//     });
+// };
+
+// new Flickity(imageContainerEl, {
+//     // options
+//     cellAlign: 'left',
+//     contain: true
+// });

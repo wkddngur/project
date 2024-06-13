@@ -239,6 +239,62 @@
   color: #0B005C;
 }
 
+._obj-dialog {
+  top: 50%;
+  left: 50%;
+  width: 30rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1.5rem 0.0625rem rgba(33, 33, 33, 0.3764705882);
+  box-sizing: border-box;
+  opacity: 0;
+  padding: 2.5rem;
+  pointer-events: none;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  transition-duration: 250ms;
+  z-index: 9;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: flex-start;
+}
+._obj-dialog.-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+._obj-dialog::-webkit-scrollbar {
+  display: none;
+}
+._obj-dialog > .__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+._obj-cover {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(33, 33, 33, 0.6274509804);
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  transition-duration: 250ms;
+  transition-property: opacity;
+  transition-timing-function: ease;
+  z-index: 8;
+}
+._obj-cover.-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
 a:link, a:visited {
   color: #0B005C;
   text-decoration: none;

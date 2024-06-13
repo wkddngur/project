@@ -68,13 +68,16 @@ public class ParkingLotAddService {
 
         this.parkingLotAddMapper.insertParkingLot(parkingLot);
 
-        for (int i = 0; i < images.length; i++) {
+        for (MultipartFile image : images) {
             ParkingLotImageEntity parkingLotImage = new ParkingLotImageEntity();
             parkingLotImage.setParkingLotIndex(parkingLot.getIndex());
-            parkingLotImage.setData(images[i].getBytes());
-            parkingLotImage.setName(images[i].getOriginalFilename());
-            parkingLotImage.setContentType(images[i].getContentType());
-            this.parkingLotAddMapper.insertParkingLotImage(parkingLotImage);
+            parkingLotImage.setData(image.getBytes());
+            parkingLotImage.setName(image.getOriginalFilename());
+            parkingLotImage.setContentType(image.getContentType());
+            if (this.parkingLotAddMapper.insertParkingLotImage(parkingLotImage) == 0) {
+                throw new RuntimeException();
+            }
+
         }
 
         return CommonResult.SUCCESS;

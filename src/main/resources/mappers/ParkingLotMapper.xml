@@ -3,6 +3,68 @@
         "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jbw.reservation.mappers.ParkingLotMapper">
+
+    <select id="selectParkingLotDetailAsideByIndex" resultType="com.jbw.reservation.dtos.ParkingLotDto">
+        SELECT `parkingLot`.`index`                            AS `index`,
+               `parkingLot`.`contractor_email`                 AS `contractorEmail`,
+               `parkingLot`.`contractor_name`                  AS `contractorName`,
+               `parkingLot`.`thumbnail`                        AS `thumbnail`,
+               `parkingLot`.`thumbnail_file_name`              AS `thumbnailFileName`,
+               `parkingLot`.`thumbnail_content_type`           AS `thumbnailContentType`,
+               `parkingLot`.`name`                             AS `name`,
+               `parkingLot`.`category_code`                    AS `categoryCode`,
+               `parkingLot`.`contact_first`                    AS `contactFirst`,
+               `parkingLot`.`contact_second`                   AS `contactSecond`,
+               `parkingLot`.`contact_third`                    AS `contactThird`,
+               `parkingLot`.`address_postal`                   AS `addressPostal`,
+               `parkingLot`.`address_primary`                  AS `addressPrimary`,
+               `parkingLot`.`address_secondary`                AS `addressSecondary`,
+               `parkingLot`.`latitude`                         AS `latitude`,
+               `parkingLot`.`longitude`                        AS `longitude`,
+               `parkingLot`.`general_car_number`               AS `generalCarNumber`,
+               `parkingLot`.`dp_car_number`                    AS `dpCarNumber`,
+               `parkingLot`.`description`                      AS `description`,
+               `parkingLot`.`price`                            AS `price`,
+               `parkingLot`.`day_max_price`                    AS `dayMaxPrice`,
+               `parkingLot`.`created_at`                       AS `createdAt`,
+               `parkingLot`.`modified_at`                      AS `modifiedAt`,
+               `parkingLot`.`is_deleted`                       AS `isDeleted`,
+               `parkingLotCategory`.`text`                     AS `parkingLotCategoryText`,
+               COUNT(`parkingLotFavorite`.`parking_lot_index`) AS `favoriteCount`,
+               COUNT(`parkingLotReview`.`parking_lot_index`)   AS `reviewCount`
+        FROM `reservation`.`parking_lots` AS `parkingLot`
+                 LEFT JOIN `reservation`.`parking_lots_category` AS `parkingLotCategory`
+                           ON `parkingLot`.`category_code` = `parkingLotCategory`.`code`
+                 LEFT JOIN `reservation`.`parking_lot_favorites` AS `parkingLotFavorite`
+                           ON `parkingLot`.`index` = `parkingLotFavorite`.`parking_lot_index`
+                 LEFT JOIN `reservation`.`parking_lot_reviews` AS `parkingLotReview`
+                           ON `parkingLot`.`index` = `parkingLotReview`.`parking_lot_index`
+        WHERE `parkingLot`.`index` = #{index}
+        GROUP BY `parkingLot`.`index`
+        LIMIT 1
+    </select>
+
+    <select id="selectParkingLotImageByIndex" resultType="com.jbw.reservation.entities.ParkingLotImageEntity">
+        SELECT `index`             AS `index`,
+               `parking_lot_index` AS `parkingLotIndex`,
+               `data`              AS `data`,
+               `name`              AS `name`,
+               `content_type`      AS `contentType`
+        FROM `reservation`.`parking_lot_images`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
+
+    <select id="selectParkingLotImageByParkingLotIndex" resultType="com.jbw.reservation.entities.ParkingLotImageEntity">
+        SELECT `index`             AS `index`,
+               `parking_lot_index` AS `parkingLotIndex`,
+               `data`              AS `data`,
+               `name`              AS `name`,
+               `content_type`      AS `contentType`
+        FROM `reservation`.`parking_lot_images`
+        WHERE `parking_lot_index` = #{parkingLotIndex}
+    </select>
+
     <select id="selectParkingLotDtoByCoords" resultType="com.jbw.reservation.dtos.ParkingLotDto">
         SELECT `parkingLot`.`index`                            AS `index`,
                `parkingLot`.`contractor_email`                 AS `contractorEmail`,

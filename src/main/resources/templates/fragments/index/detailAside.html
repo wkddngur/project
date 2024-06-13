@@ -1,39 +1,31 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<aside class="aside add" id="detailAside" th:fragment="detailAside">
+<aside class="aside list" id="detailAside" th:fragment="detailAside">
     <h2 class="title">
         <i class="closer fa-solid fa-angle-left" rel="closer"></i>
-        주차장 상세정보</h2>
-    <!-- 동성로 228 중앙 주차장 작성시작 -->
-    <div class="image-container">
-        <img class="image thumbnail"
-             src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA1MDNfMTI3%2FMDAxNTI1Mjc5NzY1MjMx.urv7bcIrDG3hTdqb0xQNG0s7338LMXrylPgdVDkambUg.Ey2Ert5ADg7wxI1q-IKXTVWU1k1nEvi0Iqx596aR-aMg.JPEG.jjung10479%2FDSC03310.JPG&type=a340"
-             alt="">
-        <img class="image"
-             src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA1MDNfMTYy%2FMDAxNTI1Mjc5Nzg5MjA5.TYli4hVyL6YmK3J0bDj1Unyq-JCP7V6CT7zU9vfNYZUg.SmbrQYFM_0XE4V5DtKis9RdtIaN7PIIBqNSf57-Kc6Qg.JPEG.jjung10479%2FDSC03307.JPG&type=sc960_832"
-             alt="">
-        <img class="image"
-             src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDAzMTRfMjU1%2FMDAxNzEwMzgyMDcwMDIw.R_J6RCN3NSdWrkaTDEHzt6zj4FHmZK9hBu7m6i-Evnkg.jnbwtS9WqW57vYiaxmMWxwTrt0dJQ-nw7qqNaKNcFj0g.JPEG%2FScreenshot%25A3%25DF20240314%25A3%25DF105855%25A3%25DFGallery.jpg&type=a340"
-             alt="">
-        <img class="image"
-             src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA4MjhfMTc5%2FMDAxNjYxNjkxNzAxNjM0._BPgdm5ERPZgqgzTv2EIasAvS4EcNr3ykUnqrRilG-Ig.BMbGSa3LaXiTkXrCGtVWmFPQV2IgEGXExZwAT9IW7AUg.JPEG.kkmkkkek%2FIMG_0907.jpg&type=a340"
-             alt="">
-        <img class="image"
-             src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDAxMTVfMSAg%2FMDAxNzA1MzAyMjgxOTkz.X3SH3Cl57lEKGFSHQBiZG0kEMl_TlvnOzc52SapSgYMg.3itVXbBDkNPL669xehIhty-w--npL38TQgYnXbNRD7sg.JPEG.bliss_322%2FIMG_3876.JPG&type=a340"
-             alt="">
-    </div>
+        주차장 상세정보
+    </h2>
+
+    <div class="image-container" rel="imageContainer"></div>
 
     <div class="info-container">
+
         <div class="name-container">
-            <span class="name" rel="name">동성로 228공원 주차장</span>
-            <span class="category" rel="category">공영주차장</span>
+            <span class="name" rel="name"></span>
+            <span class="category" rel="parkingLotCategoryText"></span>
         </div>
+
         <div class="stat-container">
-            <div class="item favorite">즐겨찾기</div>
-            <span class="value" rel="favorite">1,234</span>
-            <div class="item review">리뷰</div>
-            <span class="value" rel="review"> 1,2354</span>
+            <div class="item favorite">
+                <span class="text">즐겨찾기</span>
+                <span class="value" rel="favoriteCount"></span>
+            </div>
+
+            <div class="item review">
+                <span class="text">리뷰</span>
+                <span class="value" rel="reviewCount"></span>
+            </div>
         </div>
 
         <div class="button-container">
@@ -41,112 +33,69 @@
                 <i class="icon fa-solid fa-star"></i>
                 <span class="text">즐겨찾기</span>
             </button>
+
             <button class="button" rel="reportButton" type="button">
                 <i class="icon fa-solid fa-circle-exclamation"></i>
                 <span class="text">신고</span>
             </button>
-            <button class="button" rel="modifyButton" type="button">
+
+            <button class="button" rel="reservationButton" type="button">
                 <i class="icon fa-solid fa-pen"></i>
-                <span class="text">수정</span>
-            </button>
-            <button class="button" rel="deleteButton" type="button">
-                <i class="icon fa-solid fa-trash"></i>
-                <span class="text">삭제</span>
+                <span class="text">예약</span>
             </button>
         </div>
+
     </div>
+
 
     <div class="spec-container">
         <div class="item">
             <i class="icon fa-solid fa-location-dot"></i>
-            <span class="item" rel="address">대구 중구 동성로2길 80 228공원 주차장</span>
+            <span class="item" rel="address"></span>
         </div>
+
         <div class="item">
             <i class="icon fa-solid fa-phone"></i>
-            <a class="text contact" href="tel:053-252-2193" rel="contact">053-252-2193</a>
+            <a class="text contact" href="" rel="contact"></a>
         </div>
-        <label class="date">
-            <input class="date-detail" type="datetime-local">
-        </label>
+
+        <div class="item">
+            <i class="fa-solid fa-square-parking"></i>
+            <span class="item" rel="generalCarNumber"></span>
+        </div>
+
+        <div class="item">
+            <i class="fa-solid fa-square-parking"></i>
+            <span class="item" rel="dpCarNumber"></span>
+        </div>
+
+        <div class="item">
+            <i class="fa-solid fa-tag"></i>
+            <span class="item" rel="price"></span>
+        </div>
+
+        <div class="item">
+            <i class="fa-solid fa-tag"></i>
+            <span class="item" rel="dayMaxPrice"></span>
+        </div>
+
+        <div class="item">
+            선택 날짜 기준 예약 내역(NOW()로 끌어온 날짜보다 뒤로는 갈수 없다.<br>
+            선택 날짜 시간 기준 몇대가 예약 가능한가등의 정보 표시.
+        </div>
+
+        <div class="item">
+            <i class="fa-solid fa-message"></i>
+            <span class="item" rel="description"></span>
+        </div>
+
+        <div class="item">
+            <i class="fa-solid fa-building"></i>
+            <span class="item" rel="contractorName"></span>
+        </div>
+
     </div>
 
-
-    <form class="review-form">
-        <!--        <span class="not-signed"> 로그인이 후 리뷰를 남길수 있습니다. </span>-->
-        <input hidden name="placeIndex" type="hidden">
-        <h3 class="title">리뷰 작성</h3>
-        <span class="_obj-label attachment">
-            <input hidden multiple accept="image/*" name="images" type="file">
-        <span class="__text">첨부이미지</span>
-        <span class="image-container">
-            <span class="empty">이미지가 없습니다.</span>
-                <label class="image-wrapper">
-                    <input type="checkbox">
-                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA5MDRfMTc3%2FMDAxNTY3NTc2Nzk1MzQz.h6otz4az-mU4jOS3VfNLGrepKRhUfainhlj9rHp2SHgg.WVA3l-HUnHrhfsQ0B8JxBo2f_7Na2Q5B6vTY68pqnNUg.JPEG.rusl333%2F20190806_135146.jpg&type=a340"
-                         alt="">
-                </label>
-        </span>
-        <span class="button-container">
-            <button class="_obj-button" name="clearButton" type="button">전체 삭제</button>
-            <button class="_obj-button" name="deleteButton" type="button">선택 삭제</button>
-            <span class="spring"></span>
-            <button class="_obj-button" name="addButton">추가</button>
-            </span>
-        </span>
-
-
-        <label class="_obj-label rating">
-            <span>별점</span>
-            <select class="_obj-input" name="rating">
-                <option selected value="5">⭐⭐⭐⭐⭐</option>
-                <option value="4">⭐⭐⭐⭐</option>
-                <option value="3">⭐⭐⭐</option>
-                <option value="2">⭐⭐</option>
-                <option value="1">⭐</option>
-            </select>
-        </label>
-
-        <label class="_obj-label content" rel="contentLabel">
-            <span class="__text">내용</span>
-            <textarea class="_obj-input __field" name="content" rows="5"></textarea>
-            <span class="__warning">올바른 내용을입력해주세요</span>
-        </label>
-        <button class="_obj-button" type="submit">작성하기</button>
-    </form>
-
-    <ul class="review-container">
-        <li class="item">
-            <span class="head">
-                <span class="left">
-                    <span class="nickname">샘플 닉네임</span>
-                    <span class="rating">
-                        <i class="star fa-solid fa-star"></i>
-                        <i class="star fa-solid fa-star"></i>
-                        <i class="star fa-solid fa-star"></i>
-                        <i class="star fa-solid fa-star"></i>
-                        <i class="star fa-regular fa-star"></i>
-                    </span>
-                </span>
-                <span class="right date" >2024-05-21 09:28:17</span>
-            </span>
-            <span class="body">
-                <span class="image-container" data-flickity>
-                    <img class="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA5MDRfMTc3%2FMDAxNTY3NTc2Nzk1MzQz.h6otz4az-mU4jOS3VfNLGrepKRhUfainhlj9rHp2SHgg.WVA3l-HUnHrhfsQ0B8JxBo2f_7Na2Q5B6vTY68pqnNUg.JPEG.rusl333%2F20190806_135146.jpg&type=a340" alt="">
-                    <img class="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA5MDRfMTc3%2FMDAxNTY3NTc2Nzk1MzQz.h6otz4az-mU4jOS3VfNLGrepKRhUfainhlj9rHp2SHgg.WVA3l-HUnHrhfsQ0B8JxBo2f_7Na2Q5B6vTY68pqnNUg.JPEG.rusl333%2F20190806_135146.jpg&type=a340" alt="">
-                    <img class="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA5MDRfMTc3%2FMDAxNTY3NTc2Nzk1MzQz.h6otz4az-mU4jOS3VfNLGrepKRhUfainhlj9rHp2SHgg.WVA3l-HUnHrhfsQ0B8JxBo2f_7Na2Q5B6vTY68pqnNUg.JPEG.rusl333%2F20190806_135146.jpg&type=a340" alt="">
-                    <img class="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA5MDRfMTc3%2FMDAxNTY3NTc2Nzk1MzQz.h6otz4az-mU4jOS3VfNLGrepKRhUfainhlj9rHp2SHgg.WVA3l-HUnHrhfsQ0B8JxBo2f_7Na2Q5B6vTY68pqnNUg.JPEG.rusl333%2F20190806_135146.jpg&type=a340" alt="">
-                    <img class="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA5MDRfMTc3%2FMDAxNTY3NTc2Nzk1MzQz.h6otz4az-mU4jOS3VfNLGrepKRhUfainhlj9rHp2SHgg.WVA3l-HUnHrhfsQ0B8JxBo2f_7Na2Q5B6vTY68pqnNUg.JPEG.rusl333%2F20190806_135146.jpg&type=a340" alt="">
-                </span>
-                <span class="content">
-                    내용 내용 내용
-                </span>
-            </span>
-            <span class="foot">
-                <a href="#" rel="deleteLink" class="link">삭제</a>
-                <a href="#" rel="reportLink" class="link">신고</a>
-            </span>
-        </li>
-    </ul>
 </aside>
 
 </html>

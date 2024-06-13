@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 public class ParkingLotDto extends ParkingLotEntity {
     private String parkingLotCategoryText;
+    private int[] imageIndexes;
     private int favoriteCount; // 즐겨찾기 갯수
     private int reviewCount; // 리뷰 갯수
     private boolean isSigned; // 로그인 여부

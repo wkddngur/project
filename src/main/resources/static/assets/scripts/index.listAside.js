@@ -75,7 +75,7 @@ const loadParkingLots = () => {
                 map.instance.setCenter(new kakao.maps.LatLng(parkingLotObject['latitude'], parkingLotObject['longitude']));
                 map.instance.setLevel(2);
                 listAside.hide();
-                detailAside.show();
+                showDetailAside(parkingLotObject['index'], () => listAside.show());
             };
             parkingLotsEl.append(parkingLotEl);
 
