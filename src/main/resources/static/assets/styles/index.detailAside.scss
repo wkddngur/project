@@ -23,7 +23,7 @@
 
 
 #detailAside > .info-container {
-  border-bottom: 0.75rem solid #0B005C;
+  border-bottom: 0.2rem solid #0B005C;
 
   align-items: stretch;
   display: flex;
@@ -99,7 +99,7 @@
 }
 
 #detailAside > .spec-container {
-  border-bottom: 0.75rem solid #0B005C;
+  border-bottom: 0.2rem solid #0B005C;
   font-size: 1rem;
   padding: 1.25rem;
 
@@ -109,4 +109,38 @@
   gap: 0.875rem;
   justify-content: flex-start;
 
+  .reserved-table {
+
+    .slider {
+      height: 10px;
+      background-color: #bdbdbd;
+      position: relative;
+
+      .progress {
+        height: 10px;
+        //left: 25%;
+        //right: 25%;
+        position: absolute;
+        border-radius: 5px;
+        background-color:black;
+      }
+    }
+    > .reservedDiv {
+      display: flex;
+
+      > .reservedSpanEl {
+        width: 100%;
+        height: 10px;
+        top: -10px;
+        background: none;
+        position: relative;
+
+        &.-visible {
+          background: #0B005C;
+          pointer-events: all;
+        }
+      }
+
+    }
+  }
 }

@@ -132,7 +132,7 @@ contractorRegisterDiv.contractorRegisterForm.onsubmit = (e) => {
     }
     if(!contractorRegisterDiv.contractorRegisterForm.nameLabel.isValid()) {
         MessageObj.createSimpleOk('경고','올바른 협력업체 이름을 입력해 주세요.', () => {
-            contractorRegisterDiv.contractorRegisterForm['contractorName'].focus();
+            contractorRegisterDiv.contractorRegisterForm['name'].focus();
         }).show();
         return;
     }

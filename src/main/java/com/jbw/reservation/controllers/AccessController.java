@@ -239,5 +239,79 @@ public class AccessController {
         return responseObject.toString();
     }
 
+    // 협력업체 아이디 조회 및 비밀번호 변경할 수 있는 페이지로 이동하는 맵핑.
+    @RequestMapping(value = "/contractorRecover", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getContractorRecover() {
+        ModelAndView modelAndView = new ModelAndView("access/contractorRecover");
+        return modelAndView;
+    }
+
+    // 협력업체 이름, 대표번호, 사업자번호로 이메일 찾기를 위한 맵핑.
+    @RequestMapping(value = "/contractorRecover/emailFind", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postContractorRecoverEmailFind(@RequestParam(value = "name") String name,
+                                                 @RequestParam(value = "contactFirst") String contactFirst,
+                                                 @RequestParam(value = "contactSecond") String contactSecond,
+                                                 @RequestParam(value = "contactThird") String contactThird,
+                                                 @RequestParam(value = "tinFirst") String tinFirst,
+                                                 @RequestParam(value = "tinSecond") String tinSecond,
+                                                 @RequestParam(value = "tinThird") String tinThird) {
+
+        JSONObject responseObject = new JSONObject();
+
+        String contractorEmail = this.accessService.findContractorEmail(name, contactFirst, contactSecond, contactThird, tinFirst, tinSecond, tinThird);
+
+        if (contractorEmail == null) {
+            responseObject.put("result", "failure");
+            return responseObject.toString();
+        } else {
+            responseObject.put("result", "success");
+            responseObject.put("email", contractorEmail);
+            return responseObject.toString();
+        }
+    }
+
+    // 비밀번호 재설정에서 협력업체 이메일로 인증번호 전송 버튼을 눌렀을 때의 맵핑.
+    @RequestMapping(value = "/contractorRecover/resetPasswordEmailSend", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postContractorRecoverResetPasswordEmailSend(EmailAuthEntity emailAuth) throws MessagingException, NoSuchAlgorithmException {
+        Result result = this.accessService.sendEmailContractorResetPassword(emailAuth);
+
+        JSONObject responseObject = new JSONObject();
+        if (result == CommonResult.SUCCESS) {
+            responseObject.put("result", result.name().toLowerCase());
+            responseObject.put("salt", emailAuth.getSalt());
+            return responseObject.toString();
+        } else {
+            responseObject.put("result", result.name().toLowerCase());
+            responseObject.put("email", emailAuth.getEmail());
+            return responseObject.toString();
+        }
+    }
+
+    // 비밀번호 재설정에서 인증번호 확인 버튼을 눌렀을 때의 맵핑.
+    @RequestMapping(value = "/contractorRecover/resetPasswordEmailCodeVerify", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchContractorRecoverResetPasswordEmailCodeVerify(EmailAuthEntity emailAuth) {
+        Result result = this.accessService.verifyEmailCode(emailAuth);
+
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+
+        return responseObject.toString();
+    }
+
+    // 협력업체 비밀번호 재설정에서 비밀번호 재설정 버튼을 눌렀을 떄의 맵핑.
+    @RequestMapping(value = "/contractorRecover/resetPassword", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchContractorResetPassword(EmailAuthEntity emailAuth,
+                                     ContractorEntity contractor) {
+        Result result = this.accessService.contractorResetPassword(emailAuth, contractor);
+
+        JSONObject responseObject = new JSONObject();
+
+        responseObject.put("result", result.name().toLowerCase());
+        return responseObject.toString();
+    }
 
 }

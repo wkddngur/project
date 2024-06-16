@@ -20,6 +20,8 @@ public interface AccessMapper {
 
     int updateUser(UserEntity user);
 
+    int updateContractor(ContractorEntity contractor);
+
     EmailAuthEntity selectEmailAuthEmailCodeSalt(@Param("email") String email,
                                                  @Param("code") String code,
                                                  @Param("salt") String salt);
@@ -45,6 +47,14 @@ public interface AccessMapper {
                                            @Param("tinThird") String tinThird);
 
     ContractorEntity selectContractorByName(@Param("name") String name);
+
+    ContractorEntity selectContractorByNameContactTin(@Param("name") String name,
+                                                      @Param("contactFirst") String contactFirst,
+                                                      @Param("contactSecond") String contactSecond,
+                                                      @Param("contactThird") String contactThird,
+                                                      @Param("tinFirst") String tinFirst,
+                                                      @Param("tinSecond") String tinSecond,
+                                                      @Param("tinThird") String tinThird);
 
 
 

@@ -1,4 +1,5 @@
 const detailAside = document.getElementById('detailAside');
+const reservedDiv = document.getElementById('reservedDiv');
 
 const showDetailAside = (parkingLotIndex, onclose) => {
 
@@ -57,11 +58,9 @@ const showDetailAside = (parkingLotIndex, onclose) => {
             imageContainerEl.append(imageEl);
         }
 
+        reservedSpan('144');
 
         applyFlickity(detailAside.querySelector('[rel="imageContainer"]'));
-
-
-
 
         detailAside.show();
     }
@@ -70,12 +69,34 @@ const showDetailAside = (parkingLotIndex, onclose) => {
 }
 
 
+const reservedSpan = (reservedNumber) => {
+    reservedDiv.innerHTML = '';
+    for (let i = 1; i < 145; i++) {
+        const reservedSpanEl = new DOMParser().parseFromString(`
+        <span class="reservedSpanEl" value="${i}"></span>
+    `, 'text/html').querySelector('.reservedSpanEl');
+
+        reservedDiv.append(reservedSpanEl);
+    }
+
+    const reservedSpans = reservedDiv.querySelectorAll('.reservedSpanEl');
+
+    for (let i = 0; i < reservedSpans.length; i++) {
+        if (reservedSpans[i].getAttribute('value') === reservedNumber){
+            reservedSpans[i].classList.add(HTMLElement.VISIBLE_CLASS_NAME);
+            reservedSpans[i].onclick = () => {
+                alert('ddd');
+            }
+        }
+    }
+}
+
 const applyFlickity = (imageContainer) => {
-        new Flickity(imageContainer, {
-            cellAlign: 'left',
-            contain: true,
-            pageDots: false,
-            wrapAround: true
-        });
+    new Flickity(imageContainer, {
+        cellAlign: 'left',
+        contain: true,
+        pageDots: false,
+        wrapAround: true
+    });
 };
 

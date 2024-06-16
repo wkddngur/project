@@ -14,7 +14,7 @@
 }
 
 #detailAside > .info-container {
-  border-bottom: 0.75rem solid #0B005C;
+  border-bottom: 0.2rem solid #0B005C;
   align-items: stretch;
   display: flex;
   flex-direction: column;
@@ -77,7 +77,7 @@
 }
 
 #detailAside > .spec-container {
-  border-bottom: 0.75rem solid #0B005C;
+  border-bottom: 0.2rem solid #0B005C;
   font-size: 1rem;
   padding: 1.25rem;
   align-items: stretch;
@@ -85,6 +85,31 @@
   flex-direction: column;
   gap: 0.875rem;
   justify-content: flex-start;
+}
+#detailAside > .spec-container .reserved-table .slider {
+  height: 10px;
+  background-color: #bdbdbd;
+  position: relative;
+}
+#detailAside > .spec-container .reserved-table .slider .progress {
+  height: 10px;
+  position: absolute;
+  border-radius: 5px;
+  background-color: black;
+}
+#detailAside > .spec-container .reserved-table > .reservedDiv {
+  display: flex;
+}
+#detailAside > .spec-container .reserved-table > .reservedDiv > .reservedSpanEl {
+  width: 100%;
+  height: 10px;
+  top: -10px;
+  background: none;
+  position: relative;
+}
+#detailAside > .spec-container .reserved-table > .reservedDiv > .reservedSpanEl.-visible {
+  background: #0B005C;
+  pointer-events: all;
 }
 
 #listAside::-webkit-scrollbar {

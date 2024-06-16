@@ -136,6 +136,33 @@ public class AccessService {
         return CommonResult.SUCCESS;
     }
 
+    // 협력업체 이메일 인증코드를 보내기 위한 메서드. db 결과 email 중복이 있을 때 사용하는 메서드.(비밀번호 찾기)
+    public Result sendEmailContractorResetPassword(EmailAuthEntity emailAuth) throws NoSuchAlgorithmException, MessagingException {
+        if (emailAuth == null || !EmailAuthRegex.email.tests(emailAuth.getEmail())) {
+            return CommonResult.FAILURE;
+        }
+        if (this.accessMapper.selectContractorByEmail(emailAuth.getEmail()) == null) {
+            return CommonResult.FAILURE;
+        }
+
+        prepareEmailAuth(emailAuth);
+
+        if (this.accessMapper.insertEmailAuth(emailAuth) != 1) {
+            return CommonResult.FAILURE;
+        }
+
+        Context context = new Context();
+        context.setVariable("code", emailAuth.getCode());
+        new MailSender(this.mailSender)
+                .setFrom("jbw5387@naver.com")
+                .setSubject("[] 협력업체 비밀번호 재설정 인증번호")
+                .setTo(emailAuth.getEmail())
+                .setText(this.templateEngine.process("htmlMailSend/contractorResetPasswordEmail", context), true)
+                .send();
+
+        return CommonResult.SUCCESS;
+    }
+
     // 이메일 인증번호 확인을 위한 메서드.
     public Result verifyEmailCode(EmailAuthEntity emailAuth) {
         if (emailAuth == null ||
@@ -411,6 +438,66 @@ public class AccessService {
         dbUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 
         this.accessMapper.updateUser(dbUser);
+
+        return CommonResult.SUCCESS;
+    }
+
+    // 이름, 성별, 생년월일로 이메일 찾기 위한 메서드.
+    public String findContractorEmail(String name, String contactFirst, String contactSecond, String contactThird, String tinFirst, String tinSecond, String tinThird) {
+        if (name == null ||
+                !ContractorRegex._name.tests(name) ||
+                !ContractorRegex.contactFirst.tests(contactFirst) ||
+                !ContractorRegex.contactSecond.tests(contactSecond) ||
+                !ContractorRegex.contactThird.tests(contactThird) ||
+                !ContractorRegex.tinFirst.tests(tinFirst) ||
+                !ContractorRegex.tinSecond.tests(tinSecond) ||
+                !ContractorRegex.tinThird.tests(tinThird)) {
+            return null;
+        }
+
+        ContractorEntity dbContractorResult = this.accessMapper.selectContractorByNameContactTin(name, contactFirst, contactSecond, contactThird, tinFirst, tinSecond, tinThird);
+
+        if (dbContractorResult == null) {
+            return null;
+        }
+
+        return dbContractorResult.getEmail();
+    }
+
+    // 비밀번호 변경을 위한 메서드.
+    @Transactional
+    public Result contractorResetPassword(EmailAuthEntity emailAuth,
+                                ContractorEntity contractor) {
+        if (emailAuth == null || contractor == null ||
+                !EmailAuthRegex.email.tests(emailAuth.getEmail()) ||
+                !EmailAuthRegex.code.tests(emailAuth.getCode()) ||
+                !EmailAuthRegex.salt.tests(emailAuth.getSalt()) ||
+                !ContractorRegex.email.tests(contractor.getEmail()) ||
+                !ContractorRegex.password.tests(contractor.getPassword())) {
+            return CommonResult.FAILURE;
+        }
+
+        EmailAuthEntity dbEmailAuthResult = this.accessMapper.selectEmailAuthEmailCodeSalt(
+                emailAuth.getEmail(),
+                emailAuth.getCode(),
+                emailAuth.getSalt());
+
+        if (dbEmailAuthResult == null || !dbEmailAuthResult.isVerified() || dbEmailAuthResult.isUsed()) {
+            return CommonResult.FAILURE;
+        }
+
+        dbEmailAuthResult.setUsed(true);
+        this.accessMapper.updateEmailAuth(dbEmailAuthResult);
+
+        ContractorEntity dbContractor = this.accessMapper.selectContractorByEmail(contractor.getEmail());
+
+        if (dbContractor == null || dbContractor.isDeleted()) {
+            return CommonResult.FAILURE;
+        }
+
+        dbContractor.setPassword(new BCryptPasswordEncoder().encode(contractor.getPassword()));
+
+        this.accessMapper.updateContractor(dbContractor);
 
         return CommonResult.SUCCESS;
     }

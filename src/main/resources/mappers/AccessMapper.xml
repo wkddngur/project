@@ -48,6 +48,26 @@
         LIMIT 1
     </update>
 
+    <update id="updateContractor" parameterType="com.jbw.reservation.entities.ContractorEntity">
+        UPDATE `reservation`.`contractors`
+        SET `password`       = #{password},
+            `name`           = #{name},
+            `contact_first`  = #{contactFirst},
+            `contact_second` = #{contactSecond},
+            `contact_third`  = #{contactThird},
+            `tin_first`      = #{tinFirst},
+            `tin_second`     = #{tinSecond},
+            `tin_third`      = #{tinThird},
+            `created_at`     = #{createdAt},
+            `modified_at`    = #{modifiedAt},
+            `is_deleted`     = #{isDeleted},
+            `is_suspended`   = #{isSuspended},
+            `is_agree`       = #{isAgree},
+            `is_approved`    = #{isApproved}
+        WHERE BINARY `email` = #{email}
+        LIMIT 1
+    </update>
+
     <select id="selectEmailAuthEmailCodeSalt" resultType="com.jbw.reservation.entities.EmailAuthEntity">
         SELECT `email`       AS `email`,
                `code`        AS code,
@@ -205,6 +225,33 @@
                `is_approved`    AS `isApproved`
         FROM `reservation`.`contractors`
         WHERE BINARY `name` = #{name}
+        LIMIT 1
+    </select>
+
+    <select id="selectContractorByNameContactTin" resultType="com.jbw.reservation.entities.ContractorEntity">
+        SELECT `email`          AS `email`,
+               `password`       AS `password`,
+               `name`           AS `name`,
+               `contact_first`  AS `contactFirst`,
+               `contact_second` AS `contactSecond`,
+               `contact_third`  AS `contactThird`,
+               `tin_first`      AS `tinFirst`,
+               `tin_second`     AS `tinSecond`,
+               `tin_third`      AS `tinThird`,
+               `created_at`     AS `createdAt`,
+               `modified_at`    AS `modifiedAt`,
+               `is_deleted`     AS `isDeleted`,
+               `is_suspended`   AS `idSuspended`,
+               `is_agree`       AS `isAgree`,
+               `is_approved`    AS `isApproved`
+        FROM `reservation`.`contractors`
+        WHERE BINARY `name` = #{name}
+          AND `contact_first` = #{contactFirst}
+          AND `contact_second` = #{contactSecond}
+          AND `contact_third` = #{contactThird}
+          AND `tin_first` = #{tinFirst}
+          AND `tin_second` = #{tinSecond}
+          AND `tin_third` = #{tinThird}
         LIMIT 1
     </select>
 
