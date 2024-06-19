@@ -60,9 +60,9 @@ const loadParkingLots = () => {
                         <span class="addressSecondary">${parkingLotObject['addressSecondary']}</span>
                     </div>
                     
-                    <span class="generalCarNumber">일반 차량 : ${parkingLotObject['reserveGeneralCarNumber']} / ${parkingLotObject['generalCarNumber']}</span>
+                    <span class="generalCarNumber">최대 일반 차량 주차 대수 : ${parkingLotObject['generalCarNumber']}</span>
                     
-                    <span class="dpCarNumber">장애인 차량 : ${parkingLotObject['reserveDpCarNumber']} / ${parkingLotObject['dpCarNumber']}</span>
+                    <span class="dpCarNumber">초대 장애인 차량 주차 대수 : ${parkingLotObject['dpCarNumber']}</span>
                     
                     <span class="price">기준 가격 (10분) : ${parkingLotObject['price']}원</span>
                     
@@ -83,6 +83,14 @@ const loadParkingLots = () => {
                 map: map.instance,
                 position: new kakao.maps.LatLng(parkingLotObject['latitude'], parkingLotObject['longitude'])
             });
+
+            // 지도에 생성된 마커 클릭시 메서드
+            kakao.maps.event.addListener(marker, 'click', function(e) {
+                showDetailAside(parkingLotObject['index'], () => listAside.show())
+                map.instance.setCenter(new kakao.maps.LatLng(parkingLotObject['latitude'], parkingLotObject['longitude']));
+                map.instance.setLevel(2);
+            });
+
             map.markers.push(marker);
         }
     }

@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import "index.detailAside";
 @import "index.listAside";
+@import "index.catagoryDialog";
 
 $aside-width: 27rem;
 $nav-height: 4.5rem;
@@ -74,6 +75,18 @@ body {
       pointer-events: all;
     }
   }
+
+  @media screen and (max-width: 85rem) {
+    #nav > .button-container {
+      display: none;
+    }
+  }
+  
+  @media screen and (max-width: 68rem) {
+    #nav {
+      display: none;
+    }
+  }
 }
 
 #nav {
@@ -143,10 +156,11 @@ body {
       border-radius: 999rem;
       border: 0.0625rem solid #ffffff;
       background-color: #0B005C;
-      font-weight: 300;
-      font-size: 1.4rem;
+      font-weight: 400;
+      font-size: 1.3rem;
       color: #ffffff;
       cursor: pointer;
+      text-align: center;
     }
   }
 

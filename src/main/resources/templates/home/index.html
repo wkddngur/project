@@ -11,9 +11,15 @@
     <link rel="stylesheet" type="text/css" th:href="@{assets/styles/common.css}">
     <link rel="stylesheet" type="text/css" th:href="@{assets/styles/index.css}">
 
-    <!--    flickity API 끌어온것.-->
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js" type="text/javascript"></script>
+    <!--    swiperjs API 끌어온것.-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Date Range Picker API 끌어온것 -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     <!--카카오 지도 API 끌어온것.-->
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=20117416fbae8ce050ee1dcc56db2c71&libraries=services"
@@ -27,6 +33,7 @@
     <script defer type="text/javascript" th:src="@{/assets/scripts/index.listAside.js}"></script>
     <script defer type="text/javascript" th:src="@{/assets/scripts/index.js}"></script>
     <script defer type="text/javascript" th:src="@{/assets/scripts/index.reservationForm.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.nav.js}"></script>
 
 </head>
 
@@ -42,6 +49,10 @@
 <th:block th:replace="~{fragments/index/map.html :: map}"></th:block>
 
 <th:block th:replace="~{fragments/index/reservationForm.html :: reservationForm}"></th:block>
+
+<th:block th:replace="~{fragments/index/categoryDialog.html :: categoryDialog}"></th:block>
+
+<th:block th:replace="~{fragments/index/referenceTimeDialog.html :: referenceTimeDialog}"></th:block>
 
 </body>
 

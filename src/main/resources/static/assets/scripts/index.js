@@ -55,19 +55,27 @@ if (!isNaN(parseFloat(localStorage.getItem('mapLastLat'))) &&
     });
 }
 
-// const applyFlickity = () => {
-//     document.body.querySelectorAll('[data-flickity]').forEach(el => {
-//         new Flickity(el, {
-//             cellAlign: 'left',
-//             contain: true,
-//             pageDots: false,
-//             wrapAround: true
-//         });
-//     });
-// };
 
-// new Flickity(imageContainerEl, {
-//     // options
-//     cellAlign: 'left',
-//     contain: true
-// });
+function dateFormat(dateTime) {
+    let year = dateTime.getFullYear();
+    let month = dateTime.getMonth() + 1;
+    let date = dateTime.getDate();
+    let hour = dateTime.getHours();
+    let minute = dateTime.getMinutes();
+
+    if (month < 10) {
+        month = '0' + month;
+    }
+    if (date < 10) {
+        date = '0' + date;
+    }
+    if (hour < 10) {
+        hour = '0' + hour;
+    }
+    if (minute === 0) {
+        minute = '0' + minute;
+    }
+
+    return year + '-' + month + '-' + date + ' ' + hour + ':' + minute;
+        // YYYY-MM-DD HH:mm
+}

@@ -15,6 +15,11 @@ public class ContractorPageController {
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getContractor(@SessionAttribute(value = "contractor", required = false) ContractorEntity contractor) {
         ModelAndView modelAndView = new ModelAndView("contractor/contractorPage");
+        if (contractor == null) {
+            modelAndView.addObject("result", null);
+            return modelAndView;
+        }
+        modelAndView.addObject("contractor", contractor);
         return modelAndView;
     }
 }
