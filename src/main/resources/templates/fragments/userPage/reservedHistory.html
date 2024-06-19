@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div id="reservedHistory" class="div reservedHistory" th:fragment="reservedHistory">
+
+    <div class="reservedHistoryTitleDiv">
+        <h2 class="title">예약 내역</h2>
+    </div>
+
+    <label>
+        <span>이메일</span>
+        <input class="_obj-input" name="userEmail" placeholder="예) user@email.com" type="text">
+    </label>
+    <label>
+        <span>예약날짜</span>
+        <input class="_obj-input" placeholder="예) 2024-06-18 ~ 2024-06-23" type="text">
+    </label>
+    <label>
+        <span>결제일시</span>
+        <input class="_obj-input" placeholder="예) 2024-06-18 13:22:54" type="text">
+    </label>
+    <label>
+        <span>결제금액</span>
+        <input class="_obj-input" placeholder="예) 50,000원" type="text">
+    </label>
+
+    <!--        get 요청에서 modelAndView 에 결과값을 보내줘서 th:if로 아직 입금되지 않았습니다. 입금 확인을 위해서는 1:1문의 게시판에 글을 남겨주세요. 또는 입금확인이 완료되었습니다. 와 같은 문구를 띄워줘야 할듯-->
+
+    <label>
+        <span>계좌번호</span>
+        <span>국비 수업 프로젝트 페이지입니다. 예시 사항을 작성해 뒀을 뿐 실제 입금처리 되지 않습니다.</span>
+        <input class="_obj-input" placeholder="예) 대구 1234-56-7891011" type="text">
+    </label>
+    <label>
+        <input class="_obj-input" placeholder="예) 입금 상태" type="text">
+    </label>
+    <label>
+        <input class="_obj-input" placeholder="예) 환불 상태" type="text">
+    </label>
+</div>
+
+</html>

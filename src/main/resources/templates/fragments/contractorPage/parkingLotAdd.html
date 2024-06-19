@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div id="parkingLotAdd" class="div parkingLotAdd"
+     th:with="parkingLotRegex = ${T(com.jbw.reservation.regexes.ParkingLotRegex)}" th:fragment="parkingLotAdd">
+
+    <form novalidate id="parkingLotAddForm" class="parkingLotAddForm" rel="parkingLotAddForm">
+        <input hidden name="contractorEmail" type="hidden" th:if="${session.contractor != null}" th:value="${session.contractor.getEmail()}">
+        <input hidden name="contractorName" type="hidden" th:if="${session.contractor != null}" th:value="${session.contractor.getName()}">
+
+        <label class="_obj-label thumbnail" rel="thumbnailLabel">
+            <input hidden accept="image/*" name="thumbnail" type="file">
+            <span class="__text">대표 이미지</span>
+            <span class="image-wrapper">
+                    <span class="empty">대표 이미지를 선택해 주세요.</span>
+                    <img src="" alt="" class="image">
+                </span>
+        </label>
+
+        <label class="_obj-label attachedImage" rel="attachedImageLabel">
+            <input hidden multiple accept="image/*" name="images" type="file">
+            <span class="__text">첨부 이미지</span>
+            <span class="image-container">
+                    <span class="empty">이미지가 없습니다. <br><br>3장 이상 선택해 주세요.</span>
+                </span>
+
+            <span class="button-container">
+                <button class="_obj-button" name="clearButton" type="button">전체 삭제</button>
+                <button class="_obj-button" name="deleteButton" type="button">선택 삭제</button>
+                <span class="spring"></span>
+                <button class="_obj-button" name="addButton" type="button">추가</button>
+            </span>
+
+        </label>
+
+        <label class="_obj-label" rel="nameLabel">
+            <span class="__text">주차장 상호명</span>
+            <input required autocomplete="off" class="_obj-input __field" maxlength="50" minlength="1" name="name"
+                   placeholder="상호명(숫자, 영어 대소문자, 한글, 공백 1자 이상 50자 미만)" type="text"
+                   th:attrappend="data-regex=${parkingLotRegex._name.expression}">
+        </label>
+
+        <label class="_obj-label" rel="categoryLabel">
+            <span class="__text">주차장 분류</span>
+            <select class="_obj-input __field" name="categoryCode">
+                <option disabled hidden selected value="-1">주차장 영업방식</option>
+                <option value="reserve">예약제 주차장</option>
+                <option value="fcfs">선착순 주차장</option>
+            </select>
+        </label>
+
+        <label class="_obj-label" rel="contactLabel">
+            <span class="__text">주차장 연락처</span>
+            <span class="__horizontal">
+                    <input required autocomplete="off" class="_obj-input __field" maxlength="4" minlength="3"
+                           name="contactFirst" spellcheck="false" type="text"
+                           th:attrappend="data-regex=${parkingLotRegex.contactFirst.expression}">
+                    <span class="space">-</span>
+                    <input required autocomplete="off" class="_obj-input __field" maxlength="4" minlength="3"
+                           name="contactSecond" spellcheck="false" type="text"
+                           th:attrappend="data-regex=${parkingLotRegex.contactSecond.expression}">
+                    <span class="space">-</span>
+                    <input required autocomplete="off" class="_obj-input __field" maxlength="4" minlength="4"
+                           name="contactThird" spellcheck="false" type="text"
+                           th:attrappend="data-regex=${parkingLotRegex.contactThird.expression}">
+                </span>
+        </label>
+
+        <label class="_obj-label" rel="addressLabel">
+            <span class="__text">주차장 주소</span>
+            <span class="__horizontal">
+                    <input readonly required autocomplete="off" class="_obj-input __field -spring" maxlength="5"
+                           minlength="5"
+                           name="addressPostal" spellcheck="false" type="text"
+                           th:attrappend="data-regex=${parkingLotRegex.addressPostal.expression}">
+                    <button class="_obj-button" name="addressFind" type="button">주소 찾기</button>
+                </span>
+            <input readonly required autocomplete="off" class="_obj-input __field" maxlength="100" minlength="1"
+                   name="addressPrimary" placeholder="주소 찾기 버튼을 클릭하여 주소를 입력해 주세요." spellcheck="false" type="text"
+                   th:attrappend="data-regex=${parkingLotRegex.addressPrimary.expression}">
+
+            <input autocomplete="off" class="_obj-input __field" maxlength="100" minlength="1"
+                   name="addressSecondary"
+                   placeholder="상세 주소(건물명, 동/호 등)" spellcheck="false" type="text"
+                   th:attrappend="data-regex=${parkingLotRegex.addressSecondary.expression}">
+        </label>
+
+        <label class="_obj-label" rel="coordsLabel">
+            <span class="__text">좌표</span>
+            <span class="__horizontal">
+                    <input disabled readonly required autocomplete="off" class="_obj-input __field -spring"
+                           name="latitude"
+                           placeholder="위도" spellcheck="false" type="text">
+                <input disabled readonly required autocomplete="off" class="_obj-input __field -spring" name="longitude"
+                       placeholder="경도" spellcheck="false" type="text">
+                </span>
+        </label>
+
+        <label class="_obj-label" rel="generalCarNumberLabel">
+            <span class="__text">일반 차량 주차가능 대수</span>
+            <input required autocomplete="off" class="_obj-input __field" maxlength="6" minlength="1" name="generalCarNumber"
+                   spellcheck="false" type="text" th:attrappend="data-regex=${parkingLotRegex.parkingCapacity.expression}">
+        </label>
+
+        <label class="_obj-label" rel="dpCarNumberLabel">
+            <span class="__text">장애인 차량 주차가능 대수</span>
+            <input required autocomplete="off" class="_obj-input __field" maxlength="6" minlength="0" name="dpCarNumber"
+                   spellcheck="false" type="text" th:attrappend="data-regex=${parkingLotRegex.parkingCapacity.expression}">
+        </label>
+
+        <label class="_obj-label" rel="descriptionLabel">
+            <span class="__text">주차장 안내사항</span>
+            <textarea required autocomplete="off" class="_obj-input __field description" name="description"
+                      placeholder="안내사항을 입력해 주세요."
+                      spellcheck="false"
+                      th:attrappend="data-regex=${parkingLotRegex.description.expression}"></textarea>
+        </label>
+
+        <label class="_obj-label" rel="priceLabel">
+            <span class="__text">10분당 가격</span>
+            <input required autocomplete="off" class="_obj-input __field" maxlength="6" minlength="0" name="price" spellcheck="false"
+                   type="text" th:attrappend="data-regex=${parkingLotRegex.price.expression}">
+        </label>
+
+        <label class="_obj-label" rel="dayMaxPriceLabel">
+            <span class="__text">하루 최대 요금</span>
+            <input required autocomplete="off" class="_obj-input __field" maxlength="6" minlength="0" name="dayMaxPrice"
+                   spellcheck="false" type="text" th:attrappend="data-regex=${parkingLotRegex.price.expression}">
+        </label>
+
+        <button class="_obj-button" type="submit">주차장 추가하기</button>
+    </form>
+    <!--        <button class="_obj-button" name="cancelButton" type="button">전체 초기화</button>-->
+</div>
+
+</html>

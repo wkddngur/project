@@ -1,0 +1,104 @@
+body {
+  background-color: #0B005C;
+}
+
+#userPage {
+  background-color: #f5f5f5;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 90%;
+  border-radius: 0.375rem;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+#userPage::-webkit-scrollbar {
+  display: none;
+}
+#userPage > .userPageTitleDiv {
+  background-color: #f5f5f5;
+  top: 0;
+  position: sticky;
+  z-index: 9;
+}
+#userPage > .userPageTitleDiv > .titleDiv {
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  padding: 1rem;
+}
+#userPage > .userPageTitleDiv > .type-wrapper {
+  padding: 0 2rem;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+#userPage > .userPageTitleDiv > .type-wrapper > .type {
+  background-color: #dddddd;
+  border: 0.0625rem solid lightgray;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  user-select: none;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: flex-start;
+}
+#userPage > .userPageTitleDiv > .type-wrapper > .type > [name=type] {
+  display: none;
+}
+#userPage > .userPageTitleDiv > .type-wrapper > .type > .title {
+  font-size: 1.2rem;
+  white-space: nowrap;
+  text-align: center;
+}
+#userPage > .userPageTitleDiv > .type-wrapper > .type > .message {
+  color: #757575;
+  font-size: 0.8rem;
+  line-height: 1.25;
+}
+#userPage > .userPageTitleDiv > .type-wrapper > .type:hover {
+  border-color: #212121;
+}
+#userPage > .userPageTitleDiv > .type-wrapper > .type:has([name=type]:checked) {
+  border-color: #0B005C;
+}
+#userPage > .userPageTitleDiv:has([name=type][value=reservedHistory]:checked) ~ .div.reservedHistory {
+  display: flex;
+}
+#userPage > .userPageTitleDiv:has([name=type][value=userDataRecover]:checked) ~ .div.userDataRecover {
+  display: flex;
+}
+
+#reservedHistory {
+  top: 30%;
+  left: 50%;
+  width: 50%;
+  height: 90%;
+  border-radius: 0.375rem;
+  padding: 1rem 2rem;
+  position: relative;
+  transform: translate(-50%, -30%);
+  align-items: stretch;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+#userDataRecover {
+  font-size: 1.4rem;
+  align-items: center;
+  display: none;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=userPage.css.map */

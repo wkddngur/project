@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>마이페이지</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/userPage.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/common.css}">
+
+    <!--        <script defer th:if="${}">-->
+    <!--            alert('로그인 후 이용해 주세요.');-->
+    <!--            location.href = '/access/';-->
+    <!--        </script>-->
+
+</head>
+<body>
+<div id="refundDialog">
+    <div class="dialog"></div>
+</div>
+
+<div id="userPage">
+
+    <div class="userPageTitleDiv">
+        <div class="titleDiv">
+            <h2>마이페이지</h2>
+        </div>
+
+
+        <div class="type-wrapper">
+            <label class="type">
+                <input checked name="type" value="reservedHistory" type="radio">
+                <span class="title">예약 내역</span>
+            </label>
+
+            <label class="type">
+                <input name="type" value="userDataRecover" type="radio">
+                <span class="title">회원 정보 수정</span>
+            </label>
+        </div>
+    </div>
+
+
+    <th:block th:replace="~{fragments/userPage/reservedHistory.html :: reservedHistory}"></th:block>
+
+    <th:block th:replace="~{fragments/userPage/userDataRecover.html :: userDataRecover}"></th:block>
+
+</div>
+
+
+</body>
+</html>
