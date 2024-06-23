@@ -22,5 +22,20 @@ document.addEventListener('DOMContentLoaded', () => {
     categoryDialog.addEventListener('mouseleave', () => {
         categoryDialog.hide();
     });
-})
+});
 
+nav.searchForm = document.getElementById('searchForm');
+
+nav.searchForm.onsubmit = (e) => {
+    e.preventDefault();
+
+    const keyword = nav.searchForm.querySelector('[name="keyword"]').value;
+
+    if (keyword === null || keyword.length > 255 || keyword.length < 1) {
+        alert('검색어를 입력해 주세요.');
+        return;
+    }
+
+    searchParkingLots(keyword);
+
+}

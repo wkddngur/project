@@ -30,8 +30,23 @@ body {
 #userPage > .userPageTitleDiv > .titleDiv {
   font-size: 2rem;
   font-weight: 400;
+  padding: 1rem 2rem;
   text-align: center;
-  padding: 1rem;
+}
+#userPage > .userPageTitleDiv > .titleDiv > .closer {
+  left: 2rem;
+  padding: 0.8rem;
+  font-size: 1rem;
+  position: absolute;
+  text-align: center;
+}
+#userPage > .userPageTitleDiv > .titleDiv > .closer > .text {
+  font: inherit;
+}
+#userPage > .userPageTitleDiv > .titleDiv > .closer:hover {
+  cursor: pointer;
+  border-radius: 5rem;
+  background-color: #dddddd;
 }
 #userPage > .userPageTitleDiv > .type-wrapper {
   padding: 0 2rem;

@@ -2,15 +2,16 @@ const detailAside = document.getElementById('detailAside');
 const reservedDiv = document.getElementById('reservedDiv');
 const swiperWrapper = detailAside.querySelector('[rel="swiperWrapper"]');
 
+let parkingLotObject = '';
+
 const referenceTimeDiv = document.getElementById('referenceTimeDiv');
 const referenceTimeDialog = document.getElementById('referenceTimeDialog');
-
 const referenceTimeButton = referenceTimeDiv.querySelector('[rel="referenceTimeButton"]');
 
 let nowDateTime = new Date();
 
 let minutes = nowDateTime.getMinutes();
-let fixedMinutes = Math.floor(minutes/10) * 10 + 10;
+let fixedMinutes = Math.floor(minutes / 10) * 10 + 10;
 nowDateTime.setMinutes(fixedMinutes);
 nowDateTime.setSeconds(0);
 
@@ -40,8 +41,14 @@ const showDetailAside = (parkingLotIndex, onclose) => {
         }
     });
 
-    detailAside.querySelector('[name="startDateTime"]').value = dateFormat(nowDateTime);
-    detailAside.querySelector('[name="endDateTime"]').value = dateFormat(endDateTime);
+    if (typeof sessionStorage.getItem('startDateTime') === 'string' && typeof sessionStorage.getItem('endDateTime') === 'string') {
+        detailAside.querySelector('[name="startDateTime"]').value = sessionStorage.getItem('startDateTime');
+        detailAside.querySelector('[name="endDateTime"]').value = sessionStorage.getItem('endDateTime');
+    } else {
+        detailAside.querySelector('[name="startDateTime"]').value = dateFormat(nowDateTime);
+        detailAside.querySelector('[name="endDateTime"]').value = dateFormat(endDateTime);
+    }
+
 
     let initialStartDateTime = detailAside.querySelector('[name="startDateTime"]').value;
     let initialEndDateTime = detailAside.querySelector('[name="endDateTime"]').value;
@@ -78,7 +85,7 @@ const showDetailAside = (parkingLotIndex, onclose) => {
                 minDate: nowDateTime,
             });
 
-            $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
+            $('input[name="datetimes"]').on('apply.daterangepicker', function (ev, picker) {
                 sessionStorage.setItem('startDateTime', picker.startDate.format('YYYY-MM-DD HH:mm'));
                 sessionStorage.setItem('endDateTime', picker.endDate.format('YYYY-MM-DD HH:mm'));
 
@@ -104,12 +111,8 @@ const showDetailAside = (parkingLotIndex, onclose) => {
     }
 
     detailAside.querySelector('[rel="reservationButton"]').onclick = () => {
-        reservationForm.querySelector('[name="startDateTime"]').value = sessionStorage.getItem('startDateTime');
-        reservationForm.querySelector('[name="endDateTime"]').value = sessionStorage.getItem('endDateTime');
-
         showReservationForm();
     }
-
 
 
     const xhr = new XMLHttpRequest();
@@ -122,7 +125,7 @@ const showDetailAside = (parkingLotIndex, onclose) => {
             MessageObj.createSimpleOk('오류', '요청을 전송하는 도중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.', () => location.reload()).show();
             return;
         }
-        const parkingLotObject = JSON.parse(xhr.responseText);
+        parkingLotObject = JSON.parse(xhr.responseText);
 
         detailAside.querySelector('[rel="name"]').innerText = parkingLotObject['name'];
         detailAside.querySelector('[rel="parkingLotCategoryText"]').innerText = parkingLotObject['parkingLotCategoryText'];
@@ -178,11 +181,11 @@ const showDetailAside = (parkingLotIndex, onclose) => {
 }
 
 
-function reservedSpan(reservedNumber)  {
+function reservedSpan(reservedNumber) {
     const reservedSpans = reservedDiv.querySelectorAll('.reservedSpanEl');
 
     for (let i = 0; i < reservedSpans.length; i++) {
-        if (reservedSpans[i].getAttribute('value') === reservedNumber){
+        if (reservedSpans[i].getAttribute('value') === reservedNumber) {
             reservedSpans[i].classList.add(HTMLElement.VISIBLE_CLASS_NAME);
             reservedSpans[i].onmouseover = () => {
                 alert('ddd');

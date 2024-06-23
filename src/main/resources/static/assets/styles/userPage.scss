@@ -34,8 +34,30 @@ body {
     > .titleDiv {
       font-size: 2rem;
       font-weight: 400;
+      padding: 1rem 2rem;
       text-align: center;
-      padding: 1rem;
+      //align-items: center;
+      //display: flex;
+      //flex-direction: row;
+
+      > .closer {
+        left: 2rem;
+        padding: 0.8rem;
+        font-size: 1rem;
+        position: absolute;
+        text-align: center;
+
+        > .text {
+          font: inherit;
+
+        }
+
+        &:hover {
+          cursor: pointer;
+          border-radius: 5rem;
+          background-color: darken(#e0e0e0, 1%);
+        }
+      }
     }
 
     > .type-wrapper {

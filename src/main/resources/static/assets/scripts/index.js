@@ -1,6 +1,8 @@
 const map = document.getElementById('map');
 const cover = document.getElementById('cover');
 
+let searching = false; // 검색한 상황인지에 대한 판단을 위한 변수.
+
 const loadMap = (lat, lng, lv) => {
     lat ??= 35.8715411;
     lng ??= 128.601505;
@@ -18,14 +20,17 @@ const loadMap = (lat, lng, lv) => {
     });
 
     kakao.maps.event.addListener(map.instance, 'dragend', () => {
+        if (searching === true) return;
         loadParkingLots();
     });
 
     kakao.maps.event.addListener(map.instance, 'zoom_changed', () => {
+        if (searching === true) return;
         loadParkingLots();
     });
 
     kakao.maps.event.addListener(map.instance, 'tilesloaded', () => {
+        if (searching === true) return;
         loadParkingLots();
     });
 }
@@ -77,5 +82,5 @@ function dateFormat(dateTime) {
     }
 
     return year + '-' + month + '-' + date + ' ' + hour + ':' + minute;
-        // YYYY-MM-DD HH:mm
+    // YYYY-MM-DD HH:mm
 }

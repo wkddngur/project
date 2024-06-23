@@ -16,6 +16,8 @@ public interface ParkingLotMapper {
                                                 @Param("maxLat") double maxLat,
                                                 @Param("maxLng") double maxLng);
 
+    ParkingLotDto[] selectParkingLotDtoByKeyword(@Param("keyword") String keyword);
+
     ParkingLotImageEntity selectParkingLotImageByIndex(@Param("index") int index);
 
     ParkingLotImageEntity[] selectParkingLotImageByParkingLotIndex(@Param("parkingLotIndex") int parkingLotIndex);

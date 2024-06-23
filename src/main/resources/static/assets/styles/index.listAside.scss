@@ -6,6 +6,28 @@
     display: none;
   }
 
+  > .searchClear-container {
+    border-bottom: 0.0625rem solid #eeeeee;
+
+    > .searchClear {
+      width: 100%;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      > ._obj-button{
+        font-size: 1rem;
+        font-weight: 400;
+        color: #ffffff;
+        width: 80%;
+      }
+    }
+  }
+
   > .parkingLots {
     white-space: nowrap;
 

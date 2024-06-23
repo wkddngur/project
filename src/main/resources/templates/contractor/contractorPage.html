@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/contractorPage.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/common.css}">
 
-    <script defer th:if="${session.contractor == null || result == null}">
+    <script defer th:if="${session.contractor == null}">
         alert('협력업체 로그인 후 이용해 주세요.');
         location.href = '/access/';
     </script>
