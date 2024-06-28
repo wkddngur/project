@@ -65,6 +65,10 @@
         </div>
 
         <div class="reserved-table">
+            <label class="_obj-label check-reserved-input">
+                <span class="__text">예약 내역 확인</span>
+                <input readonly name="reservedDate" class="_obj-input" type="text">
+            </label>
             <div class="slider">
                 <div class="progress"></div>
             </div>
@@ -217,46 +221,102 @@
         </div>
     </div>
 
+    <div class="time-table">
+        <span class="item">00:10</span>
+        <span class="spring"></span>
+        <span class="item">06:00</span>
+        <span class="spring"></span>
+        <span class="item">12:00</span>
+        <span class="spring"></span>
+        <span class="item">18:00</span>
+        <span class="spring"></span>
+        <span class="item">24:00</span>
+    </div>
 
     <div class="spec-container">
         <div class="item">
-            <i class="icon fa-solid fa-location-dot"></i>
-            <span class="item" rel="address"></span>
+            <div class="title">
+                <i class="icon fa-solid fa-location-dot"></i>
+                <span class="text">주차장 위치</span>
+            </div>
+            <div class="content">
+                <span class="item" rel="address"></span>
+            </div>
         </div>
 
         <div class="item">
-            <i class="icon fa-solid fa-phone"></i>
-            <a class="text contact" href="" rel="contact"></a>
+            <div class="title">
+                <i class="icon fa-solid fa-phone"></i>
+                <span class="text">주차장 대표번호</span>
+            </div>
+            <div class="content">
+                <a class="text contact" href="" rel="contact"></a>
+            </div>
         </div>
 
         <div class="item">
-            <i class="fa-solid fa-square-parking"></i>
-            <span class="item" rel="generalCarNumber"></span>
+            <div class="title">
+                <i class="fa-solid fa-square-parking"></i>
+                <span class="text">일반 차량 주차 대수</span>
+            </div>
+            <div class="content">
+                <span class="item" rel="generalCarNumber"></span>
+                <span>대</span>
+            </div>
+
         </div>
 
         <div class="item">
-            <i class="fa-solid fa-square-parking"></i>
-            <span class="item" rel="dpCarNumber"></span>
+            <div class="title">
+                <i class="fa-solid fa-square-parking"></i>
+                <span class="text">장애인 차량 주차 대수</span>
+            </div>
+            <div class="content">
+                <span class="item" rel="dpCarNumber"></span>
+                <span>대</span>
+            </div>
         </div>
 
         <div class="item">
-            <i class="fa-solid fa-tag"></i>
-            <span class="item" rel="price"></span>
+            <div class="title">
+                <i class="fa-solid fa-tag"></i>
+                <span class="text">10분당 요금</span>
+            </div>
+            <div class="content">
+                <span class="item" rel="price"></span>
+                <span>원</span>
+            </div>
         </div>
 
         <div class="item">
-            <i class="fa-solid fa-tag"></i>
-            <span class="item" rel="dayMaxPrice"></span>
+            <div class="title">
+                <i class="fa-solid fa-tag"></i>
+                <span class="text">하루 최대 요금</span>
+            </div>
+            <div class="content">
+                <span class="item" rel="dayMaxPrice"></span>
+                <span>원</span>
+            </div>
         </div>
 
         <div class="item">
-            <i class="fa-solid fa-message"></i>
-            <span class="item" rel="description"></span>
+            <div class="title">
+                <i class="fa-solid fa-message"></i>
+                <span class="text">상세 정보</span>
+            </div>
+            <div class="content">
+                <div class="item" rel="description"></div>
+            </div>
         </div>
 
         <div class="item">
-            <i class="fa-solid fa-building"></i>
-            <span class="item" rel="contractorName"></span>
+            <div class="title">
+                <i class="fa-solid fa-building"></i>
+                <span class="text">협력업체 이름</span>
+            </div>
+            <div class="content">
+                <span class="item" rel="contractorName"></span>
+            </div>
         </div>
     </div>
 

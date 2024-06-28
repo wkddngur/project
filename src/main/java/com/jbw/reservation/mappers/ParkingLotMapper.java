@@ -23,4 +23,6 @@ public interface ParkingLotMapper {
     ParkingLotImageEntity[] selectParkingLotImageByParkingLotIndex(@Param("parkingLotIndex") int parkingLotIndex);
 
     ParkingLotEntity selectParkingLotByIndex(@Param("index") int index);
+
+    ParkingLotDto[] selectParkingLotByContractorEmail(@Param("contractorEmail") String contractorEmail);
 }

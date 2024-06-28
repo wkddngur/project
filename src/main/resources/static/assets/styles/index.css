@@ -40,6 +40,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  gap: 0.3rem;
 }
 #detailAside > .info-container > .name-container > .name {
   font-size: 1rem;
@@ -52,11 +53,11 @@
 #detailAside > .info-container > .stat-container {
   color: #757575;
   padding: 0 1.25rem 1.25rem 1.25rem;
-  align-items: center;
+  align-items: stretch;
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  justify-content: flex-start;
+  justify-content: center;
 }
 #detailAside > .info-container > .button-container {
   border-top: 0.0625rem solid #e0e0e0;
@@ -91,7 +92,6 @@
 }
 
 #detailAside > .reservation-container {
-  border-bottom: 0.2rem solid #0B005C;
   font-size: 1rem;
   padding: 1.25rem;
 }
@@ -112,6 +112,21 @@
 }
 #detailAside > .reservation-container .reserved-table {
   margin-top: 1.2rem;
+}
+#detailAside > .reservation-container .reserved-table > .check-reserved-input {
+  text-align: center;
+  margin-bottom: 1.2rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+#detailAside > .reservation-container .reserved-table > .check-reserved-input .__text {
+  font-size: 1.1rem;
+}
+#detailAside > .reservation-container .reserved-table > .check-reserved-input ._obj-input {
+  width: 20rem;
+  height: 2.5rem;
+  text-align: center;
 }
 #detailAside > .reservation-container .reserved-table .slider {
   height: 10px;
@@ -139,15 +154,52 @@
   pointer-events: all;
 }
 
+.time-table {
+  margin-top: -30px;
+  padding-bottom: 1.25rem;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.time-table > .item {
+  font-size: 0.9rem;
+}
+.time-table .spring {
+  flex-grow: 1;
+}
+
 #detailAside > .spec-container {
+  border-top: 0.2rem solid #0B005C;
   border-bottom: 0.2rem solid #0B005C;
   font-size: 1rem;
   padding: 1.25rem;
   align-items: stretch;
   display: flex;
   flex-direction: column;
-  gap: 0.875rem;
+  gap: 0.8rem;
   justify-content: flex-start;
+}
+#detailAside > .spec-container > .item {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  border: 0.0625rem solid #0B005C;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+#detailAside > .spec-container > .item > .title {
+  font-weight: 500;
+  color: #212121;
+}
+#detailAside > .spec-container > .item > .content {
+  overflow: auto;
+  white-space: nowrap;
+}
+#detailAside > .spec-container > .item > .content label textarea {
+  width: 20rem;
+  white-space: nowrap;
 }
 
 #listAside::-webkit-scrollbar {

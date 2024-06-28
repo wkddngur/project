@@ -62,7 +62,7 @@ const loadParkingLots = () => {
                     
                     <span class="generalCarNumber">최대 일반 차량 주차 대수 : ${parkingLotObject['generalCarNumber']}</span>
                     
-                    <span class="dpCarNumber">초대 장애인 차량 주차 대수 : ${parkingLotObject['dpCarNumber']}</span>
+                    <span class="dpCarNumber">최대 장애인 차량 주차 대수 : ${parkingLotObject['dpCarNumber']}</span>
                     
                     <span class="price">기준 가격 (10분) : ${parkingLotObject['price']}원</span>
                     

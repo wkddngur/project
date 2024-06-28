@@ -13,15 +13,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ReservationHistoryEntity {
     private int index;
+    private int parkingLotIndex;
     private int paymentIndex;
-    private int refundIndex;
+    private Integer refundIndex;
     private String userEmail;
+    private String userContact;
     private double amount;
-    private String schedule;
     private String carNumber;
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private boolean isDeleted;
-    private boolean paymentStatus;
-    private boolean refundStatus;
 }

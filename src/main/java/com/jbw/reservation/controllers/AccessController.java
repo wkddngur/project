@@ -67,6 +67,12 @@ public class AccessController {
         return responseObject.toString();
     }
 
+    @RequestMapping(value = "/contractorLogout", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public String getContractorLogout(HttpSession session) {
+        session.setAttribute("contractor", null);
+        return "redirect:/access/";
+    }
+
     // 로그인 화면에서 회원가입으로 이동하기위한 GET 맵핑.
     @RequestMapping(value = "/register", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getRegister() {

@@ -84,3 +84,19 @@ function dateFormat(dateTime) {
     return year + '-' + month + '-' + date + ' ' + hour + ':' + minute;
     // YYYY-MM-DD HH:mm
 }
+
+function onlyDateFormat(dateTime) {
+    let year = dateTime.getFullYear();
+    let month = dateTime.getMonth() + 1;
+    let date = dateTime.getDate();
+
+    if (month < 10) {
+        month = '0' + month;
+    }
+    if (date < 10) {
+        date = '0' + date;
+    }
+
+    return year + '-' + month + '-' + date;
+    // YYYY-MM-DD
+}

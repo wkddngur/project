@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="_obj-dialog" id="parkingLotInfoDialog" th:fragment="parkingLotInfoDialog">
+    <div class="title">
+        <span class="text">등록 주차장 세부 정보</span>
+    </div>
+
+    <div class="item">
+        <span class="text">주차장 이름</span>
+        <span class="content">
+            <span class="content-text" rel="parkingLotName">천호아파트 지하주차장</span>
+        </span>
+    </div>
+
+    <div class="item">
+        <span class="text">소유 협력업체 이름</span>
+        <span class="content" rel="">
+            <span class="content-text" th:if="${session.contractor != null}" th:text="${session.contractor.getName()}">천호아파트 지하주차장</span>
+        </span>
+    </div>
+
+    <div class="item">
+        <span class="text">소유 협력업체 대표번호</span>
+        <span class="content" rel="">
+            <span class="content-text" th:if="${session.contractor != null}"
+                  th:text="${session.contractor.getContactFirst()} + '-' + ${session.contractor.getContactSecond()} + '-' + ${session.contractor.getContactThird()}"></span>
+        </span>
+    </div>
+
+    <div class="item">
+        <span class="text">소유 협력업체 사업자 등록번호</span>
+        <span class="content" rel="">
+            <span class="content-text" th:if="${session.contractor != null}"
+                  th:text="${session.contractor.getTinFirst()} + '-' + ${session.contractor.getTinSecond()} + '-' + ${session.contractor.getTinThird()}"></span>
+        </span>
+    </div>
+
+    <div class="item">
+        <span class="text">주차장 분류</span>
+        <span class="content">
+            <span class="content-text" rel="parkingLotCategoryText"></span>
+        </span>
+    </div>
+
+    <div class="item">
+        <span class="text">주차장 문의번호</span>
+        <span class="content">
+            <span class="content-text" rel="parkingLotContact"></span>
+        </span>
+    </div>
+
+    <div class="item">
+        <span class="text">주차장 주소</span>
+        <span class="content">
+            <span class="content-text" rel="parkingLotAddress"></span>
+        </span>
+    </div>
+
+    <div class="item">
+        <span class="text">일반 차량 주차가능 대수</span>
+        <span class="content">
+            <span class="content-text" rel="parkingLotGCN"></span>
+        </span>
+    </div>
+
+    <div class="item">
+        <span class="text">장애인 차량 주차가능 대수</span>
+        <span class="content">
+            <span class="content-text" rel="parkingLotDCN"></span>
+        </span>
+    </div>
+
+    <div class="item">
+        <span class="text">주차장 상세설명</span>
+        <div class="descriptionContent">
+            <div class="content-text" rel="parkingLotDescription"></div>
+        </div>
+    </div>
+
+    <div class="item">
+        <span class="text">10분 요금</span>
+        <span class="content">
+            <span class="content-text" rel="parkingLotPrice"></span>
+        </span>
+    </div>
+
+    <div class="item">
+        <span class="text">24시간 최대 요금</span>
+        <span class="content">
+            <span class="content-text" rel="parkingLotDayMaxPrice"></span>
+        </span>
+    </div>
+
+    <div class="item">
+        <span class="text">주차장 등록 일시</span>
+        <span class="content">
+            <span class="content-text" rel="parkingLotCreatedAt"></span>
+        </span>
+    </div>
+
+    <div class="item">
+        <span class="text">주차장 예약(결제) 내역</span>
+        <div class="statusContent">
+            <span class="__horizontal">
+                <span class="content-text" rel="parkingLotReservedPaymentsHistory">10 / 25</span>
+                <span class="spring"></span>
+                <button class="_obj-button" type="button" rel="parkingLotReservedPaymentHistoryButton">예약(결제) 내역 확인
+                </button>
+            </span>
+        </div>
+
+    </div>
+
+    <div class="item">
+        <span class="text">주차장 환불 내역</span>
+        <div class="statusContent">
+            <span class="__horizontal">
+                <span class="content-text" rel="parkingLotReservedRefundsHistory">10 / 25</span>
+                <span class="spring"></span>
+                <button class="_obj-button" type="button" rel="parkingLotReservedRefundHistoryButton">환불 내역 확인</button>
+            </span>
+        </div>
+
+    </div>
+
+    <div class="button-container">
+        <button class="_obj-button" type="button" rel="closeButton">닫기</button>
+    </div>
+
+</div>
+</html>

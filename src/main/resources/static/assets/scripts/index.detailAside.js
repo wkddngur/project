@@ -24,7 +24,13 @@ endDateTime.setMinutes(fixedMinutes);
 endDateTime.setSeconds(0);
 
 
+
 const showDetailAside = (parkingLotIndex, onclose) => {
+
+    reservedDiv.querySelectorAll('.reservedSpanEl').forEach((x) => {
+        x.classList.remove(HTMLElement.VISIBLE_CLASS_NAME);
+        x.removeAttribute('style');
+    })
 
     // loadReviews 들어올 자리
 
@@ -48,6 +54,36 @@ const showDetailAside = (parkingLotIndex, onclose) => {
         detailAside.querySelector('[name="startDateTime"]').value = dateFormat(nowDateTime);
         detailAside.querySelector('[name="endDateTime"]').value = dateFormat(endDateTime);
     }
+
+    $(function () {
+        const now = new Date()
+        const nowDate = onlyDateFormat(now);
+
+
+        $('input[name="reservedDate"]').daterangepicker({
+            locale: {
+                "format": 'YYYY-MM-DD', // 일시 노출 포맷
+                "applyLabel": "설정하기",  // 확인 버튼 텍스트
+                "cancelLabel": "취소", // 취소 버튼 텍스트
+                "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+                "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+            },
+            singleDatePicker: true,
+            opens: 'center',
+            startDate: nowDate,
+            minDate: nowDate,
+        })
+
+        $('input[name="reservedDate"]').on('apply.daterangepicker', function (ev, picker){
+            reservedDiv.querySelectorAll('.reservedSpanEl').forEach((x) => {
+                x.classList.remove(HTMLElement.VISIBLE_CLASS_NAME);
+                x.removeAttribute('style');
+            });
+            const reqDate = picker.startDate.format('YYYY-MM-DD');
+            detailAside.querySelector('[name="reservedDate"]').value = reqDate;
+            reservedHistory(parkingLotIndex, reqDate.toString());
+        })
+    })
 
 
     let initialStartDateTime = detailAside.querySelector('[name="startDateTime"]').value;
@@ -86,6 +122,16 @@ const showDetailAside = (parkingLotIndex, onclose) => {
             });
 
             $('input[name="datetimes"]').on('apply.daterangepicker', function (ev, picker) {
+                const RST = picker.startDate;
+                const RET = picker.endDate;
+                const tenMinutedUnit = 10 * 60 * 1000;
+                const timeDifference = RET - RST;
+
+                if (timeDifference / tenMinutedUnit < 5) {
+                    MessageObj.createSimpleOk('경고', '예약은 1시간 이상만 가능합니다.').show();
+                    return;
+                }
+
                 sessionStorage.setItem('startDateTime', picker.startDate.format('YYYY-MM-DD HH:mm'));
                 sessionStorage.setItem('endDateTime', picker.endDate.format('YYYY-MM-DD HH:mm'));
 
@@ -172,7 +218,7 @@ const showDetailAside = (parkingLotIndex, onclose) => {
             observeParents: true,
         });
 
-        reservedSpan('144');
+        reservedHistory(parkingLotIndex, onlyDateFormat(nowDateTime));
 
         detailAside.show();
     }
@@ -180,17 +226,45 @@ const showDetailAside = (parkingLotIndex, onclose) => {
     xhr.send(formData);
 }
 
+function reservedHistory(parkingLotIndex, date) {
 
-function reservedSpan(reservedNumber) {
-    const reservedSpans = reservedDiv.querySelectorAll('.reservedSpanEl');
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState !== XMLHttpRequest.DONE) {
+            return;
+        }
+        if (xhr.status < 200 || xhr.status >= 300) {
+            MessageObj.createSimpleOk('오류', '요청을 전송하는 도중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.').show();
+            return;
+        }
 
-    for (let i = 0; i < reservedSpans.length; i++) {
-        if (reservedSpans[i].getAttribute('value') === reservedNumber) {
-            reservedSpans[i].classList.add(HTMLElement.VISIBLE_CLASS_NAME);
-            reservedSpans[i].onmouseover = () => {
-                alert('ddd');
+        const responseObject = JSON.parse(xhr.responseText);
+        const reservedAllIndexes = JSON.parse(responseObject['reservedAllIndexes']);
+        const resMap = {};
+        reservedAllIndexes.forEach((res) => {
+            res.forEach((time) => {
+                const ts = time.toString();
+                resMap[ts] ??= 0;
+                resMap[ts] += 1;
+            });
+        });
+        const reservedSpans = Array.from(reservedDiv.querySelectorAll('.reservedSpanEl'));
+        const MAX_CAP = parkingLotObject['generalCarNumber'];
+        for (let i = 0; i < reservedSpans.length; i++) {
+            const reservedSpan = reservedSpans[i];
+            let currRes = null;
+            currRes = resMap[(i + 1).toString()]; // 현재 시간의 예약
+
+            if (currRes >= MAX_CAP) {
+                reservedSpan.style.backgroundColor = 'red';
+                reservedSpan.style.zIndex = 10;
+            } else if (currRes > 0) {
+                reservedSpan.classList.add(HTMLElement.VISIBLE_CLASS_NAME);
+            } else {
+                reservedSpan.classList.remove(HTMLElement.VISIBLE_CLASS_NAME);
             }
         }
     }
+    xhr.open('GET', `/reservation/reservedHistory?parkingLotIndex=${parkingLotIndex}&date=${date}`);
+    xhr.send();
 }
-

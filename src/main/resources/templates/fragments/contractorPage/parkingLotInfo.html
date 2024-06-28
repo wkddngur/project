@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <div id="parkingLotInfo" class="div parkingLotInfo" th:fragment="parkingLotInfo">
+
     <div class="contractorTitleDiv">
-        <h2>주차장 정보</h2>
+        <h2>등록 주차장 목록</h2>
+        <span class="text">각 주차장 목록에 접근하려면 <b>주차장 이름</b>을 클릭해주세요</span>
     </div>
 
+    <div class="parkingLot-table">
+        <div class="parkingLot-thead">
+            <div class="parkingLot-tr">
+                <span class="text">번호</span>
+                <span class="text">주차장 이름</span>
+                <span class="text">주차장 주소</span>
+                <span class="text">주차장 분류</span>
+                <span class="text">협력업체 이메일</span>
+            </div>
+        </div>
+
+        <div class="parkingLot-tbody" rel="parkingLotTbody">
+
+        </div>
+    </div>
 
 </div>
 </html>

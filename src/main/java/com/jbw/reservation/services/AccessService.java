@@ -218,7 +218,7 @@ public class AccessService {
             return CommonResult.FAILURE;
         }
         user.setEmail(dbUser.getEmail());
-        user.setPassword(dbUser.getPassword());
+        user.setPassword(null);
         user.setName(dbUser.getName());
         user.setGender(dbUser.getGender());
         user.setNickname(dbUser.getNickname());
@@ -258,7 +258,7 @@ public class AccessService {
         }
 
         contractor.setEmail(dbContractor.getEmail());
-        contractor.setPassword(dbContractor.getPassword());
+        contractor.setPassword(null);
         contractor.setName(dbContractor.getName());
         contractor.setContactFirst(dbContractor.getContactFirst());
         contractor.setContactSecond(dbContractor.getContactSecond());

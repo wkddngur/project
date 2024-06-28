@@ -248,6 +248,7 @@
   box-shadow: 0 0 1.5rem 0.0625rem rgba(33, 33, 33, 0.3764705882);
   box-sizing: border-box;
   opacity: 0;
+  overflow: auto;
   padding: 2.5rem;
   pointer-events: none;
   position: fixed;
@@ -274,6 +275,12 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+._obj-dialog.inner {
+  width: 40rem;
+  height: 90%;
+  gap: 1rem;
 }
 
 ._obj-cover {

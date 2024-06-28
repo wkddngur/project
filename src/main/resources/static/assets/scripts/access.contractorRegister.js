@@ -1,5 +1,9 @@
 const contractorRegisterDiv = document.getElementById('contractorRegisterDiv');
 
+contractorRegisterDiv.querySelector('[rel="goLoginCaller"]').onclick = () => {
+    location.href = '/access/';
+}
+
 contractorRegisterDiv.contractorRegisterForm = contractorRegisterDiv.querySelector('[rel="contractorRegisterForm"]');
 
 contractorRegisterDiv.contractorRegisterForm.emailLabel = new LabelObj(contractorRegisterDiv.contractorRegisterForm.querySelector('[rel="emailLabel"]'));

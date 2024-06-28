@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class RefundEntity {
     private int index;
+    private int parkingLotIndex;
     private int paymentIndex;
     private String userEmail;
     private double amount;

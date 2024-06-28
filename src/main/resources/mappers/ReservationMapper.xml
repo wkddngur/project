@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbw.reservation.mappers.ReservationMapper">
+    <insert id="insertPayment"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="com.jbw.reservation.entities.PaymentEntity">
+        INSERT INTO `reservation`.`payments` (`parking_lot_index`,`user_email`, `amount`, `created_at`, `is_agree`)
+        VALUES (#{parkingLotIndex}, #{userEmail}, #{amount}, #{createdAt}, #{isAgree})
+    </insert>
+
+    <insert id="insertReservationHistory"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="com.jbw.reservation.entities.ReservationHistoryEntity">
+        INSERT INTO `reservation`.`reservation_histories` (`parking_lot_index`, `payment_index`, `refund_index`, `user_email`, `user_contact`, `amount`, `car_number`, `start_date_time`, `end_date_time`, `created_at`, `modified_at`, `is_deleted`)
+        VALUES (#{parkingLotIndex}, #{paymentIndex}, #{refundIndex}, #{userEmail}, #{userContact}, #{amount}, #{carNumber}, #{startDateTime}, #{endDateTime}, #{createdAt}, #{modifiedAt}, #{isDeleted})
+    </insert>
+    
+    <select id="selectReservedCount" resultType="_int">
+        SELECT COUNT(0)
+        FROM `reservation`.`reservation_histories`
+        WHERE `parking_lot_index` = #{parkingLotIndex}
+          AND `is_deleted` = FALSE
+          AND #{startDateTime} AND #{endDateTime} BETWEEN `start_date_time` AND `end_date_time`
+    </select>
+
+    <select id="selectRefundsCountByPIndex" resultType="_int">
+        SELECT COUNT(0)
+        FROM `reservation`.`refunds`
+        WHERE `parking_lot_index` = #{parkingLotIndex}
+    </select>
+
+    <select id="selectRefundsUnsolvedCountByPIndex" resultType="_int">
+        SELECT COUNT(0)
+        FROM `reservation`.`refunds`
+        WHERE `parking_lot_index` = #{parkingLotIndex}
+          AND `is_agree` = FALSE
+    </select>
+
+    <select id="selectReservedHistoryByNow" resultType="com.jbw.reservation.entities.ReservationHistoryEntity">
+        SELECT `index`             AS `index`,
+               `parking_lot_index` AS `parkingLotIndex`,
+               `payment_index`     AS `paymentIndex`,
+               `refund_index`      AS `refundIndex`,
+               `user_email`        AS `userEmail`,
+               `user_contact`      AS `userContact`,
+               `amount`            AS `amount`,
+               `car_number`        AS `carNumber`,
+               `start_date_time`   AS `startDateTime`,
+               `end_date_time`     AS `endDateTime`,
+               `created_at`        AS `createdAt`,
+               `modified_at`       AS `modifiedAt`,
+               `is_deleted`        AS `isDeleted`
+        FROM `reservation`.`reservation_histories`
+        WHERE `parking_lot_index` = #{parkingLotIndex}
+          AND `is_deleted` = false
+          AND #{today} BETWEEN DATE(`start_date_time`) AND DATE(`end_date_time`)
+    </select>
+
+    <select id="selectReservedHistoryByPindexTime" resultType="com.jbw.reservation.entities.ReservationHistoryEntity">
+        SELECT `index`             AS `index`,
+               `parking_lot_index` AS `parkingLotIndex`,
+               `payment_index`     AS `paymentIndex`,
+               `refund_index`      AS `refundIndex`,
+               `user_email`        AS `userEmail`,
+               `user_contact`      AS `userContact`,
+               `amount`            AS `amount`,
+               `car_number`        AS `carNumber`,
+               `start_date_time`   AS `startDateTime`,
+               `end_date_time`     AS `endDateTime`,
+               `created_at`        AS `createdAt`,
+               `modified_at`       AS `modifiedAt`,
+               `is_deleted`        AS `isDeleted`
+        FROM `reservation`.`reservation_histories`
+        WHERE `parking_lot_index` = #{parkingLotIndex}
+          AND `user_email` = #{userEmail}
+          AND `is_deleted` = false
+          AND #{startDateTime}
+          AND (#{startDateTime} BETWEEN `start_date_time` AND `end_date_time`
+            OR #{endDateTime} BETWEEN `start_date_time` AND `end_date_time`
+            OR `start_date_time` BETWEEN #{startDateTime} AND #{endDateTime}
+            OR `end_date_time` BETWEEN #{startDateTime} AND #{endDateTime})
+    </select>
+
+    <select id="getReservedHistoryByPIndex" resultType="com.jbw.reservation.dtos.ReservationHistoryDto">
+        SELECT `reservedHistory`.`index`             AS `index`,
+               `reservedHistory`.`parking_lot_index` AS `parkingLotIndex`,
+               `reservedHistory`.`payment_index`     AS `paymentIndex`,
+               `reservedHistory`.`refund_index`      AS `refundIndex`,
+               `reservedHistory`.`user_email`        AS `userEmail`,
+               `reservedHistory`.`user_contact`      AS `userContact`,
+               `reservedHistory`.`amount`            AS `amount`,
+               `reservedHistory`.`car_number`        AS `carNumber`,
+               `reservedHistory`.`start_date_time`   AS `startDateTime`,
+               `reservedHistory`.`end_date_time`     AS `endDateTime`,
+               `reservedHistory`.`created_at`        AS `createdAt`,
+               `reservedHistory`.`modified_at`       AS `modifiedAt`,
+               `reservedHistory`.`is_deleted`        AS `isDeleted`,
+               `payment`.`is_agree`                  AS `isAgreePayment`,
+               `payment`.`created_at`                AS `createdAtPayment`,
+               `refund`.`is_agree`                   AS `isAgreeRefund`,
+               `refund`.`created_at`                 AS `createdAtRefund`,
+               `refund`.`bank_code`                  AS `bankCode`,
+               `refund`.`bank_account_number`        AS `bankAccountNumber`
+        FROM `reservation`.`reservation_histories` AS `reservedHistory`
+                 LEFT JOIN `reservation`.`payments` AS `payment`
+                           ON `reservedHistory`.`payment_index` = `payment`.`index`
+                 LEFT JOIN `reservation`.`refunds` AS `refund`
+                           ON `reservedHistory`.`refund_index` = `refund`.`index`
+        WHERE `reservedHistory`.`is_deleted` = FALSE
+          AND `reservedHistory`.`parking_lot_index` = ${parkingLotIndex}
+    </select>
+
+</mapper>

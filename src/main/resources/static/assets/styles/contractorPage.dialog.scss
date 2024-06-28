@@ -1,0 +1,116 @@
+
+
+#parkingLotInfoDialog {
+  width: 40%;
+  height: 80%;
+  padding: 1.5rem 5rem;
+
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.3rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  > .title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  > .item {
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.8rem;
+
+    > .text {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    > .content {
+      width: 100%;
+      height: 3rem;
+      border: 0.0625rem solid #0B005C;
+      border-radius: 0.25rem;
+
+      align-items: center;
+      display: flex;
+      justify-content: center;
+
+      > .content-text {
+        font-size: 1.1rem;
+      }
+    }
+
+    > .descriptionContent {
+      width: 100%;
+      height: auto;
+      min-height: 3rem;
+      border: 0.0625rem solid #0B005C;
+      border-radius: 0.25rem;
+      overflow: auto;
+
+      align-items: center;
+      display: flex;
+      justify-content: flex-start;
+
+      > .content-text {
+        padding: 0.5rem;
+        font-size: 1.1rem;
+      }
+    }
+
+    > .statusContent {
+      > .__horizontal {
+        align-items: stretch;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 0.5rem;
+
+        > .content-text {
+          width: 60%;
+          height: 3rem;
+          border: 0.0625rem solid #0B005C;
+          border-radius: 0.25rem;
+          font-size: 1.1rem;
+
+          align-items: center;
+          display: flex;
+          justify-content: center;
+
+        }
+
+        > .spring {
+          flex: 1;
+        }
+
+        > ._obj-button {
+          width: 40%;
+          height: 3rem;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+
+  > .button-container {
+    align-items: stretch;
+    display: flex;
+    justify-content: center;
+    > ._obj-button {
+      width: 20rem;
+      height: 3rem;
+      font-size: 1.1rem;
+
+    }
+  }
+}

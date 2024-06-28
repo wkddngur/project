@@ -13,6 +13,7 @@
         </span>
 
         <span class="text">
+            <input hidden name="contractorEmail" type="hidden" th:if="${session.contractor != null}" th:value="${session.contractor.getEmail()}">
             <i class="fa-regular fa-envelope"></i>
             <span class="__text" th:if="${session.contractor != null}" th:text="${session.contractor.getEmail()}"></span>
         </span>

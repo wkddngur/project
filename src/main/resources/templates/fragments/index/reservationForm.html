@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<form novalidate class="_obj-dialog " id="reservationForm"
+<form novalidate class="_obj-dialog inner" id="reservationForm"
+      th:with="parkingLotRegex = ${T(com.jbw.reservation.regexes.ParkingLotRegex)}, reservationRegex = ${T(com.jbw.reservation.regexes.ReservationRegex)}"
       th:fragment="reservationForm">
-
     <h2 class="__title">주차장 예약</h2>
 
-    <label class="_obj-label" rel="phoneLabel">
-        <span class="__text">휴대전화번호</span>
-        <input required autocomplete="off" class="_obj-input __field" name="phoneNumber" spellcheck="false" type="text"
-               placeholder="예) 01012345678">
+    <label class="_obj-label" rel="emailLabel">
+        <span class="__text">예약자 이메일</span>
+        <input readonly required class="_obj-input __field" name="userEmail" minlength="5" maxlength="50"
+               type="text"
+               value="jbw5387@naver.com">
     </label>
 
-    <label class="_obj-label" rel="carLabel">
-        <span class="__text">차량번호</span>
-        <input required autocomplete="off" class="_obj-input __field" name="carNumber" spellcheck="false" type="text"
-               placeholder="예) 00가0000, 서울00가0000">
+    <label class="_obj-label" rel="nameLabel">
+        <span class="__text">협력업체 주차장 상호명</span>
+        <input hidden name="parkingLotIndex" type="hidden">
+        <input readonly required autocomplete="off" class="_obj-input __field" maxlength="50" minlength="1"
+               name="name"
+               type="text">
+    </label>
+
+    <label class="_obj-label" rel="addressLabel">
+        <span class="__text">협력업체 주차장 주소</span>
+        <input readonly required autocomplete="off" class="_obj-input __field" maxlength="100" minlength="1"
+               name="addressPrimary" spellcheck="false" type="text">
+        <input readonly autocomplete="off" class="_obj-input __field" maxlength="100" minlength="1"
+               name="addressSecondary" spellcheck="false" type="text">
+    </label>
+
+    <label class="_obj-label" rel="contactLabel">
+        <span class="__text">예약자 전화번호</span>
+        <input required autocomplete="off" class="_obj-input __field" name="userContact" spellcheck="false" type="text" th:attrappend="data-regex=${reservationRegex.userContact.expression}">
+    </label>
+
+    <label class="_obj-label" rel="carNumberLabel">
+        <span class="__text">예약자 차량번호</span>
+        <input required autocomplete="off" class="_obj-input __field" name="carNumber" spellcheck="false" type="text" th:attrappend="data-regex=${reservationRegex.carNumber.expression}">
     </label>
 
     <label class="_obj-label" rel="reservationStartTimeLabel">
@@ -32,7 +53,7 @@
         <span class="__text">최종 결제 금액</span>
         <span class="price-container">
             <input readonly name="totalPrice" class="_obj-input __field" type="text">
-            <span class="__text">원</span>
+            <!--            <span class="__text">원</span>-->
         </span>
     </label>
 

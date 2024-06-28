@@ -34,15 +34,25 @@
     <!--카카오 주소찾기 API 끌어온거.-->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer type="text/javascript" th:src="@{/assets/scripts/common.js}"></script>
-    <script defer type="text/javascript" th:src="@{/assets/scripts/contractor.parkingLotAdd.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/contractorPage.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/contractorPage.parkingLotAdd.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/contractorPage.dialog.js}"></script>
 </head>
 <body>
+<div class="_obj-cover" id="cover"></div>
 <div id="addressFinder">
     <div class="dialog"></div>
 </div>
-<div id="contractorPage">
+
+<th:block th:replace="~{fragments/contractorPage/parkingLotInfoDialog.html :: parkingLotInfoDialog}"></th:block>
+
+
+<div id="contractorPage" th:if="${session.contractor != null}">
     <div class="contractorTitleDiv">
         <div class="titleDiv">
+            <i class="closer fa-solid fa-arrow-right-from-bracket" rel="contractorLogout">
+                <span class="text">협력업체 로그아웃</span>
+            </i>
             <h2>협력업체 페이지</h2>
         </div>
 
@@ -57,7 +67,7 @@
                 <span class="title">주차장 등록</span>
             </label>
 
-            <label class="type">
+            <label class="type" rel="parkingLotInfoLabel">
                 <input name="type" value="parkingLotInfo" type="radio">
                 <span class="title">주차장 정보</span>
             </label>
