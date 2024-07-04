@@ -8,7 +8,7 @@ body {
   background-color: #f5f5f5;
   top: 50%;
   left: 50%;
-  width: 80%;
+  width: 90%;
   height: 90%;
   border-radius: 0.375rem;
   position: fixed;
@@ -117,20 +117,70 @@ body {
 
 
 #reservedHistory {
-  top: 30%;
   left: 50%;
-  width: 50%;
-  height: 90%;
-  border-radius: 0.375rem;
-  padding: 1rem 2rem;
+  width: 90%;
+  transform: translate(-50%);
   position: relative;
-  transform: translate(-50%, -30%);
 
-  align-items: stretch;
+  align-items: center;
   display: none;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 1rem;
+  gap: 1.5rem;
+
+  > .reservedHistoryTitleDiv {
+    text-align: center;
+
+    > h2 {
+      padding: 1rem;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+    > .text {
+      font-size: 1.2rem;
+    }
+  }
+
+  > .reservedHistory-table {
+    border: 0.13rem solid #0B005C;
+    border-radius: 0.375rem;
+    display: table;
+    table-layout: auto;
+    width: 100%;
+
+    > .reservedHistory-thead {
+      display: table-header-group;
+      > .reservedHistory-tr {
+        display: table-row;
+
+        > .text {
+          border: 0.13rem solid #0B005C;
+          font-weight: 500;
+          overflow: hidden;
+          padding: 0.5rem;
+          text-align: center;
+          display: table-cell;
+        }
+      }
+    }
+
+    > .reservedHistory-tbody {
+      display: table-row-group;
+      > .reservedHistory-list-tr {
+        display: table-row;
+
+        > .text {
+          text-align: center;
+          padding: 0.5rem;
+          border: 0.0625rem solid #0B005C;
+          display: table-cell;
+        }
+
+        > .text.index {
+
+        }
+      }
+    }
+  }
 }
 
 #userDataRecover {

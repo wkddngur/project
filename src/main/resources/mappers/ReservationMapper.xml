@@ -42,6 +42,31 @@
           AND `is_agree` = FALSE
     </select>
 
+    <update id="updatePayment" parameterType="com.jbw.reservation.entities.PaymentEntity">
+        UPDATE `reservation`.`payments`
+        SET `parking_lot_index` = #{parkingLotIndex},
+            `user_email`        = #{userEmail},
+            `amount`            = #{amount},
+            `created_at`        = #{createdAt},
+            `is_agree`          = #{isAgree}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+
+    <update id="updateRefund" parameterType="com.jbw.reservation.entities.RefundEntity">
+        UPDATE `reservation`.`refunds`
+        SET `parking_lot_index`   = #{parkingLotIndex},
+            `payment_index`       = #{paymentIndex},
+            `user_email`          = #{userEmail},
+            `amount`              = #{amount},
+            `bank_code`           = #{bankCode},
+            `bank_account_number` = #{bankAccountNumber},
+            `created_at`          = #{createdAt},
+            `is_agree`            = #{isAgree}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+
     <select id="selectReservedHistoryByNow" resultType="com.jbw.reservation.entities.ReservationHistoryEntity">
         SELECT `index`             AS `index`,
                `parking_lot_index` AS `parkingLotIndex`,
@@ -62,7 +87,7 @@
           AND #{today} BETWEEN DATE(`start_date_time`) AND DATE(`end_date_time`)
     </select>
 
-    <select id="selectReservedHistoryByPindexTime" resultType="com.jbw.reservation.entities.ReservationHistoryEntity">
+    <select id="selectReservedHistoryByPIndexTime" resultType="com.jbw.reservation.entities.ReservationHistoryEntity">
         SELECT `index`             AS `index`,
                `parking_lot_index` AS `parkingLotIndex`,
                `payment_index`     AS `paymentIndex`,
@@ -106,14 +131,78 @@
                `refund`.`is_agree`                   AS `isAgreeRefund`,
                `refund`.`created_at`                 AS `createdAtRefund`,
                `refund`.`bank_code`                  AS `bankCode`,
+               `refund`.`bank_account_number`        AS `bankAccountNumber`,
+               `user`.`name`                         AS `userName`,
+               `bankCategory`.`text`                 AS `bankCodeText`
+
+        FROM `reservation`.`reservation_histories` AS `reservedHistory`
+                 LEFT JOIN `reservation`.`users` AS `user`
+                           ON `reservedHistory`.`user_email` = `user`.`email`
+                 LEFT JOIN `reservation`.`payments` AS `payment`
+                           ON `reservedHistory`.`payment_index` = `payment`.`index`
+                 LEFT JOIN `reservation`.`refunds` AS `refund`
+                           ON `reservedHistory`.`refund_index` = `refund`.`index`
+                 LEFT JOIN `reservation`.`banks_category` AS `bankCategory`
+                           ON `refund`.`bank_code` = `bankCategory`.`code`
+        WHERE `reservedHistory`.`is_deleted` = FALSE
+          AND `reservedHistory`.`parking_lot_index` = ${parkingLotIndex}
+    </select>
+
+    <select id="selectReservedHistoryByUserEmail" resultType="com.jbw.reservation.dtos.ReservationHistoryDto">
+        SELECT `reservedHistory`.`index`             AS `index`,
+               `reservedHistory`.`parking_lot_index` AS `parkingLotIndex`,
+               `reservedHistory`.`payment_index`     AS `paymentIndex`,
+               `reservedHistory`.`refund_index`      AS `refundIndex`,
+               `reservedHistory`.`user_email`        AS `userEmail`,
+               `reservedHistory`.`user_contact`      AS `userContact`,
+               `reservedHistory`.`amount`            AS `amount`,
+               `reservedHistory`.`car_number`        AS `carNumber`,
+               `reservedHistory`.`start_date_time`   AS `startDateTime`,
+               `reservedHistory`.`end_date_time`     AS `endDateTime`,
+               `reservedHistory`.`created_at`        AS `createdAt`,
+               `reservedHistory`.`modified_at`       AS `modifiedAt`,
+               `reservedHistory`.`is_deleted`        AS `isDeleted`,
+               `parkingLot`.`name`                   AS `parkingLotName`,
+               `payment`.`is_agree`                  AS `isAgreePayment`,
+               `payment`.`created_at`                AS `createdAtPayment`,
+               `refund`.`is_agree`                   AS `isAgreeRefund`,
+               `refund`.`created_at`                 AS `createdAtRefund`,
+               `refund`.`bank_code`                  AS `bankCode`,
                `refund`.`bank_account_number`        AS `bankAccountNumber`
         FROM `reservation`.`reservation_histories` AS `reservedHistory`
+                 LEFT JOIN `reservation`.`parking_lots` AS `parkingLot`
+                           ON `reservedHistory`.`parking_lot_index` = `parkingLot`.`index`
                  LEFT JOIN `reservation`.`payments` AS `payment`
                            ON `reservedHistory`.`payment_index` = `payment`.`index`
                  LEFT JOIN `reservation`.`refunds` AS `refund`
                            ON `reservedHistory`.`refund_index` = `refund`.`index`
         WHERE `reservedHistory`.`is_deleted` = FALSE
-          AND `reservedHistory`.`parking_lot_index` = ${parkingLotIndex}
+          AND `reservedHistory`.`user_email` = #{userEmail}
+    </select>
+
+    <select id="selectPaymentByIndex" resultType="com.jbw.reservation.entities.PaymentEntity">
+        SELECT `index`             AS `index`,
+               `parking_lot_index` AS `parkingLotIndex`,
+               `user_email`        AS `userEmail`,
+               `amount`            AS `amount`,
+               `created_at`        AS `createdAt`,
+               `is_agree`          AS `isAgree`
+        FROM `reservation`.`payments`
+        WHERE `index` = #{paymentIndex}
+    </select>
+
+    <select id="selectRefundByIndex" resultType="com.jbw.reservation.entities.RefundEntity">
+        SELECT `index`               AS `index`,
+               `parking_lot_index`   AS `parkingLotIndex`,
+               `payment_index`       AS `paymentIndex`,
+               `user_email`          AS `userEmail`,
+               `amount`              AS `amount`,
+               `bank_code`           AS `bankCode`,
+               `bank_account_number` AS `bankAccountNumber`,
+               `created_at`          AS `createdAt`,
+               `is_agree`            AS `isAgree`
+        FROM `reservation`.`refunds`
+        WHERE `index` = #{refundIndex}
     </select>
 
 </mapper>

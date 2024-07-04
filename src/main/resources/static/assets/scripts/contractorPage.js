@@ -26,7 +26,16 @@ function getParkingLotList() { // 협력업체 페이지 접근시 parkingLots �
         }
         const parkingLotArray = JSON.parse(xhr.responseText);
 
+        if (parkingLotArray.length === 0) {
+            parkingLotInfoDiv.querySelector('[rel="parkingLotTable"]').innerHTML = '';
+            parkingLotInfoDiv.querySelector('[rel="parkingLotTable"]').innerHTML = `<div style="width: 100%; font-size: 1.1rem; padding: 0.5rem; text-align: center;">등록된 주차장이 없습니다. 주차장 등록 카테고리로 이동하여 주차장 등록을 진행해 주세요.</div>`
+            return;
+        }
+
         for (let parkingLotObject of parkingLotArray) {
+
+            contractorInfoDiv.querySelector('[rel="totalParkingLotCount"]').innerText = parkingLotArray.length;
+
             const parkingLotEl = new DOMParser().parseFromString(`
         <div class="parkingLot-list-tr">
             <span class="text index">${parkingLotObject['index']}</span>

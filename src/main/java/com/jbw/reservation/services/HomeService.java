@@ -6,6 +6,7 @@ import com.jbw.reservation.entities.UserEntity;
 import com.jbw.reservation.mappers.AccessMapper;
 import com.jbw.reservation.mappers.ParkingLotMapper;
 import com.jbw.reservation.mappers.SearchMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ public class HomeService {
     private final SearchMapper searchMapper;
     private final AccessMapper accessMapper;
 
+    @Autowired
     public HomeService(ParkingLotMapper parkingLotMapper, SearchMapper searchMapper, AccessMapper accessMapper) {
         this.parkingLotMapper = parkingLotMapper;
         this.searchMapper = searchMapper;

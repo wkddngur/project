@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="_obj-dialog" id="parkingLotInfoPaymentHistoryDialog" th:fragment="parkingLotInfoPaymentHistoryDialog">
+
+    <div class="title">
+        <span class="text">예약(결제) 신청 내역</span>
+    </div>
+
+    <div class="payment-history-table empty" rel="emptyDiv"></div>
+
+    <div class="payment-history-table" rel="paymentHistoryTable">
+        <div class="payment-history-thead">
+            <div class="payment-history-tr">
+                <span class="text">예약자 이름</span>
+                <span class="text">예약자 전화번호</span>
+                <span class="text">예약자 차량번호</span>
+                <span class="text">예약 기간</span>
+                <span class="text">예약 금액</span>
+                <span class="text">예약 요청 날짜</span>
+                <span class="text">결제 상태</span>
+            </div>
+        </div>
+
+        <div class="payment-history-tbody" rel="paymentHistoryTbody">
+
+        </div>
+    </div>
+
+    <button class="_obj-button" rel="cancelButton" type="button">닫기</button>
+</div>
+</html>

@@ -2,6 +2,7 @@ package com.jbw.reservation.mappers;
 
 import com.jbw.reservation.dtos.ReservationHistoryDto;
 import com.jbw.reservation.entities.PaymentEntity;
+import com.jbw.reservation.entities.RefundEntity;
 import com.jbw.reservation.entities.ReservationHistoryEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,18 +18,28 @@ public interface ReservationMapper {
 
     int selectReservedCount(ReservationHistoryEntity reservationHistory);
 
-    int selectRefundsCountByPIndex(int parkingLotIndex);
+    int selectRefundsCountByPIndex(@Param("parkingLotIndex") int parkingLotIndex);
 
-    int selectRefundsUnsolvedCountByPIndex(int parkingLotIndex);
+    int selectRefundsUnsolvedCountByPIndex(@Param("parkingLotIndex") int parkingLotIndex);
+
+    int updatePayment(PaymentEntity payment);
+
+    int updateRefund(RefundEntity refund);
 
     ReservationHistoryEntity[] selectReservedHistoryByNow(@Param("parkingLotIndex") int parkingLotIndex,
                                                           @Param("today") LocalDate reqDate);
 
-    ReservationHistoryEntity selectReservedHistoryByPindexTime(
+    ReservationHistoryEntity selectReservedHistoryByPIndexTime(
             @Param("parkingLotIndex") int parkingLotIndex,
             @Param("userEmail") String userEmail,
             @Param("startDateTime") LocalDateTime startDateTime,
             @Param("endDateTime") LocalDateTime endDateTime);
 
-    ReservationHistoryDto[] getReservedHistoryByPIndex(int parkingLotIndex);
+    ReservationHistoryDto[] getReservedHistoryByPIndex(@Param("parkingLotIndex") int parkingLotIndex);
+
+    ReservationHistoryDto[] selectReservedHistoryByUserEmail(@Param("userEmail") String userEmail);
+
+    PaymentEntity selectPaymentByIndex(@Param("paymentIndex") Integer paymentIndex);
+
+    RefundEntity selectRefundByIndex(@Param("refundIndex") Integer refundIndex);
 }

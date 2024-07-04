@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="_obj-dialog" id="parkingLotInfoRefundHistoryDialog" th:fragment="parkingLotInfoRefundHistoryDialog">
+
+    <div class="title">
+        <span class="text">환불 신청 내역</span>
+    </div>
+
+    <div class="refund-history-table empty" rel="emptyDiv"></div>
+
+    <div class="refund-history-table" rel="refundHistoryTable">
+        <div class="refund-history-thead">
+            <div class="refund-history-tr">
+                <span class="text">예약자 이름</span>
+                <span class="text">예약자 전화번호</span>
+                <span class="text">예약자 차량번호</span>
+                <span class="text">예약 기간</span>
+                <span class="text">환불 금액</span>
+                <span class="text">환불 요청 은행명</span>
+                <span class="text">환불 요청 계좌번호</span>
+                <span class="text">환불 요청 날짜</span>
+                <span class="text">환불 상태</span>
+            </div>
+        </div>
+
+        <div class="refund-history-tbody" rel="refundHistoryTbody">
+
+        </div>
+    </div>
+
+    <button class="_obj-button" rel="cancelButton" type="button">닫기</button>
+</div>
+</html>

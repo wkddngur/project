@@ -39,7 +39,8 @@
                            ON `parkingLot`.`index` = `parkingLotFavorite`.`parking_lot_index`
                  LEFT JOIN `reservation`.`parking_lot_reviews` AS `parkingLotReview`
                            ON `parkingLot`.`index` = `parkingLotReview`.`parking_lot_index`
-        WHERE `parkingLot`.`index` = #{index}
+        WHERE `parkingLot`.`is_deleted` = FALSE
+          AND `parkingLot`.`index` = #{index}
         GROUP BY `parkingLot`.`index`
         LIMIT 1
     </select>
@@ -100,7 +101,8 @@
                            ON `parkingLot`.`index` = `parkingLotFavorite`.`parking_lot_index`
                  LEFT JOIN `reservation`.`parking_lot_reviews` AS `parkingLotReview`
                            ON `parkingLot`.`index` = `parkingLotReview`.`parking_lot_index`
-        WHERE `parkingLot`.`latitude` BETWEEN #{minLat} AND #{maxLat}
+        WHERE `parkingLot`.`is_deleted` = FALSE
+          AND `parkingLot`.`latitude` BETWEEN #{minLat} AND #{maxLat}
           AND `parkingLot`.`longitude` BETWEEN #{minLng} AND #{maxLng}
         GROUP BY `parkingLot`.`index`
     </select>
@@ -140,9 +142,10 @@
                            ON `parkingLot`.`index` = `parkingLotFavorite`.`parking_lot_index`
                  LEFT JOIN `reservation`.`parking_lot_reviews` AS `parkingLotReview`
                            ON `parkingLot`.`index` = `parkingLotReview`.`parking_lot_index`
-        WHERE REPLACE(`name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
-          OR REPLACE(`address_primary`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
-          OR REPLACE(`address_secondary`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+        WHERE `parkingLot`.`is_deleted` = FALSE
+            AND REPLACE(`name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+           OR REPLACE(`address_primary`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+           OR REPLACE(`address_secondary`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
         GROUP BY `parkingLot`.`index`
     </select>
 
@@ -172,7 +175,8 @@
                `modified_at`            AS `modifiedAt`,
                `is_deleted`             AS `isDeleted`
         FROM `reservation`.`parking_lots` AS `parkingLots`
-        WHERE `parkingLots`.`index` = #{index}
+        WHERE `parkingLots`.`is_deleted` = FALSE
+          AND `parkingLots`.`index` = #{index}
         LIMIT 1
     </select>
 

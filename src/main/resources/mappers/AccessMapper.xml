@@ -98,7 +98,9 @@
                `is_admin`     AS `isAdmin`,
                `is_agree`     AS `isAgree`
         FROM `reservation`.`users`
-        WHERE BINARY `email` = #{email}
+        WHERE `is_deleted` = FALSE
+          AND `is_suspended` = FALSE
+          AND BINARY `email` = #{email}
         LIMIT 1
     </select>
 
@@ -116,7 +118,9 @@
                `is_admin`     AS `isAdmin`,
                `is_agree`     AS `isAgree`
         FROM `reservation`.`users`
-        WHERE `nickname` = #{nickname}
+        WHERE `is_deleted` = FALSE
+          AND `is_suspended` = FALSE
+          AND `nickname` = #{nickname}
         LIMIT 1
     </select>
 
@@ -134,7 +138,9 @@
                `is_admin`     AS `isAdmin`,
                `is_agree`     AS `isAgree`
         FROM `reservation`.`users`
-        WHERE `name` = #{name}
+        WHERE `is_deleted` = FALSE
+          AND `is_suspended` = FALSE
+          AND `name` = #{name}
           AND BINARY `gender` = #{gender}
           AND `ssn_birth` = #{ssnBirth}
         LIMIT 1
@@ -157,7 +163,9 @@
                `is_agree`       AS `isAgree`,
                `is_approved`    AS `isApproved`
         FROM `reservation`.`contractors`
-        WHERE BINARY `email` = #{email}
+        WHERE `is_deleted` = FALSE
+          AND `is_suspended` = FALSE
+          AND BINARY `email` = #{email}
         LIMIT 1
     </select>
 
@@ -178,7 +186,9 @@
                `is_agree`       AS `isAgree`,
                `is_approved`    AS `isApproved`
         FROM `reservation`.`contractors`
-        WHERE BINARY `contact_first` = #{contactFirst}
+        WHERE `is_deleted` = FALSE
+          AND `is_suspended` = FALSE
+          AND BINARY `contact_first` = #{contactFirst}
           AND BINARY `contact_second` = #{contactSecond}
           AND BINARY `contact_third` = #{contactThird}
         LIMIT 1
@@ -201,7 +211,9 @@
                `is_agree`       AS `isAgree`,
                `is_approved`    AS `isApproved`
         FROM `reservation`.`contractors`
-        WHERE BINARY `tin_first` = #{tinFirst}
+        WHERE `is_deleted` = FALSE
+          AND `is_suspended` = FALSE
+          AND BINARY `tin_first` = #{tinFirst}
           AND BINARY `tin_second` = #{tinSecond}
           AND BINARY `tin_third` = #{tinThird}
         LIMIT 1
@@ -224,7 +236,9 @@
                `is_agree`       AS `isAgree`,
                `is_approved`    AS `isApproved`
         FROM `reservation`.`contractors`
-        WHERE BINARY `name` = #{name}
+        WHERE `is_deleted` = FALSE
+          AND `is_suspended` = FALSE
+          AND BINARY `name` = #{name}
         LIMIT 1
     </select>
 
@@ -245,7 +259,9 @@
                `is_agree`       AS `isAgree`,
                `is_approved`    AS `isApproved`
         FROM `reservation`.`contractors`
-        WHERE BINARY `name` = #{name}
+        WHERE `is_deleted` = FALSE
+          AND `is_suspended` = FALSE
+          AND BINARY `name` = #{name}
           AND `contact_first` = #{contactFirst}
           AND `contact_second` = #{contactSecond}
           AND `contact_third` = #{contactThird}

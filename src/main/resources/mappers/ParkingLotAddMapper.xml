@@ -56,7 +56,8 @@
                `modified_at`            AS `modifiedAt`,
                `is_deleted`             AS `isDeleted`
         FROM `reservation`.`parking_lots`
-        WHERE `address_postal` = #{addressPostal}
+        WHERE parking_lots.`is_deleted` = FALSE
+          AND `address_postal` = #{addressPostal}
           AND `address_primary` = #{addressPrimary}
         LIMIT 1
     </select>

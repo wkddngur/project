@@ -13,6 +13,7 @@ import com.jbw.reservation.results.access.CommonResult;
 import com.jbw.reservation.results.reservation.ReservationResult;
 import org.apache.ibatis.cache.decorators.BlockingCache;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +29,7 @@ public class ReservationService {
     private final ParkingLotMapper parkingLotMapper;
     private final AccessMapper accessMapper;
 
+    @Autowired
     public ReservationService(ReservationMapper reservationMapper, ParkingLotMapper parkingLotMapper, AccessMapper accessMapper) {
         this.reservationMapper = reservationMapper;
         this.parkingLotMapper = parkingLotMapper;
@@ -68,7 +70,7 @@ public class ReservationService {
             return ReservationResult.FAILURE_EMAIL_NOT_FOUND;
         }
 
-        ReservationHistoryEntity dbCheckReserved = this.reservationMapper.selectReservedHistoryByPindexTime(
+        ReservationHistoryEntity dbCheckReserved = this.reservationMapper.selectReservedHistoryByPIndexTime(
                 reservationHistory.getParkingLotIndex(),
                 reservationHistory.getUserEmail(),
                 LocalDateTime.from(reservationHistory.getStartDateTime()),
@@ -119,7 +121,9 @@ public class ReservationService {
             if (totalPrice >= dayMaxPrice) {
                 totalPrice = dayMaxPrice;
             }
-        } else {
+        }
+
+        if (reservationFormatTenMinuteResult > 144) {
             int oneDayFormatMilliSec = 24 * 60 * 60;
             int totalDays = (int) Math.ceil((double) timeDifference / oneDayFormatMilliSec);
 
@@ -132,7 +136,7 @@ public class ReservationService {
                 }
                 totalPrice = dayMaxPrice + overTimePrice;
             } else {
-                for (int day = 0; day <= totalDays; day++) {
+                for (int day = 0; day < totalDays; day++) {
                     if (day == 0) {
                         long endOfFirstDay = midNight + oneDayFormatMilliSec;
                         int firstDayTimeDifference = (int) ((endOfFirstDay - dateFormatRST) / tenMinutedUnit);

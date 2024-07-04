@@ -118,18 +118,12 @@ const showReservationForm = () => {
         reservationForm.carNumberLabel.setValid(reservationForm['carNumber'].tests());
 
         if (!reservationForm.contactLabel.isValid()) {
-            MessageObj.createSimpleOk('경고', '올바른 전화번호를 입력해 주세요.', () => {
-                reservationForm.contactLabel['userContact'].focus();
-                reservationForm.contactLabel['userContact'].value = '';
-            }).show();
+            MessageObj.createSimpleOk('경고', '올바른 전화번호를 입력해 주세요.').show();
             return;
         }
 
         if (!reservationForm.carNumberLabel.isValid()) {
-            MessageObj.createSimpleOk('경고', '올바른 차량번호를 입력해 주세요.', () => {
-                reservationForm.carNumberLabel['carNumber'].focus();
-                reservationForm.carNumberLabel['carNumber'].value = '';
-            }).show();
+            MessageObj.createSimpleOk('경고', '올바른 차량번호를 입력해 주세요.').show();
             return;
         }
 
@@ -150,7 +144,6 @@ const showReservationForm = () => {
             }
             if (xhr.status < 200 || xhr.status >= 300) {
                 MessageObj.createSimpleOk('오류', '요청을 전송하는 도중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.').show();
-                return;
                 return;
             }
 

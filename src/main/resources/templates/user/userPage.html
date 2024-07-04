@@ -11,6 +11,7 @@
 
     <script src="https://kit.fontawesome.com/bb143610b4.js" crossorigin="anonymous" type="text/javascript"></script>
 
+    <script defer type="text/javascript" th:src="@{/assets/scripts/common.js}"></script>
     <script defer type="text/javascript" th:src="@{/assets/scripts/userPage.js}"></script>
 
     <!--        <script defer th:if="${}">-->
@@ -25,6 +26,9 @@
 </div>
 
 <div id="userPage">
+
+<!--    session 처리한 결과로 찍어줘야 될 부분-->
+    <input name="userEmail" value="jbw5387@naver.com" type="hidden">
 
     <div class="userPageTitleDiv">
         <div class="titleDiv">

@@ -38,13 +38,18 @@
     <script defer type="text/javascript" th:src="@{/assets/scripts/contractorPage.parkingLotAdd.js}"></script>
     <script defer type="text/javascript" th:src="@{/assets/scripts/contractorPage.dialog.js}"></script>
 </head>
-<body>
+<body th:if="${session.contractor != null}">
 <div class="_obj-cover" id="cover"></div>
 <div id="addressFinder">
     <div class="dialog"></div>
 </div>
 
 <th:block th:replace="~{fragments/contractorPage/parkingLotInfoDialog.html :: parkingLotInfoDialog}"></th:block>
+
+<th:block th:replace="~{fragments/contractorPage/parkingLotInfoPaymentHistoryDialog.html :: parkingLotInfoPaymentHistoryDialog}"></th:block>
+
+<th:block th:replace="~{fragments/contractorPage/parkingLotInfoRefundHistoryDoalog.html :: parkingLotInfoRefundHistoryDialog}"></th:block>
+
 
 
 <div id="contractorPage" th:if="${session.contractor != null}">

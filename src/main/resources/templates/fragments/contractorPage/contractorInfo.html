@@ -1,44 +1,73 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <div id="contractorInfo" class="div contractorInfo" th:fragment="contractorInfo">
-    <div class="contractorTitleDiv">
-        <h2>협력업체 정보</h2>
-    </div>
 
     <div class="infoDiv">
-        <div class="title">기본정보</div>
-        <span class="text">
-            <i class="fa-regular fa-circle-user"></i>
-            <span class="__text" th:if="${session.contractor != null}" th:text="${session.contractor.getName()}"></span>
-        </span>
 
-        <span class="text">
+        <div class="title">
+            <span class="text">기본 정보</span>
+        </div>
+
+        <div class="item">
+            <i class="fa-regular fa-circle-user">
+                <span class="text">협력업체 이름</span>
+            </i>
+            <span class="content">
+                <span class="content-text" th:if="${session.contractor != null}" th:text="${session.contractor.getName()}"></span>
+            </span>
+        </div>
+
+        <div class="item">
             <input hidden name="contractorEmail" type="hidden" th:if="${session.contractor != null}" th:value="${session.contractor.getEmail()}">
-            <i class="fa-regular fa-envelope"></i>
-            <span class="__text" th:if="${session.contractor != null}" th:text="${session.contractor.getEmail()}"></span>
-        </span>
+            <i class="fa-regular fa-envelope">
+                <span class="text">협력업체 이메일</span>
+            </i>
+            <span class="content">
+                <span class="content-text" th:if="${session.contractor != null}" th:text="${session.contractor.getEmail()}"></span>
+            </span>
+        </div>
 
-        <span class="text">
-            <i class="fa-solid fa-mobile-screen-button"></i>
-            <span class="__text" th:if="${session.contractor != null}" th:text="${session.contractor.getContactFirst()} + '-' + ${session.contractor.getContactSecond()} + '-' + ${session.contractor.getContactThird()}"></span>
-        </span>
+        <div class="item">
+            <i class="fa-solid fa-mobile-screen-button">
+                <span class="text">협력업체 대표번호</span>
+            </i>
+            <span class="content">
+                <span class="content-text" th:if="${session.contractor != null}" th:text="${session.contractor.getContactFirst()} + '-' + ${session.contractor.getContactSecond()} + '-' + ${session.contractor.getContactThird()}"></span>
+            </span>
+        </div>
 
-        <span class="text">
-            <i class="fa-regular fa-address-card"></i>
-            <span class="__text" th:if="${session.contractor != null}" th:text="${session.contractor.getTinFirst()} + '-' + ${session.contractor.getTinSecond()} + '-' + ${session.contractor.getTinThird()}"></span>
-        </span>
+        <div class="item">
+            <i class="fa-regular fa-address-card">
+                <span class="text">협렵업체 사업자 등록번호</span>
+            </i>
+            <span class="content">
+                <span class="content-text" th:if="${session.contractor != null}" th:text="${session.contractor.getTinFirst()} + '-' + ${session.contractor.getTinSecond()} + '-' + ${session.contractor.getTinThird()}"></span>
+            </span>
+        </div>
     </div>
 
     <div class="statusInfo">
-        <div class="title">상태 정보</div>
 
-        <span class="text">
-            <span class="__text">등록된 주차장 개수</span>
-        </span>
+        <div class="title">
+            <span class="text">상태 정보</span>
+        </div>
 
-        <span class="text">
-            <span class="__text">협력업체 회원가입 일시</span>
-            <span class="content" th:if="${session.contractor != null}" th:text="${session.contractor.getCreatedAt()}"></span>
+        <div class="item">
+            <i class="fa-solid fa-square-parking">
+                <span class="text">등록된 주차장 개수</span>
+            </i>
+            <span class="content">
+                <span class="content-text" rel="totalParkingLotCount"></span>
+            </span>
+        </div>
+
+        <span class="item">
+            <i class="fa-solid fa-registered">
+                <span class="text">협력업체 회원가입 일시</span>
+            </i>
+            <span class="content" th:if="${session.contractor != null}">
+                <span class="content-text" th:text="${#temporals.format(session.contractor.getCreatedAt(), 'yyyy-MM-dd HH:mm:ss')}"></span>
+            </span>
         </span>
 
     </div>

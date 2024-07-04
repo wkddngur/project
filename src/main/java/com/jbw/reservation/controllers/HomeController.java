@@ -4,6 +4,7 @@ import com.jbw.reservation.dtos.ParkingLotDto;
 import com.jbw.reservation.entities.SearchHistoryEntity;
 import com.jbw.reservation.services.HomeService;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
     private final HomeService homeService;
 
+    @Autowired
     public HomeController(HomeService homeService) {
         this.homeService = homeService;
     }

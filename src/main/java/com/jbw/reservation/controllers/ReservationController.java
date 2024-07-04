@@ -4,6 +4,7 @@ import com.jbw.reservation.entities.ReservationHistoryEntity;
 import com.jbw.reservation.results.Result;
 import com.jbw.reservation.services.ReservationService;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import java.util.Locale;
 public class ReservationController {
     private final ReservationService reservationService;
 
+    @Autowired
     public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }

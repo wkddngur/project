@@ -18,5 +18,8 @@ public class ReservationHistoryDto extends ReservationHistoryEntity {
     private boolean isAgreeRefund;
     private LocalDateTime createdAtRefund;
     private String bankCode;
+    private String bankCodeText;
     private String bankAccountNumber;
+    private String parkingLotName;
+    private String userName;
 }

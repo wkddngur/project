@@ -1,7 +1,8 @@
 #parkingLotInfoDialog {
-  width: 40%;
+  width: 50%;
   height: 80%;
   padding: 1.5rem 5rem;
+  overflow: auto;
   align-items: stretch;
   display: flex;
   flex-direction: column;
@@ -75,19 +76,182 @@
   flex: 1;
 }
 #parkingLotInfoDialog > .item > .statusContent > .__horizontal > ._obj-button {
+  white-space: nowrap;
   width: 40%;
   height: 3rem;
   font-size: 1rem;
 }
 #parkingLotInfoDialog > .button-container {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   align-items: stretch;
   display: flex;
   justify-content: center;
 }
 #parkingLotInfoDialog > .button-container > ._obj-button {
-  width: 20rem;
+  width: 100%;
   height: 3rem;
   font-size: 1.1rem;
+}
+
+#parkingLotInfoPaymentHistoryDialog {
+  width: 70%;
+  height: 80%;
+  padding: 1.5rem 2rem;
+  overflow: auto;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.3rem;
+}
+#parkingLotInfoPaymentHistoryDialog::-webkit-scrollbar {
+  display: none;
+}
+#parkingLotInfoPaymentHistoryDialog > .title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+#parkingLotInfoPaymentHistoryDialog > .payment-history-table.empty {
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  text-align: center;
+  opacity: 0;
+}
+#parkingLotInfoPaymentHistoryDialog > .payment-history-table.empty.-visible {
+  opacity: 1;
+}
+#parkingLotInfoPaymentHistoryDialog > .payment-history-table {
+  border: 0.13rem solid #0B005C;
+  border-radius: 0.375rem;
+  display: table;
+  table-layout: auto;
+  width: 100%;
+  opacity: 0;
+}
+#parkingLotInfoPaymentHistoryDialog > .payment-history-table.-visible {
+  opacity: 1;
+}
+#parkingLotInfoPaymentHistoryDialog > .payment-history-table > .payment-history-thead {
+  display: table-header-group;
+}
+#parkingLotInfoPaymentHistoryDialog > .payment-history-table > .payment-history-thead > .payment-history-tr {
+  display: table-row;
+}
+#parkingLotInfoPaymentHistoryDialog > .payment-history-table > .payment-history-thead > .payment-history-tr > .text {
+  border: 0.13rem solid #0B005C;
+  font-weight: 500;
+  overflow: hidden;
+  padding: 0.5rem;
+  text-align: center;
+  display: table-cell;
+}
+#parkingLotInfoPaymentHistoryDialog > .payment-history-table > .payment-history-tbody {
+  display: table-row-group;
+}
+#parkingLotInfoPaymentHistoryDialog > .payment-history-table > .payment-history-tbody > .payment-history-list-tr {
+  display: table-row;
+}
+#parkingLotInfoPaymentHistoryDialog > .payment-history-table > .payment-history-tbody > .payment-history-list-tr > .text {
+  text-align: center;
+  padding: 0.5rem;
+  border: 0.0625rem solid #0B005C;
+  display: table-cell;
+}
+#parkingLotInfoPaymentHistoryDialog > .payment-history-table > .payment-history-tbody > .payment-history-list-tr > .text > ._obj-button {
+  white-space: nowrap;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  height: 1rem;
+}
+#parkingLotInfoPaymentHistoryDialog > ._obj-button {
+  top: 95%;
+  position: sticky;
+  font-size: 1.1rem;
+  height: 3rem;
+}
+
+#parkingLotInfoRefundHistoryDialog {
+  width: 78%;
+  height: 80%;
+  padding: 1.5rem 2rem;
+  overflow: auto;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.3rem;
+}
+#parkingLotInfoRefundHistoryDialog::-webkit-scrollbar {
+  display: none;
+}
+#parkingLotInfoRefundHistoryDialog > .refund-history-table.empty {
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  text-align: center;
+  opacity: 0;
+}
+#parkingLotInfoRefundHistoryDialog > .refund-history-table.empty.-visible {
+  opacity: 1;
+}
+#parkingLotInfoRefundHistoryDialog > .title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+#parkingLotInfoRefundHistoryDialog > .refund-history-table {
+  border: 0.13rem solid #0B005C;
+  border-radius: 0.375rem;
+  display: table;
+  table-layout: auto;
+  width: 100%;
+  opacity: 0;
+}
+#parkingLotInfoRefundHistoryDialog > .refund-history-table.-visible {
+  opacity: 1;
+}
+#parkingLotInfoRefundHistoryDialog > .refund-history-table > .refund-history-thead {
+  display: table-header-group;
+}
+#parkingLotInfoRefundHistoryDialog > .refund-history-table > .refund-history-thead > .refund-history-tr {
+  display: table-row;
+}
+#parkingLotInfoRefundHistoryDialog > .refund-history-table > .refund-history-thead > .refund-history-tr > .text {
+  border: 0.13rem solid #0B005C;
+  font-weight: 500;
+  overflow: hidden;
+  padding: 0.5rem;
+  text-align: center;
+  display: table-cell;
+}
+#parkingLotInfoRefundHistoryDialog > .refund-history-table > .refund-history-tbody {
+  display: table-row-group;
+}
+#parkingLotInfoRefundHistoryDialog > .refund-history-table > .refund-history-tbody > .refund-history-list-tr {
+  display: table-row;
+}
+#parkingLotInfoRefundHistoryDialog > .refund-history-table > .refund-history-tbody > .refund-history-list-tr > .text {
+  text-align: center;
+  padding: 0.5rem;
+  border: 0.0625rem solid #0B005C;
+  display: table-cell;
+}
+#parkingLotInfoRefundHistoryDialog > .refund-history-table > .refund-history-tbody > .refund-history-list-tr > .text > ._obj-button {
+  white-space: nowrap;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  height: 1rem;
+}
+#parkingLotInfoRefundHistoryDialog > ._obj-button {
+  top: 95%;
+  position: sticky;
+  font-size: 1.1rem;
+  height: 3rem;
 }
 
 body {
@@ -189,26 +353,104 @@ body {
 }
 
 #contractorInfo {
-  top: 20%;
   left: 50%;
   width: 50%;
   height: 100%;
   border-radius: 0.375rem;
-  border: 0.0625rem solid #0B005C;
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 2rem;
+  overflow: auto;
   position: relative;
-  transform: translate(-50%, -20%);
+  transform: translate(-50%);
   align-items: stretch;
   display: none;
   flex-direction: column;
   justify-content: flex-start;
+  gap: 2rem;
+}
+#contractorInfo::-webkit-scrollbar {
+  display: none;
+}
+#contractorInfo > .infoDiv {
+  border: 0.0625rem solid #0B005C;
+  border-radius: 0.25rem;
+  padding: 2rem 3rem 3rem;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.5rem;
+}
+#contractorInfo > .infoDiv > .title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+#contractorInfo > .infoDiv > .item {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   gap: 1rem;
 }
-#contractorInfo > .contractorTitleDiv {
-  font-size: 2rem;
-  font-weight: 400;
+#contractorInfo > .infoDiv > .item i {
+  font-size: 1.2rem;
+}
+#contractorInfo > .infoDiv > .item i > .text {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+#contractorInfo > .infoDiv > .item > .content {
+  width: 100%;
+  height: 3rem;
+  border: 0.0625rem solid #0B005C;
+  border-radius: 0.25rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+#contractorInfo > .infoDiv > .item > .content > .content-text {
+  font-size: 1.1rem;
+}
+#contractorInfo > .statusInfo {
+  border: 0.0625rem solid #0B005C;
+  border-radius: 0.25rem;
+  padding: 2rem 3rem 3rem;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.5rem;
+}
+#contractorInfo > .statusInfo > .title {
   text-align: center;
-  padding: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+#contractorInfo > .statusInfo > .item {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+#contractorInfo > .statusInfo > .item i {
+  font-size: 1.2rem;
+}
+#contractorInfo > .statusInfo > .item i > .text {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+#contractorInfo > .statusInfo > .item > .content {
+  width: 100%;
+  height: 3rem;
+  border: 0.0625rem solid #0B005C;
+  border-radius: 0.25rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+#contractorInfo > .statusInfo > .item > .content > .content-text {
+  font-size: 1.1rem;
 }
 
 #parkingLotAdd {
@@ -323,13 +565,17 @@ body {
 
 #parkingLotInfo {
   left: 50%;
-  width: 70rem;
+  width: 85%;
   transform: translate(-50%);
   position: relative;
+  overflow: auto;
   align-items: center;
   display: none;
   flex-direction: column;
   gap: 1.5rem;
+}
+#parkingLotInfo::-webkit-scrollbar {
+  display: none;
 }
 #parkingLotInfo > .contractorTitleDiv {
   text-align: center;
@@ -347,7 +593,7 @@ body {
   border-radius: 0.375rem;
   display: table;
   table-layout: auto;
-  width: 100%;
+  width: 99%;
 }
 #parkingLotInfo > .parkingLot-table > .parkingLot-thead {
   display: table-header-group;
