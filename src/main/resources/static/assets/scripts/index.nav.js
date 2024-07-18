@@ -24,6 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+const logoutButton = buttonContainer.querySelector('[rel="logoutButton"]');
+
+logoutButton.onclick = () => {
+    if (confirm('로그아웃 하시겠습니까?')) {
+        location.href = '/access/userLogout';
+    } else {
+        return;
+    }
+}
+
 nav.searchForm = document.getElementById('searchForm');
 
 nav.searchForm.onsubmit = (e) => {

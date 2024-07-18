@@ -154,6 +154,9 @@
 #parkingLotInfoPaymentHistoryDialog > .payment-history-table > .payment-history-tbody > .payment-history-list-tr {
   display: table-row;
 }
+#parkingLotInfoPaymentHistoryDialog > .payment-history-table > .payment-history-tbody > .payment-history-list-tr > .text.status {
+  color: #28b463;
+}
 #parkingLotInfoPaymentHistoryDialog > .payment-history-table > .payment-history-tbody > .payment-history-list-tr > .text {
   text-align: center;
   padding: 0.5rem;
@@ -166,6 +169,7 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
   height: 1rem;
+  color: #e0e0e0;
 }
 #parkingLotInfoPaymentHistoryDialog > ._obj-button {
   top: 95%;
@@ -234,6 +238,9 @@
 #parkingLotInfoRefundHistoryDialog > .refund-history-table > .refund-history-tbody > .refund-history-list-tr {
   display: table-row;
 }
+#parkingLotInfoRefundHistoryDialog > .refund-history-table > .refund-history-tbody > .refund-history-list-tr > .text.status {
+  color: #28b463;
+}
 #parkingLotInfoRefundHistoryDialog > .refund-history-table > .refund-history-tbody > .refund-history-list-tr > .text {
   text-align: center;
   padding: 0.5rem;
@@ -246,6 +253,7 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
   height: 1rem;
+  color: #e0e0e0;
 }
 #parkingLotInfoRefundHistoryDialog > ._obj-button {
   top: 95%;

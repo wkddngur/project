@@ -1,4 +1,5 @@
 const contractorRegisterDiv = document.getElementById('contractorRegisterDiv');
+const loading = document.getElementById('loading');
 
 contractorRegisterDiv.querySelector('[rel="goLoginCaller"]').onclick = () => {
     location.href = '/access/';
@@ -28,6 +29,7 @@ contractorRegisterDiv.contractorRegisterForm['emailSend'].onclick = () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) {
             return;
         }
+        loading.hide();
         if (xhr.status < 200 || xhr.status >= 300) {
             MessageObj.createSimpleOk('오류', '요청을 전송하는 도중 오류가 발생하였습니다. 잠시 후 이용해 주세요.').show();
             return;
@@ -53,6 +55,7 @@ contractorRegisterDiv.contractorRegisterForm['emailSend'].onclick = () => {
 
     xhr.open('POST', '/access/contractorRegisterEmailSend');
     xhr.send(formData);
+    loading.show();
 }
 
 contractorRegisterDiv.contractorRegisterForm['emailVerify'].onclick = () => {
@@ -181,7 +184,7 @@ contractorRegisterDiv.contractorRegisterForm.onsubmit = (e) => {
         }
         const responseObject = JSON.parse(xhr.responseText);
         const [dTitle, dContent, dOnclick] = {
-            failure: ['경고', '알 수 없는 이유로 회원가입을 실패하였습니다 잠시후 다시 시도해 주세요.'],
+            failure: ['경고', '알 수 없는 이유로 회원가입을 실패하였습니다. 잠시후 다시 시도해 주세요.'],
             failure_duplicate_email: ['경고',`입력하신 이메일  <b>${contractorRegisterDiv.contractorRegisterForm['email'].value}</b> 는 이미 사용중 입니다, 다른 이메일을 사용해 주세요.`, () => {
                 contractorRegisterDiv.contractorRegisterForm['emailSalt'].value = '';
                 contractorRegisterDiv.contractorRegisterForm['email'].enable().focus();

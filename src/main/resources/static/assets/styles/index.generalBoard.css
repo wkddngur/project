@@ -1,0 +1,276 @@
+#generalBoardDialog {
+  width: 50%;
+  height: 94%;
+  overflow: auto;
+  flex: 1;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+#generalBoardDialog::-webkit-scrollbar {
+  display: none;
+}
+#generalBoardDialog > .title {
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  padding: 1rem;
+}
+#generalBoardDialog > .title > .text {
+  font-size: 1.2rem;
+}
+#generalBoardDialog > .general-board-table {
+  border: 0.13rem solid #0B005C;
+  border-radius: 0.375rem;
+  display: table;
+  table-layout: auto;
+  width: 99%;
+}
+#generalBoardDialog > .general-board-table > .general-board-thead {
+  display: table-header-group;
+}
+#generalBoardDialog > .general-board-table > .general-board-thead > .general-board-tr {
+  display: table-row;
+}
+#generalBoardDialog > .general-board-table > .general-board-thead > .general-board-tr > .text {
+  border: 0.13rem solid #0B005C;
+  font-weight: 500;
+  overflow: hidden;
+  padding: 0.5rem;
+  text-align: center;
+  display: table-cell;
+}
+#generalBoardDialog > .general-board-table > .general-board-tbody {
+  display: table-row-group;
+}
+#generalBoardDialog > .general-board-table > .general-board-tbody > .general-board-tr {
+  display: table-row;
+}
+#generalBoardDialog > .general-board-table > .general-board-tbody > .general-board-tr > .text {
+  text-align: center;
+  padding: 0.5rem;
+  border: 0.0625rem solid #0B005C;
+  display: table-cell;
+}
+#generalBoardDialog > .general-board-table > .general-board-tbody > .general-board-tr > .text.title {
+  overflow: hidden;
+  cursor: pointer;
+}
+#generalBoardDialog > .general-board-table > .general-board-tbody > .general-board-tr > .text.title:hover {
+  text-decoration: underline;
+}
+#generalBoardDialog > .spring {
+  height: 100%;
+}
+#generalBoardDialog > .aTagContainer {
+  transform: translateY(-1rem);
+  border: 0.15rem solid #0B005C;
+  border-radius: 99rem;
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+#generalBoardDialog > ._obj-button {
+  font-size: 1.1rem;
+  width: 30rem;
+}
+
+#generalArticleWriteFormDialog {
+  width: 30%;
+  overflow: auto;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+#generalArticleWriteFormDialog::-webkit-scrollbar {
+  display: none;
+}
+#generalArticleWriteFormDialog > .title {
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  padding: 1rem;
+}
+#generalArticleWriteFormDialog > .generalArticleWriteForm {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+#generalArticleWriteFormDialog > .generalArticleWriteForm > ._obj-label {
+  display: flex;
+  gap: 0.5rem;
+}
+#generalArticleWriteFormDialog > .generalArticleWriteForm > ._obj-label > .__text {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+#generalArticleWriteFormDialog > .generalArticleWriteForm > ._obj-label textarea {
+  height: 10rem;
+  resize: none;
+}
+
+#generalArticleReadDialog {
+  width: 40%;
+  height: 80%;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+#generalArticleReadDialog > .title-container {
+  width: 100%;
+  text-align: center;
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  gap: 0.1rem;
+}
+#generalArticleReadDialog > .title-container > .index {
+  width: 10%;
+  text-align: center;
+}
+#generalArticleReadDialog > .title-container > .index > .text {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+#generalArticleReadDialog > .title-container > .index > ._obj-input {
+  height: 2rem;
+  font-size: 1rem;
+  text-align: center;
+}
+#generalArticleReadDialog > .title-container > .title {
+  width: 70%;
+  text-align: center;
+}
+#generalArticleReadDialog > .title-container > .title > .text {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+#generalArticleReadDialog > .title-container > .title > ._obj-input {
+  height: 2rem;
+  font-size: 1rem;
+  text-align: center;
+}
+#generalArticleReadDialog > .title-container > .writer {
+  width: 20%;
+  text-align: center;
+}
+#generalArticleReadDialog > .title-container > .writer > .text {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+#generalArticleReadDialog > .title-container > .writer > ._obj-input {
+  height: 2rem;
+  font-size: 1rem;
+  text-align: center;
+}
+#generalArticleReadDialog > .info-container {
+  width: 100%;
+  text-align: center;
+  transform: translateY(-0.8rem);
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+}
+#generalArticleReadDialog > .info-container > .dateTime {
+  width: 85%;
+  text-align: center;
+}
+#generalArticleReadDialog > .info-container > .dateTime > .text {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+#generalArticleReadDialog > .info-container > .dateTime > ._obj-input {
+  height: 2rem;
+  font-size: 1rem;
+  text-align: center;
+}
+#generalArticleReadDialog > .info-container > .view {
+  width: 15%;
+  text-align: center;
+}
+#generalArticleReadDialog > .info-container > .view > .text {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+#generalArticleReadDialog > .info-container > .view > ._obj-input {
+  height: 2rem;
+  font-size: 1rem;
+  text-align: center;
+}
+#generalArticleReadDialog > .content-container > ._obj-label {
+  display: flex;
+  gap: 0.5rem;
+}
+#generalArticleReadDialog > .content-container > ._obj-label > .text {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+#generalArticleReadDialog > .content-container > ._obj-label > ._obj-input {
+  height: 15rem;
+  resize: none;
+  overflow: auto;
+}
+#generalArticleReadDialog > .spring {
+  flex: 1;
+}
+#generalArticleReadDialog > .button-container {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+#generalArticleReadDialog > .button-container > ._obj-button {
+  font-size: 1rem;
+}
+#generalArticleReadDialog > ._obj-button {
+  font-size: 1rem;
+}
+
+#generalArticleModifyFormDialog {
+  width: 30%;
+  overflow: auto;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+#generalArticleModifyFormDialog::-webkit-scrollbar {
+  display: none;
+}
+#generalArticleModifyFormDialog > .title {
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  padding: 1rem;
+}
+#generalArticleModifyFormDialog > .generalArticleModifyForm {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+#generalArticleModifyFormDialog > .generalArticleModifyForm > ._obj-label {
+  display: flex;
+  gap: 0.5rem;
+}
+#generalArticleModifyFormDialog > .generalArticleModifyForm > ._obj-label > .__text {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+#generalArticleModifyFormDialog > .generalArticleModifyForm > ._obj-label textarea {
+  height: 10rem;
+  resize: none;
+}
+
+/*# sourceMappingURL=index.generalBoard.css.map */

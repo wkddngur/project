@@ -1,4 +1,5 @@
 const contractorRecoverDiv = document.getElementById('ContractorRecoverDiv');
+const loading = document.getElementById('loading');
 
 contractorRecoverDiv.querySelector('[rel="goLoginCaller"]').onclick = () => {
     location.href = '/access/';
@@ -104,6 +105,7 @@ contractorRecoverDiv.passwordForm['emailSend'].onclick = () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) {
             return;
         }
+        loading.hide();
         if (xhr.status < 200 || xhr.status >= 300) {
             MessageObj.createSimpleOk('오류', '요청을 전송하는 도중 오류가 발생하였습니다. 잠시 후 다시 시도해 주세요.').show();
             return;
@@ -130,6 +132,7 @@ contractorRecoverDiv.passwordForm['emailSend'].onclick = () => {
     }
     xhr.open('POST', '/access/contractorRecover/resetPasswordEmailSend');
     xhr.send(formData);
+    loading.show();
 };
 
 // 협력업체 비밀번호 변경의 인증번호 확인 버튼을 위한 메서드.

@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <div class="categoryDialog" id="categoryDialog" th:fragment="categoryDialog">
+    <input hidden name="userEmail" type="hidden" th:value="${session.user.getEmail()}">
     <ul class="category-container">
         <li class="item" rel="goUserPageCaller">
             <span class="text">마이페이지</span>
         </li>
-        <li class="item" rel="">
+        <li class="item" rel="showFreeArticleSpan">
             <span class="text">자유 게시판</span>
         </li>
-        <li class="item" rel="">
+        <li class="item" rel="showNoticeArticleSpan">
             <span class="text">공지사항 게시판</span>
         </li>
-        <li class="item" rel="">
+        <li class="item" rel="showEventArticleSpan">
             <span class="text">이벤트 게시판</span>
         </li>
-        <li class="item" rel="">
+        <li class="item" rel="showInquiryArticleSpan">
             <span class="text">문의 게시판</span>
         </li>
     </ul>

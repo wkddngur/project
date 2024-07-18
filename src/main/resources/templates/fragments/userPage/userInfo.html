@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div id="userInfo" class="div userInfo" th:fragment="userInfo">
+
+    <div class="infoDiv">
+        <div class="title">
+            <span class="text">회원 정보</span>
+        </div>
+
+        <div class="item">
+            <i class="fa-solid fa-user">
+                <span class="text">회원 이름</span>
+            </i>
+            <span class="content">
+                <span class="content-text" th:if="${session.user != null}" th:text="${session.user.getName()}"></span>
+            </span>
+        </div>
+
+        <div class="item">
+            <input hidden name="userEmail" type="hidden" th:if="${session.user != null}" th:value="${session.user.getEmail()}">
+            <i class="fa-regular fa-envelope">
+                <span class="text">회원 이메일</span>
+            </i>
+            <span class="content">
+                <span class="content-text" th:if="${session.user != null}" th:text="${session.user.getEmail()}"></span>
+            </span>
+        </div>
+
+        <div class="item">
+            <i class="fa-regular fa-address-card">
+                <span class="text">회원 닉네임</span>
+            </i>
+            <span class="content">
+                <span class="content-text" th:if="${session.user != null}" th:text="${session.user.getNickname()}"></span>
+            </span>
+        </div>
+
+        <div class="item">
+            <i class="fa-solid fa-venus-mars">
+                <span class="text">회원 성별</span>
+            </i>
+            <span class="content">
+                <span class="content-text" rel="userInfoGender" th:if="${session.user != null}" th:text="${session.user.getGender()}"></span>
+            </span>
+        </div>
+
+        <div class="item">
+            <i class="fa-solid fa-cake-candles">
+                <span class="text">회원 생년월일</span>
+            </i>
+            <span class="content">
+                <span class="content-text" th:if="${session.user != null}" th:text="${session.user.getSsnBirth()}"></span>
+            </span>
+        </div>
+    </div>
+
+    <div class="statusInfo">
+        <div class="title">
+            <span class="text">상태 정보</span>
+        </div>
+
+        <div class="item">
+            <i class="fa-regular fa-calendar">
+                <span class="text">예약한 주차장 개수</span>
+            </i>
+            <span class="content">
+                <span class="content-text" th:if="${session.user != null}" rel="totalReservationCount"></span>
+            </span>
+        </div>
+
+        <div class="item">
+            <i class="fa-regular fa-clock">
+                <span class="text">회원가입 일시</span>
+            </i>
+            <span class="content" th:if="${session.user != null}">
+                <span class="content-text" th:text="${#temporals.format(session.user.getCreatedAt(), 'yyyy-MM-dd HH:mm:ss')}"></span>
+            </span>
+        </div>
+
+    </div>
+</div>
+
+</html>

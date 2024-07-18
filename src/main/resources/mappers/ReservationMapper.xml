@@ -12,6 +12,17 @@
         VALUES (#{parkingLotIndex}, #{userEmail}, #{amount}, #{createdAt}, #{isAgree})
     </insert>
 
+    <insert id="insertRefund"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="com.jbw.reservation.entities.RefundEntity">
+        INSERT INTO `reservation`.`refunds` (`parking_lot_index`, `payment_index`, `user_email`, `amount`, `bank_code`,
+                                             `bank_account_number`, `created_at`, `is_agree`)
+        VALUES (#{parkingLotIndex}, #{paymentIndex}, #{userEmail}, #{amount}, #{bankCode}, #{bankAccountNumber},
+                #{createdAt}, #{isAgree})
+    </insert>
+
     <insert id="insertReservationHistory"
             useGeneratedKeys="true"
             keyColumn="index"
@@ -65,6 +76,23 @@
             `is_agree`            = #{isAgree}
         WHERE `index` = #{index}
         LIMIT 1
+    </update>
+
+    <update id="updateReservationHistory" parameterType="com.jbw.reservation.entities.ReservationHistoryEntity">
+        UPDATE `reservation`.`reservation_histories`
+        SET `parking_lot_index` = #{parkingLotIndex},
+            `payment_index`     = #{paymentIndex},
+            `refund_index`      = #{refundIndex},
+            `user_email`        = #{userEmail},
+            `user_contact`      = #{userContact},
+            `amount`            = #{amount},
+            `car_number`        = #{carNumber},
+            `start_date_time`   = #{startDateTime},
+            `end_date_time`     = #{endDateTime},
+            `created_at`        = #{createdAt},
+            `modified_at`       = #{modifiedAt},
+            `is_deleted`        = #{isDeleted}
+        WHERE `payment_index` = #{paymentIndex}
     </update>
 
     <select id="selectReservedHistoryByNow" resultType="com.jbw.reservation.entities.ReservationHistoryEntity">
@@ -168,14 +196,20 @@
                `refund`.`is_agree`                   AS `isAgreeRefund`,
                `refund`.`created_at`                 AS `createdAtRefund`,
                `refund`.`bank_code`                  AS `bankCode`,
-               `refund`.`bank_account_number`        AS `bankAccountNumber`
+               `refund`.`bank_account_number`        AS `bankAccountNumber`,
+               `user`.`name`                         AS `userName`,
+               `bankCategory`.`text`                 AS `bankCodeText`
         FROM `reservation`.`reservation_histories` AS `reservedHistory`
+                 LEFT JOIN `reservation`.`users` AS `user`
+                           ON `reservedHistory`.`user_email` = `user`.`email`
                  LEFT JOIN `reservation`.`parking_lots` AS `parkingLot`
                            ON `reservedHistory`.`parking_lot_index` = `parkingLot`.`index`
                  LEFT JOIN `reservation`.`payments` AS `payment`
                            ON `reservedHistory`.`payment_index` = `payment`.`index`
                  LEFT JOIN `reservation`.`refunds` AS `refund`
                            ON `reservedHistory`.`refund_index` = `refund`.`index`
+                 LEFT JOIN `reservation`.`banks_category` AS `bankCategory`
+                           ON `refund`.`bank_code` = `bankCategory`.`code`
         WHERE `reservedHistory`.`is_deleted` = FALSE
           AND `reservedHistory`.`user_email` = #{userEmail}
     </select>
@@ -203,6 +237,24 @@
                `is_agree`            AS `isAgree`
         FROM `reservation`.`refunds`
         WHERE `index` = #{refundIndex}
+    </select>
+
+    <select id="selectReservedHistoryByPaymentIndex" resultType="com.jbw.reservation.entities.ReservationHistoryEntity">
+        SELECT `index`             AS `index`,
+               `parking_lot_index` AS `parkingLotIndex`,
+               `payment_index`     AS `paymentIndex`,
+               `refund_index`      AS `refundIndex`,
+               `user_email`        AS `userEmail`,
+               `user_contact`      AS `userContact`,
+               `amount`            AS `amount`,
+               `car_number`        AS `carNumber`,
+               `start_date_time`   AS `startDateTime`,
+               `end_date_time`     AS `endDateTime`,
+               `created_at`        AS `createdAt`,
+               `modified_at`       AS `modifiedAt`,
+               `is_deleted`        AS `isDeleted`
+        FROM `reservation`.`reservation_histories`
+        WHERE `payment_index` = #{paymentIndex}
     </select>
 
 </mapper>

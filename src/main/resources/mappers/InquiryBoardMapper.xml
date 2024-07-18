@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbw.reservation.mappers.InquiryBoardMapper">
+    <insert id="insertInquiryArticle"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="com.jbw.reservation.entities.InquiryArticleEntity">
+        INSERT INTO `reservation`.`inquiry_articles` (`user_email`, `title`, `content`, `view`, created_at,
+                                                      `modified_at`, `is_deleted`, `is_agree`)
+        VALUES (#{userEmail}, #{title}, #{content}, #{view}, #{createdAt}, #{modifiedAt}, #{isDeleted}, #{isAgree})
+    </insert>
+
+    <select id="selectInquiryArticleCount" resultType="_int">
+        SELECT COUNT(0)
+        FROM `reservation`.`inquiry_articles`
+        WHERE `is_deleted` = FALSE
+    </select>
+
+    <update id="updateInquiryArticle" parameterType="com.jbw.reservation.entities.InquiryArticleEntity">
+        UPDATE `reservation`.`inquiry_articles`
+        SET `user_email`  = #{userEmail},
+            `title`       = #{title},
+            `content`     = #{content},
+            `view`        = #{view},
+            `created_at`  = #{createdAt},
+            `modified_at` = #{modifiedAt},
+            `is_deleted`  = #{isDeleted},
+            `is_agree`    = #{isAgree}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+
+    <select id="selectInquiryArticles" resultType="com.jbw.reservation.dtos.InquiryArticleDto">
+        SELECT `inquiryArticle`.`index`       AS `index`,
+               `inquiryArticle`.`user_email`  AS `userEmail`,
+               `inquiryArticle`.`title`       AS `title`,
+               `inquiryArticle`.`content`     AS `content`,
+               `inquiryArticle`.`view`        AS `view`,
+               `inquiryArticle`.`created_at`  AS `createdAt`,
+               `inquiryArticle`.`modified_at` AS `modifiedAt`,
+               `inquiryArticle`.`is_deleted`  AS `isDeleted`,
+               `inquiryArticle`.`is_agree`    AS `isAgree`,
+               `user`.name                    AS `userName`
+        FROM `reservation`.`inquiry_articles` AS `inquiryArticle`
+                 LEFT JOIN `reservation`.`users` AS `user`
+                           ON `inquiryArticle`.`user_email` = `user`.`email`
+        WHERE `inquiryArticle`.`is_deleted` = FALSE
+        ORDER BY `inquiryArticle`.`index` DESC
+        LIMIT #{countPerPage} OFFSET #{offset}
+    </select>
+    
+    <select id="selectInquiryArticleByIAI" resultType="com.jbw.reservation.entities.InquiryArticleEntity">
+        SELECT `index`       AS `index`,
+               `user_email`  AS `userEmail`,
+               `title`       AS `title`,
+               `content`     AS `content`,
+               `view`        AS `view`,
+               `created_at`  AS `createdAt`,
+               `modified_at` AS `modifiedAt`,
+               `is_deleted`  AS `isDeleted`,
+               `is_agree`    AS `isAgree`
+        FROM `reservation`.`inquiry_articles`
+        WHERE `is_deleted` = FALSE
+          AND `index` = #{index}
+        LIMIT 1
+    </select>
+
+</mapper>

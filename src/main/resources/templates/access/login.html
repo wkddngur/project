@@ -8,6 +8,16 @@
     <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/access.login.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/common.css}">
 
+    <script defer th:if="${session.user != null}">
+        alert('로그인 되어 있는 상태입니다. 로그아웃 후 다시 시도해 주세요.');
+        location.href = '/';
+    </script>
+
+    <script defer th:if="${session.contractor != null}">
+        alert('협력업체 로그인 되어있는 상태입니다. 협력업체 로그아웃 후 다시 시도해 주세요.');
+        location.href = '/contractor/'
+    </script>
+
 
     <script src="https://kit.fontawesome.com/bb143610b4.js" crossorigin="anonymous"></script>
 
@@ -15,11 +25,12 @@
     <script defer type="text/javascript" th:src="@{/assets/scripts/access.login.js}"></script>
     <title>로그인</title>
 </head>
-<body>
+<body th:if="${session.user == null && session.contractor == null}">
 <div class="loginDiv" id="loginDiv">
 
     <div class="titleDiv">
         <h2 class="__title">로그인</h2>
+        <div class="__text"><b>예약제 주차장 서비스</b>로 로그인을 완료하셔야 접속 가능합니다.</div>
     </div>
 
     <div class="type-wrapper">
@@ -51,16 +62,9 @@
                        th:attrappend="data-regex=${userRegex.password.expression}">
             </label>
 
-            <label class="_obj-check-label">
-                <input name="remember" type="checkbox">
-                <span class="__box"></span>
-                <span class="__text">아이디 저장</span>
-            </label>
-
-
             <button class="_obj-button" type="submit">
 <!--                <i class="__icon fa-solid fa-arrow-right-to-bracket"></i>-->
-                <span class="__text">로그인</span>
+                <span class="__text">개인회원 로그인</span>
             </button>
         </div>
     </form>
@@ -82,13 +86,6 @@
                        th:attrappend="data-regex=${userRegex.password.expression}">
             </label>
 
-            <label class="_obj-check-label">
-                <input name="remember" type="checkbox">
-                <span class="__box"></span>
-                <span class="__text">아이디 저장</span>
-            </label>
-
-
             <button class="_obj-button" type="submit">
 <!--                <i class="__icon fa-solid fa-arrow-right-to-bracket"></i>-->
                 <span class="__text">협력업체 로그인</span>
@@ -104,7 +101,7 @@
             <a href="contractorRecover" class="link" rel="showContractorRecoverCaller"> <b>[협력업체]</b> 아이디 찾기 / 비밀번호 재설정</a>
         </li>
         <li class="item">
-            <a href="register" class="link" rel="showRegisterCaller">회원가입</a>
+            <a href="register" class="link" rel="showRegisterCaller"><b>회원가입</b></a>
         </li>
     </ul>
 </div>

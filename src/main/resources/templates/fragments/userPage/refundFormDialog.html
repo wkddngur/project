@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<form class="_obj-dialog" id="refundFormDialog" th:fragment="refundFormDialog"
+      th:with="userRegex=${T(com.jbw.reservation.regexes.UserRegex)}, reservationRegex = ${T(com.jbw.reservation.regexes.ReservationRegex)}">
+    <div class="title">
+        <span class="text">환불신청</span>
+    </div>
+
+    <label class="_obj-label">
+        <span class="text">환불 금액</span>
+        <input readonly class="_obj-input" name="totalPlace">
+    </label>
+
+    <label class="_obj-label">
+        <span class="text">입금주 이름</span>
+        <input readonly class="_obj-input" name="userName">
+    </label>
+
+    <label class="_obj-label" rel="bankCodeLabel">
+        <span class="__text">은행명</span>
+        <select class="_obj-input __field" name="bankCode">
+            <option disabled hidden selected value="-1">은행 선택</option>
+            <option value="DGB">대구은행</option>
+            <option value="NHN">농협은행</option>
+        </select>
+    </label>
+
+    <label class="_obj-label" rel="bankAccountNumberLabel">
+        <span class="__text">계좌번호</span>
+        <input class="_obj-input __field" name="bankAccountNumber" min="1" maxlength="14"
+               placeholder="환불 받으실 계좌번호의 (-) 빼고 입력해주세요." type="text" th:attrappend="data-regex=${reservationRegex.bankAccountNumber.expression}">
+    </label>
+
+    <button class="_obj-button" type="submit" rel="refundButton">환불 신청</button>
+    <button class="_obj-button" type="button" rel="cancelButton">취소</button>
+
+</form>
+</html>

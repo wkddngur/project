@@ -1,4 +1,5 @@
 const recoverDiv = document.getElementById('recoverDiv');
+const loading = document.getElementById('loading');
 
 // 로그인으로 돌아가기 버튼을 눌렀을 때의 메서드.
 recoverDiv.querySelector('[rel="goLoginCaller"]').onclick = () => {
@@ -103,6 +104,7 @@ recoverDiv.passwordForm['emailSend'].onclick = () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) {
             return;
         }
+        loading.hide();
         if (xhr.status < 200 || xhr.status >= 300) {
             MessageObj.createSimpleOk('오류', '요청을 전송하는 도중 오류가 발생하였습니다. 잠시 후 다시 시도해 주세요.').show();
             return;
@@ -129,6 +131,7 @@ recoverDiv.passwordForm['emailSend'].onclick = () => {
     }
     xhr.open('POST', '/access/recover/resetPasswordEmailSend');
     xhr.send(formData);
+    loading.show();
 };
 
 // 비밀번호 변경의 인증번호 확인 버튼을 위한 메서드.

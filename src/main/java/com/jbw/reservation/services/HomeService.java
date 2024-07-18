@@ -25,10 +25,8 @@ public class HomeService {
         this.accessMapper = accessMapper;
     }
 
-    public ParkingLotDto[] search(SearchHistoryEntity searchHistory) { // session 값 받아서 user.getEmail 해줘야함 나중에
-        String email = "jbw5387@naver.com";
-
-        searchHistory.setUserEmail(email);
+    public ParkingLotDto[] search(String userEmail, SearchHistoryEntity searchHistory) {
+        searchHistory.setUserEmail(userEmail);
         searchHistory.setCreatedAt(LocalDateTime.now());
 
         this.searchMapper.insertSearchHistory(searchHistory);

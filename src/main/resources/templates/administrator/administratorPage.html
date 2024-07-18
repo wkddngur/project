@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/administratorPage.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/common.css}">
+
+    <script defer th:if="${session.contractor != null}">
+        alert('협력업체 로그인 상태입니다. 협력업체 로그아웃 후 다시 시도해 주세요.');
+        location.href = '/contractor/'
+    </script>
+
+    <script defer th:if="${session.contractor == null && session.user == null}">
+        alert('로그인 후 이용해 주세요.');
+        location.href = '/access/';
+    </script>
+
+    <script src="https://kit.fontawesome.com/bb143610b4.js" crossorigin="anonymous" type="text/javascript"></script>
+
+    <script defer type="text/javascript" th:src="@{/assets/scripts/common.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/administratorPage.js}"></script>
+
+</head>
+
+<body th:if="${session.user != null && session.contractor == null}">
+
+<div class="_obj-cover" id="cover"></div>
+
+<div id="administratorPage">
+
+    <div class="administratorPageTitleDiv">
+        <div class="titleDiv">
+            <i class="closer fa-solid fa-angle-left" rel="closer">
+                <span class="text">메인페이지로 돌아가기</span>
+            </i>
+            <h2>관리자 페이지</h2>
+        </div>
+    </div>
+
+    <div id="contractorInfoDiv">
+
+        <div class="contractor-info-table" rel="contractorInfoTable">
+
+            <div class="contractor-info-thead">
+                <div class="contractor-info-tr">
+                    <span class="text">협력업체 이메일</span>
+                    <span class="text">협력업체 이름</span>
+                    <span class="text">대표번호</span>
+                    <span class="text">사업자 등록 번호</span>
+                    <span class="text">가입신청 날짜</span>
+                    <span class="text">정지 상태</span>
+                    <span class="text">삭제 상태</span>
+                    <span class="text">가입 승인 상태</span>
+                </div>
+            </div>
+
+            <div class="contractor-info-tbody" rel="contractorInfoTbody">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

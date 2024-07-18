@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="_obj-dialog" id="generalArticleReadDialog" th:fragment="generalArticleReadDialog">
+    <div class="title-container">
+        <label class="_obj-label index">
+            <span class="text">번호</span>
+            <input readonly class="_obj-input" name="generalArticleIndex" type="text">
+        </label>
+        <label class="_obj-label title">
+            <span class="text">제목</span>
+            <input readonly class="_obj-input" name="generalArticleTitle" type="text">
+        </label>
+        <label class="_obj-label writer">
+            <span class="text">작성자</span>
+            <input readonly class="_obj-input" name="generalArticleUserEmail" type="text">
+        </label>
+    </div>
+
+    <div class="info-container">
+        <label class="_obj-label dateTime">
+            <span class="text">작성날짜 (수정 여부)</span>
+            <input readonly class="_obj-input" name="generalArticleDateTime" type="text">
+        </label>
+        <label class="_obj-label view">
+            <span class="text">조회수</span>
+            <input readonly class="_obj-input" name="generalArticleView" type="text">
+        </label>
+
+    </div>
+
+    <div class="content-container">
+        <label class="_obj-label">
+            <span class="text">게시글 내용</span>
+            <textarea readonly class="_obj-input" name="generalArticleContent" type="text"></textarea>
+        </label>
+    </div>
+
+    <div class="spring"></div>
+
+    <div class="button-container" rel="buttonContainer">
+<!--        <button class="_obj-button" type="button" rel="generalArticleModifyButton">게시글 수정하기</button>-->
+<!--        <button class="_obj-button" type="button" rel="generalArticleDeleteButton">게시글 삭제하기</button>-->
+    </div>
+
+    <button class="_obj-button" type="button" rel="cancelButton">게시판으로 돌아가기</button>
+
+</div>
+</html>

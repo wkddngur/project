@@ -1,0 +1,27 @@
+#refundFormDialog {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.3rem;
+}
+#refundFormDialog::-webkit-scrollbar {
+  display: none;
+}
+#refundFormDialog > .title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+#refundFormDialog > .button-container {
+  align-items: stretch;
+  display: flex;
+  justify-content: center;
+}
+#refundFormDialog > .button-container > ._obj-button {
+  width: 30rem;
+  height: 3rem;
+  font-size: 1.1rem;
+}
+
+/*# sourceMappingURL=userPage.dialog.css.map */

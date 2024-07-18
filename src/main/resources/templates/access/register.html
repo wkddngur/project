@@ -9,9 +9,19 @@
     <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/access.register.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/common.css}">
 
+    <script defer th:if="${session.user != null}">
+        alert('로그인 되어 있는 상태입니다. 로그아웃 후 다시 시도해 주세요.');
+        location.href = '/';
+    </script>
+
+    <script defer th:if="${session.contractor != null}">
+        alert('협력업체 로그인 되어있는 상태입니다. 협력업체 로그아웃 후 다시 시도해 주세요.');
+        location.href = '/contractor/'
+    </script>
+
     <title>회원가입</title>
 </head>
-<body>
+<body th:if="${session.user == null && session.contractor == null}">
 
 <div class="registerDiv" id="registerDiv">
     <div class="titleDiv">

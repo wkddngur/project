@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="_obj-dialog" id="inquiryArticleModifyFormDialog" th:fragment="inquiryArticleModifyFormDialog">
+    <div class="title">
+        <h2>문의 게시글 수정</h2>
+    </div>
+
+    <form class="inquiryArticleModifyForm" id="inquiryArticleModifyForm">
+        <label class="_obj-label" rel="inquiryArticleModifyTitleLabel">
+            <span class="__text">문의 게시글 제목</span>
+            <input  class="_obj-input __field" minlength="1" maxlength="100" name="title" type="text">
+        </label>
+
+        <label class="_obj-label" rel="inquiryArticleModifyContentLabel">
+            <span class="__text">문의 게시글 내용</span>
+            <textarea required class="_obj-input __field" name="content" minlength="1" maxlength="1000"></textarea>
+        </label>
+
+        <button class="_obj-button" type="submit">문의 게시글 수정하기</button>
+    </form>
+
+
+    <button class="_obj-button" type="button" rel="cancelButton">게시글 수정 취소</button>
+</div>
+</html>

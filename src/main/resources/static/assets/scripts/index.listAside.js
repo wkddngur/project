@@ -1,4 +1,5 @@
 const listAside = document.getElementById('listAside');
+const loading = document.getElementById('loading');
 
 const loadParkingLots = () => {
     const mapBounds = map.instance.getBounds();
@@ -106,6 +107,7 @@ const searchParkingLots = (keyword) => {
         if (xhr.readyState !== XMLHttpRequest.DONE) {
             return;
         }
+        loading.hide();
         if (xhr.status < 200 || xhr.status >= 300) {
             MessageObj.createSimpleOk('오류', '요청을 전송하는 도중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.').show();
             return;
@@ -215,4 +217,5 @@ const searchParkingLots = (keyword) => {
     }
     xhr.open('GET', `../search?keyword=${keyword}`);
     xhr.send();
+    loading.show();
 }

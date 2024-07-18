@@ -56,6 +56,5 @@ public interface AccessMapper {
                                                       @Param("tinSecond") String tinSecond,
                                                       @Param("tinThird") String tinThird);
 
-
-
+    ContractorEntity[] selectContractors();
 }

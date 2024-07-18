@@ -22,9 +22,15 @@ body {
   justify-content: flex-start;
 
   > .titleDiv {
-    font-size: 2rem;
-    font-weight: 400;
-    text-align: center;
+    > .__title {
+      font-size: 2rem;
+      font-weight: 400;
+      text-align: center;
+    }
+    > .__text {
+      text-align: center;
+      padding-top: 0.5rem;
+    }
   }
 
   > .type-wrapper {
@@ -102,11 +108,11 @@ body {
     margin-inline: unset;
     padding-inline: unset;
 
-    align-items: flex-start;
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0.3rem;
+    gap: 0.5rem;
 
     > .item {
       > .link {

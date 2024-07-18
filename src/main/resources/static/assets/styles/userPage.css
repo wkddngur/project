@@ -1,3 +1,29 @@
+#refundFormDialog {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.3rem;
+}
+#refundFormDialog::-webkit-scrollbar {
+  display: none;
+}
+#refundFormDialog > .title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+#refundFormDialog > .button-container {
+  align-items: stretch;
+  display: flex;
+  justify-content: center;
+}
+#refundFormDialog > .button-container > ._obj-button {
+  width: 30rem;
+  height: 3rem;
+  font-size: 1.1rem;
+}
+
 body {
   background-color: #0B005C;
 }
@@ -89,7 +115,7 @@ body {
 #userPage > .userPageTitleDiv:has([name=type][value=reservedHistory]:checked) ~ .div.reservedHistory {
   display: flex;
 }
-#userPage > .userPageTitleDiv:has([name=type][value=userDataRecover]:checked) ~ .div.userDataRecover {
+#userPage > .userPageTitleDiv:has([name=type][value=userInfo]:checked) ~ .div.userInfo {
   display: flex;
 }
 
@@ -105,6 +131,11 @@ body {
 }
 #reservedHistory > .reservedHistoryTitleDiv {
   text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3rem;
 }
 #reservedHistory > .reservedHistoryTitleDiv > h2 {
   padding: 1rem;
@@ -113,6 +144,9 @@ body {
 }
 #reservedHistory > .reservedHistoryTitleDiv > .text {
   font-size: 1.2rem;
+}
+#reservedHistory > .reservedHistoryTitleDiv > .smail-text {
+  color: red;
 }
 #reservedHistory > .reservedHistory-table {
   border: 0.13rem solid #0B005C;
@@ -147,11 +181,113 @@ body {
   border: 0.0625rem solid #0B005C;
   display: table-cell;
 }
-#userDataRecover {
-  font-size: 1.4rem;
-  align-items: center;
+#reservedHistory > .reservedHistory-table > .reservedHistory-tbody > .reservedHistory-list-tr > .text > ._obj-button {
+  width: 100%;
+  height: 1.5rem;
+}
+#reservedHistory > .reservedHistory-tfoot {
+  text-align: center;
+}
+
+#userInfo {
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  border-radius: 0.375rem;
+  padding: 1rem 2rem 2rem;
+  overflow: auto;
+  position: relative;
+  transform: translate(-50%);
+  align-items: stretch;
   display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+#userInfo::-webkit-scrollbar {
+  display: none;
+}
+#userInfo > .infoDiv {
+  border: 0.0625rem solid #0B005C;
+  border-radius: 0.25rem;
+  padding: 2rem 3rem 3rem;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.5rem;
+}
+#userInfo > .infoDiv > .title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+#userInfo > .infoDiv > .item {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+#userInfo > .infoDiv > .item i {
+  font-size: 1.2rem;
+}
+#userInfo > .infoDiv > .item i > .text {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+#userInfo > .infoDiv > .item > .content {
+  width: 100%;
+  height: 3rem;
+  border: 0.0625rem solid #0B005C;
+  border-radius: 0.25rem;
+  align-items: center;
+  display: flex;
   justify-content: center;
+}
+#userInfo > .infoDiv > .item > .content > .content-text {
+  font-size: 1.1rem;
+}
+#userInfo > .statusInfo {
+  border: 0.0625rem solid #0B005C;
+  border-radius: 0.25rem;
+  padding: 2rem 3rem 3rem;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.5rem;
+}
+#userInfo > .statusInfo > .title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+#userInfo > .statusInfo > .item {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+#userInfo > .statusInfo > .item i {
+  font-size: 1.2rem;
+}
+#userInfo > .statusInfo > .item i > .text {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+#userInfo > .statusInfo > .item > .content {
+  width: 100%;
+  height: 3rem;
+  border: 0.0625rem solid #0B005C;
+  border-radius: 0.25rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+#userInfo > .statusInfo > .item > .content > .content-text {
+  font-size: 1.1rem;
 }
 
 /*# sourceMappingURL=userPage.css.map */

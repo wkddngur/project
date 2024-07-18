@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="_obj-dialog" id="inquiryArticleWriteFormDialog" th:fragment="inquiryArticleWriteFormDialog">
+    <div class="title">
+        <h2>문의 게시글 작성</h2>
+    </div>
+
+    <form class="inquiryArticleWriteForm" id="inquiryArticleWriteForm">
+        <label class="_obj-label" rel="inquiryArticleWriteTitleLabel">
+            <span class="__text">문의 게시글 제목</span>
+            <input required class="_obj-input __field" minlength="1" maxlength="100" name="title" type="text">
+        </label>
+
+        <label class="_obj-label" rel="inquiryArticleWriteContentLabel">
+            <span class="__text">문의 게시글 내용</span>
+            <textarea required class="_obj-input __field" name="content" minlength="1" maxlength="1000"></textarea>
+        </label>
+
+        <label class="_obj-check-label">
+            <input type="checkbox" name="agree">
+            <span class="__box"></span>
+            <span class="__text">관리자 외 접근 차단 (선택 시 작성자와 관리자만 접근 가능)</span>
+        </label>
+
+        <button class="_obj-button" type="submit">문의 게시글 작성하기</button>
+    </form>
+
+
+    <button class="_obj-button" type="button" rel="cancelButton">게시판 돌아가기</button>
+</div>
+</html>

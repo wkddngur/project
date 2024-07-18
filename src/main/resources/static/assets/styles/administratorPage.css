@@ -1,0 +1,101 @@
+body {
+  background-color: #0B005C;
+}
+
+#administratorPage {
+  background-color: #f5f5f5;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 90%;
+  border-radius: 0.375rem;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+#administratorPage::-webkit-scrollbar {
+  display: none;
+}
+#administratorPage > .administratorPageTitleDiv {
+  background-color: #e5e5e5;
+  top: 0;
+  position: sticky;
+  border-bottom: 0.3rem solid #0B005C;
+  z-index: 9;
+}
+#administratorPage > .administratorPageTitleDiv > .titleDiv {
+  font-size: 2rem;
+  font-weight: 400;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+#administratorPage > .administratorPageTitleDiv > .titleDiv > .closer {
+  left: 2rem;
+  padding: 0.8rem;
+  font-size: 1rem;
+  position: absolute;
+  text-align: center;
+}
+#administratorPage > .administratorPageTitleDiv > .titleDiv > .closer > .text {
+  font: inherit;
+}
+#administratorPage > .administratorPageTitleDiv > .titleDiv > .closer:hover {
+  cursor: pointer;
+  border-radius: 5rem;
+  background-color: #c7c7c7;
+}
+
+#contractorInfoDiv {
+  top: 2%;
+  left: 50%;
+  width: 90%;
+  transform: translate(-50%);
+  position: relative;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+#contractorInfoDiv > .contractor-info-table {
+  border: 0.13rem solid #0B005C;
+  border-radius: 0.375rem;
+  display: table;
+  table-layout: auto;
+  width: 100%;
+}
+#contractorInfoDiv > .contractor-info-table > .contractor-info-thead {
+  display: table-header-group;
+}
+#contractorInfoDiv > .contractor-info-table > .contractor-info-thead > .contractor-info-tr {
+  display: table-row;
+}
+#contractorInfoDiv > .contractor-info-table > .contractor-info-thead > .contractor-info-tr > .text {
+  border: 0.13rem solid #0B005C;
+  font-weight: 500;
+  overflow: hidden;
+  padding: 0.5rem;
+  text-align: center;
+  display: table-cell;
+}
+#contractorInfoDiv > .contractor-info-table > .contractor-info-tbody {
+  display: table-row-group;
+}
+#contractorInfoDiv > .contractor-info-table > .contractor-info-tbody > .contractor-info-tr {
+  display: table-row;
+}
+#contractorInfoDiv > .contractor-info-table > .contractor-info-tbody > .contractor-info-tr > .text {
+  text-align: center;
+  padding: 0.5rem;
+  border: 0.0625rem solid #0B005C;
+  display: table-cell;
+}
+#contractorInfoDiv > .contractor-info-table > .contractor-info-tbody > .contractor-info-tr > .text > ._obj-button {
+  width: 100%;
+  height: 1.5rem;
+}
+
+/*# sourceMappingURL=administratorPage.css.map */

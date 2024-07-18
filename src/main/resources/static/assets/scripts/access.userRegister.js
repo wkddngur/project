@@ -31,6 +31,7 @@ userRegisterDiv.userRegisterForm['emailSend'].onclick = () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) {
             return;
         }
+        loading.hide();
         if (xhr.status < 200 || xhr.status >= 300) {
             MessageObj.createSimpleOk('오류', '요청을 전송하는 도중 오류가 발생하였습니다. 잠시 후 이용해 주세요.').show();
             return;
@@ -56,6 +57,7 @@ userRegisterDiv.userRegisterForm['emailSend'].onclick = () => {
 
     xhr.open('POST', '/access/register/userRegisterEmailSend');
     xhr.send(formData);
+    loading.show();
 }
 
 userRegisterDiv.userRegisterForm['emailVerify'].onclick = () => {
@@ -115,7 +117,7 @@ userRegisterDiv.userRegisterForm.onsubmit = (e) => {
     userRegisterDiv.userRegisterForm.nameLabel.setValid(userRegisterDiv.userRegisterForm['name'].tests());
     userRegisterDiv.userRegisterForm.passwordLabel.setValid(userRegisterDiv.userRegisterForm['password'].tests());
     userRegisterDiv.userRegisterForm.genderLabel.setValid(userRegisterDiv.userRegisterForm['gender'].value !== '-1');
-    userRegisterDiv.userRegisterForm.nicknameLabel.setValid(userRegisterDiv.userRegisterForm['nickname'].value);
+    userRegisterDiv.userRegisterForm.nicknameLabel.setValid(userRegisterDiv.userRegisterForm['nickname'].tests());
     userRegisterDiv.userRegisterForm.ssnBirthLabel.setValid(userRegisterDiv.userRegisterForm['ssnBirth'].tests());
 
     if (userRegisterDiv.userRegisterForm['emailSend'].isEnabled() || userRegisterDiv.userRegisterForm['emailVerify'].isEnabled()) {

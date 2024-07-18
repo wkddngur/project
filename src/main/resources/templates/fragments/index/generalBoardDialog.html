@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="_obj-dialog" id="generalBoardDialog" th:fragment="generalBoardDialog">
+    <div class="title">
+        <h2 rel="boardTitle">자유게시판</h2>
+        <span class="text">게시글에 접근하려면 <b>게시글 제목</b>을 클릭해주세요</span>
+    </div>
+
+    <div class="general-board-table" rel="generalBoardTable">
+        <div class="general-board-thead">
+            <div class="general-board-tr">
+                <span class="text">번호</span>
+                <span class="text">제목</span>
+                <span class="text">작성자 이메일</span>
+                <span class="text">조회수</span>
+                <span class="text">글작성 날짜</span>
+            </div>
+        </div>
+        <div class="general-board-tbody" rel="generalBoardTbody">
+            <div class="general-board-tr">
+                <span class="text">번호</span>
+                <span class="text title">제목</span>
+                <span class="text">작성자</span>
+                <span class="text">조회수</span>
+                <span class="text">글작성 날짜</span>
+            </div>
+        </div>
+    </div>
+
+    <div rel="empty"></div>
+
+    <div class="spring"></div>
+
+    <div class="aTagContainer" rel="aTagContainer">
+
+    </div>
+
+    <button class="_obj-button" type="button" rel="generalArticleWriteButton">게시글 작성하기</button>
+    <button class="_obj-button" type="button" rel="cancelButton">게시판 닫기</button>
+</div>
+</html>

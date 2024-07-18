@@ -10,7 +10,7 @@
         <span class="__text">예약자 이메일</span>
         <input readonly required class="_obj-input __field" name="userEmail" minlength="5" maxlength="50"
                type="text"
-               value="jbw5387@naver.com">
+               th:value="${session.user.getEmail()}">
     </label>
 
     <label class="_obj-label" rel="nameLabel">

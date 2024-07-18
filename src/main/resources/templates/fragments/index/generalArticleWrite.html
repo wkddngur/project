@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="_obj-dialog" id="generalArticleWriteFormDialog" th:fragment="generalArticleWriteFormDialog">
+    <div class="title">
+        <h2>게시글 작성</h2>
+    </div>
+
+    <form class="generalArticleWriteForm" id="generalArticleWriteForm">
+        <label class="_obj-label" rel="generalArticleWriteTitleLabel">
+            <span class="__text">게시글 제목</span>
+            <input required class="_obj-input __field" minlength="1" maxlength="100" name="title" type="text">
+        </label>
+
+        <label class="_obj-label" rel="generalArticleWriteContentLabel">
+            <span class="__text">게시글 내용</span>
+            <textarea required class="_obj-input __field" name="content" minlength="1" maxlength="1000"></textarea>
+        </label>
+
+
+        <button class="_obj-button" type="submit">게시글 작성하기</button>
+    </form>
+
+    <button class="_obj-button" type="button" rel="cancelButton">게시판 돌아가기</button>
+</div>
+</html>

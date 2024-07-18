@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="_obj-dialog" id="inquiryBoardDialog" th:fragment="inquiryBoardDialog">
+    <div class="title">
+        <h2>문의 게시판</h2>
+        <span class="text">문의 게시글에 접근하려면 <b>게시글 제목</b>을 클릭해주세요</span>
+    </div>
+
+    <div class="inquiry-board-table" rel="inquiryBoardTable">
+        <div class="inquiry-board-thead">
+            <div class="inquiry-board-tr">
+                <span class="text">번호</span>
+                <span class="text">제목</span>
+                <span class="text">작성자 이메일</span>
+                <span class="text">조회수</span>
+                <span class="text">게시글 작성 날짜</span>
+            </div>
+        </div>
+        <div class="inquiry-board-tbody" rel="inquiryBoardTbody">
+
+        </div>
+    </div>
+    <div class="spring"></div>
+
+    <div class="aTagContainer" rel="aTagContainer">
+
+    </div>
+
+    <button class="_obj-button" type="button" rel="inquiryArticleWriteButton">문의 게시글 작성하기</button>
+    <button class="_obj-button" type="button" rel="cancelButton">게시판 닫기</button>
+</div>
+</html>

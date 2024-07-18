@@ -30,15 +30,12 @@
                `parkingLot`.`modified_at`                      AS `modifiedAt`,
                `parkingLot`.`is_deleted`                       AS `isDeleted`,
                `parkingLotCategory`.`text`                     AS `parkingLotCategoryText`,
-               COUNT(`parkingLotFavorite`.`parking_lot_index`) AS `favoriteCount`,
-               COUNT(`parkingLotReview`.`parking_lot_index`)   AS `reviewCount`
+               COUNT(`parkingLotFavorite`.`parking_lot_index`) AS `favoriteCount`
         FROM `reservation`.`parking_lots` AS `parkingLot`
                  LEFT JOIN `reservation`.`parking_lots_category` AS `parkingLotCategory`
                            ON `parkingLot`.`category_code` = `parkingLotCategory`.`code`
                  LEFT JOIN `reservation`.`parking_lot_favorites` AS `parkingLotFavorite`
                            ON `parkingLot`.`index` = `parkingLotFavorite`.`parking_lot_index`
-                 LEFT JOIN `reservation`.`parking_lot_reviews` AS `parkingLotReview`
-                           ON `parkingLot`.`index` = `parkingLotReview`.`parking_lot_index`
         WHERE `parkingLot`.`is_deleted` = FALSE
           AND `parkingLot`.`index` = #{index}
         GROUP BY `parkingLot`.`index`
@@ -92,15 +89,12 @@
                `parkingLot`.`modified_at`                      AS `modifiedAt`,
                `parkingLot`.`is_deleted`                       AS `isDeleted`,
                `parkingLotCategory`.`text`                     AS `parkingLotCategoryText`,
-               COUNT(`parkingLotFavorite`.`parking_lot_index`) AS `favoriteCount`,
-               COUNT(`parkingLotReview`.`parking_lot_index`)   AS `reviewCount`
+               COUNT(`parkingLotFavorite`.`parking_lot_index`) AS `favoriteCount`
         FROM `reservation`.`parking_lots` AS `parkingLot`
                  LEFT JOIN `reservation`.`parking_lots_category` AS `parkingLotCategory`
                            ON `parkingLot`.`category_code` = `parkingLotCategory`.`code`
                  LEFT JOIN `reservation`.`parking_lot_favorites` AS `parkingLotFavorite`
                            ON `parkingLot`.`index` = `parkingLotFavorite`.`parking_lot_index`
-                 LEFT JOIN `reservation`.`parking_lot_reviews` AS `parkingLotReview`
-                           ON `parkingLot`.`index` = `parkingLotReview`.`parking_lot_index`
         WHERE `parkingLot`.`is_deleted` = FALSE
           AND `parkingLot`.`latitude` BETWEEN #{minLat} AND #{maxLat}
           AND `parkingLot`.`longitude` BETWEEN #{minLng} AND #{maxLng}
@@ -133,15 +127,12 @@
                `parkingLot`.`modified_at`                      AS `modifiedAt`,
                `parkingLot`.`is_deleted`                       AS `isDeleted`,
                `parkingLotCategory`.`text`                     AS `parkingLotCategoryText`,
-               COUNT(`parkingLotFavorite`.`parking_lot_index`) AS `favoriteCount`,
-               COUNT(`parkingLotReview`.`parking_lot_index`)   AS `reviewCount`
+               COUNT(`parkingLotFavorite`.`parking_lot_index`) AS `favoriteCount`
         FROM `reservation`.`parking_lots` AS `parkingLot`
                  LEFT JOIN `reservation`.`parking_lots_category` AS `parkingLotCategory`
                            ON `parkingLot`.`category_code` = `parkingLotCategory`.`code`
                  LEFT JOIN `reservation`.`parking_lot_favorites` AS `parkingLotFavorite`
                            ON `parkingLot`.`index` = `parkingLotFavorite`.`parking_lot_index`
-                 LEFT JOIN `reservation`.`parking_lot_reviews` AS `parkingLotReview`
-                           ON `parkingLot`.`index` = `parkingLotReview`.`parking_lot_index`
         WHERE `parkingLot`.`is_deleted` = FALSE
             AND REPLACE(`name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
            OR REPLACE(`address_primary`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
@@ -206,15 +197,12 @@
                `parkingLot`.`modified_at`                      AS `modifiedAt`,
                `parkingLot`.`is_deleted`                       AS `isDeleted`,
                `parkingLotCategory`.`text`                     AS `parkingLotCategoryText`,
-               COUNT(`parkingLotFavorite`.`parking_lot_index`) AS `favoriteCount`,
-               COUNT(`parkingLotReview`.`parking_lot_index`)   AS `reviewCount`
+               COUNT(`parkingLotFavorite`.`parking_lot_index`) AS `favoriteCount`
         FROM `reservation`.`parking_lots` AS `parkingLot`
                  LEFT JOIN `reservation`.`parking_lots_category` AS `parkingLotCategory`
                            ON `parkingLot`.`category_code` = `parkingLotCategory`.`code`
                  LEFT JOIN `reservation`.`parking_lot_favorites` AS `parkingLotFavorite`
                            ON `parkingLot`.`index` = `parkingLotFavorite`.`parking_lot_index`
-                 LEFT JOIN `reservation`.`parking_lot_reviews` AS `parkingLotReview`
-                           ON `parkingLot`.`index` = `parkingLotReview`.`parking_lot_index`
         WHERE `parkingLot`.`is_deleted` = FALSE
           AND `parkingLot`.`contractor_email` = #{contractorEmail}
         GROUP BY `parkingLot`.`index`

@@ -10,16 +10,20 @@
     <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/contractorPage.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/common.css}">
 
-    <script defer th:if="${session.contractor == null}">
+    <script th:if="${session.user != null}">
+        alert('일반 회원 로그인이 되어있습니다. 로그아웃 후 다시 시도해 주세요.');
+        location.href = '/';
+    </script>
+
+    <script th:if="${session.user == null && session.contractor == null}">
         alert('협력업체 로그인 후 이용해 주세요.');
         location.href = '/access/';
     </script>
 
-<!--    컨트롤러에서 세션 값도 같이 없애 줘야 할듯?-->
-<!--    <script th:if="${session.contractor != null && session.contractor.isApproved() == false}">-->
-<!--        alert('협력업체 승인 후 접속이 가능합니다.');-->
-<!--        location.href = '/access/';-->
-<!--    </script>-->
+    <script th:if="${session.contractor != null && session.contractor.isApproved() == false}">
+        alert('협력업체 승인 후 접속이 가능합니다.');
+        location.href = '/access/contractorLogout';
+    </script>
 
     <!--    flickity API 끌어온것.-->
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
@@ -38,7 +42,7 @@
     <script defer type="text/javascript" th:src="@{/assets/scripts/contractorPage.parkingLotAdd.js}"></script>
     <script defer type="text/javascript" th:src="@{/assets/scripts/contractorPage.dialog.js}"></script>
 </head>
-<body th:if="${session.contractor != null}">
+<body th:if="${session.contractor != null && session.user == null && session.contractor.isApproved() == true}">
 <div class="_obj-cover" id="cover"></div>
 <div id="addressFinder">
     <div class="dialog"></div>

@@ -32,8 +32,8 @@ public class AccessController {
 
     // 로그인 화면을 띄우기 위한 GET 맵핑.
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getLogin(@SessionAttribute(value = "contractor", required = false) ContractorEntity contractor,
-                                 @SessionAttribute(value = "user", required = false) UserEntity user) {
+    public ModelAndView getLogin() {
+
         ModelAndView modelAndView = new ModelAndView("access/login");
         return modelAndView;
     }
@@ -42,6 +42,11 @@ public class AccessController {
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postLogin(HttpSession session, UserEntity user) {
+
+        if (session.getAttribute("contractor") != null) {
+            session.setAttribute("contractor", null);
+        }
+
         Result result = this.accessService.userLogin(user);
 
         if (result == CommonResult.SUCCESS) {
@@ -52,12 +57,20 @@ public class AccessController {
         return responseObject.toString();
     }
 
+    @RequestMapping(value = "/userLogout", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public String getUserLogout(HttpSession session) {
+        session.setAttribute("user", null);
+        return "redirect:/access/";
+    }
+
     // 협력업체 로그인 버튼 요청 맵핑 접속자 저장까지.
     @RequestMapping(value = "/contractorLogin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postContractorLogin(HttpSession session, ContractorEntity contractor) {
+        if (session.getAttribute("user") != null) {
+            session.setAttribute("user", null);
+        }
         Result result = this.accessService.contractorLogin(contractor);
-
         if (result == CommonResult.SUCCESS) {
             session.setAttribute("contractor", contractor);
         }

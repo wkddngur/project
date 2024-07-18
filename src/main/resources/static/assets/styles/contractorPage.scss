@@ -111,6 +111,7 @@ body {
         }
       }
     }
+
     &:has([name="type"][value="contractorInfo"]:checked) ~ .div.contractorInfo {
       display: flex;
     }
@@ -353,7 +354,7 @@ body {
         }
 
         > .image-wrapper {
-          > .image{
+          > .image {
             width: $item-size;
             height: $item-size;
             border: 0.15rem solid #e0e0e0;
@@ -420,6 +421,7 @@ body {
       font-size: 1.5rem;
       font-weight: 500;
     }
+
     > .text {
       font-size: 1.2rem;
     }
@@ -434,6 +436,7 @@ body {
 
     > .parkingLot-thead {
       display: table-header-group;
+
       > .parkingLot-tr {
         display: table-row;
 
@@ -450,6 +453,7 @@ body {
 
     > .parkingLot-tbody {
       display: table-row-group;
+
       > .parkingLot-list-tr {
         display: table-row;
 
@@ -464,7 +468,7 @@ body {
 
           &:hover {
             text-decoration: underline;
-        }
+          }
         }
 
         > .text.index {

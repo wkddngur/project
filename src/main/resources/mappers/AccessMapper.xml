@@ -271,4 +271,22 @@
         LIMIT 1
     </select>
 
+    <select id="selectContractors" resultType="com.jbw.reservation.entities.ContractorEntity">
+        SELECT `email`          AS `email`,
+               `name`           AS `name`,
+               `contact_first`  AS `contactFirst`,
+               `contact_second` AS `contactSecond`,
+               `contact_third`  AS `contactThird`,
+               `tin_first`      AS `tinFirst`,
+               `tin_second`     AS `tinSecond`,
+               `tin_third`      AS `tinThird`,
+               `created_at`     AS `createdAt`,
+               `modified_at`    AS `modifiedAt`,
+               `is_deleted`     AS `isDeleted`,
+               `is_suspended`   AS `idSuspended`,
+               `is_agree`       AS `isAgree`,
+               `is_approved`    AS `isApproved`
+        FROM `reservation`.`contractors`
+    </select>
+
 </mapper>

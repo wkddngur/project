@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jbw.reservation.mappers.GeneralBoardMapper">
+    <insert id="insertGeneralArticle"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="com.jbw.reservation.entities.ArticleEntity">
+        INSERT INTO `reservation`.`articles` (`board_code`, `user_email`, `title`, `content`, `view`, `created_at`,
+                                              `modified_at`, `is_deleted`)
+        VALUES (#{boardCode}, #{userEmail}, #{title}, #{content}, #{view}, #{createdAt}, #{modifiedAt}, #{isDeleted})
+    </insert>
+
+    <select id="selectGeneralArticleCount" resultType="_int">
+        SELECT COUNT(0)
+        FROM `reservation`.`articles`
+        WHERE `is_deleted` = FALSE
+          AND `board_code` = #{boardCode}
+    </select>
+
+    <update id="updateGeneralArticleView" parameterType="com.jbw.reservation.entities.ArticleEntity">
+        UPDATE `reservation`.`articles`
+        SET `board_code`  = #{boardCode},
+            `user_email`  = #{userEmail},
+            `title`       = #{title},
+            `content`     = #{content},
+            `view`        = #{view},
+            `created_at`  = #{createdAt},
+            `modified_at` = #{modifiedAt},
+            `is_deleted`  = #{isDeleted}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+
+    <select id="selectGeneralArticles" resultType="com.jbw.reservation.dtos.ArticleDto">
+        SELECT `generalBoard`.`index`       AS `index`,
+               `generalBoard`.`board_code`  AS `boardCode`,
+               `generalBoard`.`user_email`  AS `userEmail`,
+               `generalBoard`.`title`       AS `title`,
+               `generalBoard`.`content`     AS `content`,
+               `generalBoard`.`view`        AS `view`,
+               `generalBoard`.`created_at`  AS `createdAt`,
+               `generalBoard`.`modified_at` AS `modifiedAt`,
+               `generalBoard`.`is_deleted`  AS `isDeleted`,
+               `user`.name                  AS `userName`
+        FROM `reservation`.`articles` AS `generalBoard`
+                 LEFT JOIN `reservation`.`users` AS `user`
+                           ON `generalBoard`.`user_email` = `user`.`email`
+        WHERE `generalBoard`.`is_deleted` = FALSE
+          AND `generalBoard`.`board_code` = #{boardCode}
+        ORDER BY `generalBoard`.`index` DESC
+        LIMIT #{countPerPage} OFFSET #{offset}
+    </select>
+
+    <select id="selectGeneralArticleReadIndex" resultType="com.jbw.reservation.entities.ArticleEntity">
+        SELECT `generalBoard`.`index`       AS `index`,
+               `generalBoard`.`board_code`  AS `boardCode`,
+               `generalBoard`.`user_email`  AS `userEmail`,
+               `generalBoard`.`title`       AS `title`,
+               `generalBoard`.`content`     AS `content`,
+               `generalBoard`.`view`        AS `view`,
+               `generalBoard`.`created_at`  AS `createdAt`,
+               `generalBoard`.`modified_at` AS `modifiedAt`,
+               `generalBoard`.`is_deleted`  AS `isDeleted`
+        FROM `reservation`.`articles` AS `generalBoard`
+        WHERE `generalBoard`.`is_deleted` = FALSE
+          AND `generalBoard`.`index` = #{index}
+        LIMIT 1
+    </select>
+
+
+
+</mapper>

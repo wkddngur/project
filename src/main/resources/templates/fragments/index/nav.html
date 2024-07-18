@@ -2,6 +2,10 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <nav id="nav" th:fragment="nav">
+    <div id="loading">
+        <img alt="" class="image" th:src="@{/assets/images/loading.png}">
+        <span class="text">잠시만 기다려 주세요...</span>
+    </div>
     <form id="searchForm" class="searchForm">
         <label class="searchLabel">
             <input class="searchInput" autocomplete="off" minlength="1" maxlength="255" name="keyword" type="search"
@@ -17,7 +21,7 @@
             <i class="fa-solid fa-list"></i>
         </button>
 
-        <button class="logout button">
+        <button class="logout button" rel="logoutButton">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </button>
     </div>

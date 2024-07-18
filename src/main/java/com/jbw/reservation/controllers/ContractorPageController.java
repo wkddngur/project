@@ -5,6 +5,7 @@ import com.jbw.reservation.dtos.ReservationHistoryDto;
 import com.jbw.reservation.entities.ContractorEntity;
 import com.jbw.reservation.entities.ParkingLotEntity;
 import com.jbw.reservation.entities.ReservationHistoryEntity;
+import com.jbw.reservation.entities.UserEntity;
 import com.jbw.reservation.results.Result;
 import com.jbw.reservation.services.ContractorPageService;
 import org.json.JSONObject;
@@ -25,20 +26,19 @@ public class ContractorPageController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getContractorPage(@SessionAttribute(value = "contractor", required = false) ContractorEntity contractor) {
+    public ModelAndView getContractorPage(
+            @SessionAttribute(value = "user", required = false) UserEntity user,
+            @SessionAttribute(value = "contractor", required = false) ContractorEntity contractor) {
         ModelAndView modelAndView = new ModelAndView("contractor/contractorPage");
-        if (contractor == null) {
-            modelAndView.addObject("result", null);
-            return modelAndView;
-        }
+
         modelAndView.addObject("contractor", contractor);
         return modelAndView;
     }
 
     @RequestMapping(value = "/parkingLotList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ParkingLotDto[] getParkingLotList(@RequestParam("contractorEmail") String contractorEmail) {
-        return this.contractorPageService.getParkingLotList(contractorEmail);
+    public ParkingLotDto[] getParkingLotList(@SessionAttribute("contractor") ContractorEntity contractor) {
+        return this.contractorPageService.getParkingLotList(contractor.getEmail());
     }
 
     @RequestMapping(value = "/reservedHistoryByPIndex", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -1,6 +1,16 @@
 const userPage = document.getElementById('userPage');
 const reservedHistoryDiv = document.getElementById('reservedHistory');
 
+const userInfoDiv = document.getElementById('userInfo');
+
+if (userInfoDiv.querySelector('[rel="userInfoGender"]').innerText === 'M') {
+    userInfoDiv.querySelector('[rel="userInfoGender"]').innerText = '남성';
+}
+
+if (userInfoDiv.querySelector('[rel="userInfoGender"]').innerText === 'F') {
+    userInfoDiv.querySelector('[rel="userInfoGender"]').innerText = '여성';
+}
+
 userPage.querySelector('[rel="closer"]').onclick = () => {
     location.href = '../';
 }
@@ -22,7 +32,13 @@ function getReservedHistory() {
 
         const reservedHistoryArray = JSON.parse(xhr.responseText);
 
+        if (reservedHistoryArray.length === 0) {
+            reservedHistoryDiv.querySelector('[rel="reservedHistoryTable"]').innerHTML = '';
+            reservedHistoryDiv.querySelector('[rel="reservedHistoryTable"]').innerHTML = `<div style="width: 100%; font-size: 1.1rem; padding: 0.5rem; text-align: center;">등록된 예약 내역이 없습니다. 메인페이지에서 예약을 진행해 주세요.</div>`;
+        }
+
         for (let reservedHistoryObject of reservedHistoryArray) {
+            userInfoDiv.querySelector('[rel="totalReservationCount"]').innerText = reservedHistoryArray.length + ' 건';
 
             let startDateTime = new Date(reservedHistoryObject['startDateTime']);
             let startDateTimeFormat = dateFormat(startDateTime);
@@ -33,9 +49,24 @@ function getReservedHistory() {
             let createdAtPayment = new Date(reservedHistoryObject['createdAtPayment']);
             let createdAtPaymentFormat = dateFormat(createdAtPayment);
 
-            let paymentStatusText = reservedHistoryObject['agreePayment'] === true ? '결제 완료' : '입금 확인중';
-            let refundStatusText = reservedHistoryObject['agreeRefund'] === true ? '환불 완료' : '환불 신청'
-            // 여기서 false 일때 버튼 요소를 만들어서 넣어줌으로서 글 대신 환불 신청 버튼이 나오면 좋을듯 그 버튼을 환불신청하는 다이얼로그로 연결시켜서 다이얼로그에서 은행 및 계좌번호 등등 입력받고 환불신청하고 컨트롤러에서는 refunds 테이블에 삽입하고 삽입한 결제에 대해서 reservation 테이블에서 refund_index 행의 값이 잘 바뀌는 지 확인 까지 하면 될듯?
+            const refundButtonEL = '<button class="_obj-button" rel="refundButton" type="button">환불 신청 하기</button>';
+
+            let paymentStatusText = reservedHistoryObject['agreePayment'] === true ? '결제 완료' : '입금 확인 중';
+            let refundStatusText = null;
+
+            if (reservedHistoryObject['agreePayment'] === false) {
+                // 결제 미완료
+                refundStatusText = '결제 미완료';
+            } else if (reservedHistoryObject['agreePayment'] === true && reservedHistoryObject['refundIndex'] === null) {
+                // 결제 완료, 환불 신청 안 한 상태
+                refundStatusText = refundButtonEL;
+            } else if (reservedHistoryObject['refundIndex'] !== null && reservedHistoryObject['agreeRefund'] === false) {
+                // 환불 신청한 상태 (환불 처리 중)
+                refundStatusText = '환불 처리 중';
+            } else if (reservedHistoryObject['refundIndex'] !== null && reservedHistoryObject['agreeRefund'] === true) {
+                // 환불 완료된 상태
+                refundStatusText = '환불 처리 완료';
+            }
 
             const reservedHistoryEl = new DOMParser().parseFromString(`
             <div class="reservedHistory-list-tr">
@@ -47,12 +78,27 @@ function getReservedHistory() {
                 <span class="text">${startDateTimeFormat} ~ ${endDateTimeFormat}</span>
                 <span class="text">${reservedHistoryObject['amount']}원</span>
                 <span class="text">${createdAtPaymentFormat}</span>
-                <span class="text">${paymentStatusText}</span>
-                <span class="text">${refundStatusText}</span>
+                <span class="text" rel="paymentStatus">${paymentStatusText}</span>
+                <span class="text" rel="refundStatus">${refundStatusText}</span>
             </div>
             `, 'text/html').querySelector('div.reservedHistory-list-tr');
 
+            if (paymentStatusText === '결제 완료') {
+                reservedHistoryEl.querySelector('[rel="paymentStatus"]').style.color = '#28b463';
+            } else {
+                reservedHistoryEl.querySelector('[rel="paymentStatus"]').style.color = 'red';
+            }
+
+            if (refundStatusText === '환불 처리 중') {
+                reservedHistoryEl.querySelector('[rel="refundStatus"]').style.color = 'red';
+            } else if (refundStatusText === '환불 처리 완료') {
+                reservedHistoryEl.querySelector('[rel="refundStatus"]').style.color = '#28b463';
+            }
+
             // 여기서 위에서 만들어준 버튼 오브젝트 클릭 이벤트 만들어서 환불 처리 POST 요청도 처리해주면 될듯
+            reservedHistoryEl.querySelector('[rel="refundButton"]')?.addEventListener('click', () => {
+               showRefundFormDialog(reservedHistoryObject);
+            });
 
             reservedHistoryDiv.querySelector('[rel="reservedHistoryTbody"]').append(reservedHistoryEl);
         }

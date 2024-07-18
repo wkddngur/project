@@ -34,7 +34,7 @@ function getParkingLotList() { // 협력업체 페이지 접근시 parkingLots �
 
         for (let parkingLotObject of parkingLotArray) {
 
-            contractorInfoDiv.querySelector('[rel="totalParkingLotCount"]').innerText = parkingLotArray.length;
+            contractorInfoDiv.querySelector('[rel="totalParkingLotCount"]').innerText = parkingLotArray.length + ' 개';
 
             const parkingLotEl = new DOMParser().parseFromString(`
         <div class="parkingLot-list-tr">

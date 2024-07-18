@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 public interface ReservationMapper {
     int insertPayment(PaymentEntity payment);
 
+    int insertRefund(RefundEntity refund);
+
     int insertReservationHistory(ReservationHistoryEntity reservationHistory);
 
     int selectReservedCount(ReservationHistoryEntity reservationHistory);
@@ -25,6 +27,8 @@ public interface ReservationMapper {
     int updatePayment(PaymentEntity payment);
 
     int updateRefund(RefundEntity refund);
+
+    int updateReservationHistory(ReservationHistoryEntity reservationHistory);
 
     ReservationHistoryEntity[] selectReservedHistoryByNow(@Param("parkingLotIndex") int parkingLotIndex,
                                                           @Param("today") LocalDate reqDate);
@@ -42,4 +46,6 @@ public interface ReservationMapper {
     PaymentEntity selectPaymentByIndex(@Param("paymentIndex") Integer paymentIndex);
 
     RefundEntity selectRefundByIndex(@Param("refundIndex") Integer refundIndex);
+
+    ReservationHistoryEntity selectReservedHistoryByPaymentIndex(@Param("paymentIndex") int paymentIndex);
 }

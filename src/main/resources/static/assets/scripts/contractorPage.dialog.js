@@ -109,7 +109,7 @@ function showReservedHistoryByPayments(reservedHistoryArray) {
                 <span class="text">${startDateTimeFormat} ~ ${endDateTimeFormat}</span>
                 <span class="text">${reservedHistoryObject['amount']} 원</span>
                 <span class="text">${createdAtFormat}</span>
-                <span class="text" rel="status">${paymentStatusEl}</span>
+                <span class="text status" rel="status">${paymentStatusEl}</span>
             </div>
         `, 'text/html').querySelector('div.payment-history-list-tr');
 
@@ -199,7 +199,7 @@ function showReservedHistoryByRefunds(reservedHistoryArray, totalRefundCount) {
                     <span class="text">${reservedHistoryObject['bankCodeText']}</span>
                     <span class="text">${reservedHistoryObject['bankAccountNumber']}</span>
                     <span class="text">${refundCreatedAtFormat}</span>
-                    <span class="text" rel="status">${refundStatusEl}</span>
+                    <span class="text status" rel="status">${refundStatusEl}</span>
                 </div>
             `, 'text/html').querySelector('div.refund-history-list-tr');
 

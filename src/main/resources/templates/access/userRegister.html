@@ -9,13 +9,27 @@
     <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/common.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/access.userRegister.css}">
 
+    <script defer th:if="${session.user != null}">
+        alert('로그인 되어 있는 상태입니다. 로그아웃 후 다시 시도해 주세요.');
+        location.href = '/';
+    </script>
+
+    <script defer th:if="${session.contractor != null}">
+        alert('협력업체 로그인 되어있는 상태입니다. 협력업체 로그아웃 후 다시 시도해 주세요.');
+        location.href = '/contractor/'
+    </script>
+
     <script defer type="text/javascript" th:src="@{/assets/scripts/common.js}"></script>
     <script defer type="text/javascript" th:src="@{/assets/scripts/access.userRegister.js}"></script>
 
 </head>
-<body th:with="userRegex=${T(com.jbw.reservation.regexes.UserRegex)},emailAuthRegex=${T(com.jbw.reservation.regexes.EmailAuthRegex)}">
+<body th:if="${session.user == null && session.contractor == null}" th:with="userRegex=${T(com.jbw.reservation.regexes.UserRegex)},emailAuthRegex=${T(com.jbw.reservation.regexes.EmailAuthRegex)}">
 
 <div class="userRegisterDiv" id="userRegisterDiv">
+    <div id="loading">
+        <img alt="" class="image" th:src="@{/assets/images/loading.png}">
+        <span class="text">잠시만 기다려 주세요...</span>
+    </div>
 
     <div class="titleDiv">
         <h2 class="__title">회원가입</h2>
@@ -63,10 +77,10 @@
             </select>
         </label>
 
-        <label class="_obj-label" rel="nicknameLabel" th:attrappend="data-regex=${userRegex.nickname.expression}">
+        <label class="_obj-label" rel="nicknameLabel">
             <span class="__text">닉네임</span>
             <input required autocomplete="off" class="_obj-input __field" maxlength="10" minlength="2" name="nickname"
-                   placeholder="닉네임" spellcheck="false" type="text">
+                   placeholder="닉네임" spellcheck="false" type="text" th:attrappend="data-regex=${userRegex.nickname.expression}">
         </label>
 
         <label class="_obj-label" rel="ssnBirthLabel">

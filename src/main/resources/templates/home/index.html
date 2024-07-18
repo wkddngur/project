@@ -11,6 +11,16 @@
     <link rel="stylesheet" type="text/css" th:href="@{assets/styles/common.css}">
     <link rel="stylesheet" type="text/css" th:href="@{assets/styles/index.css}">
 
+    <script defer th:if="${session.contractor != null}">
+        alert('협력업체 로그인 상태입니다. 협력업체 로그아웃 후 다시 시도해 주세요.');
+        location.href = '/contractor/'
+    </script>
+
+    <script defer th:if="${session.contractor == null && session.user == null}">
+        alert('로그인 후 이용해 주세요.');
+        location.href = '/access/';
+    </script>
+
     <!--    swiperjs API 끌어온것.-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -35,10 +45,13 @@
     <script defer type="text/javascript" th:src="@{/assets/scripts/index.nav.js}"></script>
     <script defer type="text/javascript" th:src="@{/assets/scripts/index.reservationForm.js}"></script>
     <script defer type="text/javascript" th:src="@{/assets/scripts/index.categoryDialog.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.inquiryBoardDialog.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/index.generalBoardDialog.js}"></script>
+
 
 </head>
 
-<body>
+<body th:if="${session.user != null && session.contractor == null}">
 <div class="_obj-cover" id="cover"></div>
 
 <th:block th:replace="~{fragments/index/nav.html :: nav}"></th:block>
@@ -54,6 +67,22 @@
 <th:block th:replace="~{fragments/index/categoryDialog.html :: categoryDialog}"></th:block>
 
 <th:block th:replace="~{fragments/index/referenceTimeDialog.html :: referenceTimeDialog}"></th:block>
+
+<th:block th:replace="~{fragments/index/inquiryBoardDialog.html :: inquiryBoardDialog}"></th:block>
+
+<th:block th:replace="~{fragments/index/inquiryArticleWriteForm.html :: inquiryArticleWriteFormDialog}"></th:block>
+
+<th:block th:replace="~{fragments/index/inquiryArticleReadDialog.html :: inquiryArticleReadDialog}"></th:block>
+
+<th:block th:replace="~{fragments/index/inquiryArticleModifyForm.html :: inquiryArticleModifyFormDialog}"></th:block>
+
+<th:block th:replace="~{fragments/index/generalBoardDialog.html :: generalBoardDialog}"></th:block>
+
+<th:block th:replace="~{fragments/index/generalArticleWrite.html :: generalArticleWriteFormDialog}"></th:block>
+
+<th:block th:replace="~{fragments/index/generalArticleReadDialog.html :: generalArticleReadDialog}"></th:block>
+
+<th:block th:replace="~{fragments/index/generalArticleModifyForm.html :: generalArticleModifyFormDialog}"></th:block>
 
 </body>
 

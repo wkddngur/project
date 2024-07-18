@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import "userPage.dialog";
 
 body {
   background-color: #0B005C;
@@ -49,7 +50,6 @@ body {
 
         > .text {
           font: inherit;
-
         }
 
         &:hover {
@@ -105,11 +105,12 @@ body {
         }
       }
     }
+
     &:has([name="type"][value="reservedHistory"]:checked) ~ .div.reservedHistory {
       display: flex;
     }
 
-    &:has([name="type"][value="userDataRecover"]:checked) ~ .div.userDataRecover {
+    &:has([name="type"][value="userInfo"]:checked) ~ .div.userInfo {
       display: flex;
     }
   }
@@ -130,13 +131,24 @@ body {
   > .reservedHistoryTitleDiv {
     text-align: center;
 
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.3rem;
+
     > h2 {
       padding: 1rem;
       font-size: 1.5rem;
       font-weight: 500;
     }
+
     > .text {
       font-size: 1.2rem;
+    }
+
+    > .smail-text {
+      color: red;
     }
   }
 
@@ -149,6 +161,7 @@ body {
 
     > .reservedHistory-thead {
       display: table-header-group;
+
       > .reservedHistory-tr {
         display: table-row;
 
@@ -165,6 +178,7 @@ body {
 
     > .reservedHistory-tbody {
       display: table-row-group;
+
       > .reservedHistory-list-tr {
         display: table-row;
 
@@ -173,19 +187,142 @@ body {
           padding: 0.5rem;
           border: 0.0625rem solid #0B005C;
           display: table-cell;
-        }
 
-        > .text.index {
-
+          > ._obj-button {
+            width: 100%;
+            height: 1.5rem;
+          }
         }
       }
     }
   }
+
+  > .reservedHistory-tfoot {
+
+    text-align: center;
+  }
 }
 
-#userDataRecover {
-  font-size: 1.4rem;
-  align-items: center;
+#userInfo {
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  border-radius: 0.375rem;
+  padding: 1rem 2rem 2rem;
+  overflow: auto;
+  position: relative;
+  transform: translate(-50%);
+
+  align-items: stretch;
   display: none;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  > .infoDiv {
+    border: 0.0625rem solid #0B005C;
+    border-radius: 0.25rem;
+    padding: 2rem 3rem 3rem;
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1.5rem;
+
+    > .title {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+
+    > .item {
+
+      align-items: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 1rem;
+
+      i {
+        font-size: 1.2rem;
+
+        > .text {
+          font-size: 1.1rem;
+          font-weight: 500;
+        }
+      }
+
+      > .content {
+        width: 100%;
+        height: 3rem;
+        border: 0.0625rem solid #0B005C;
+        border-radius: 0.25rem;
+
+        align-items: center;
+        display: flex;
+        justify-content: center;
+
+        > .content-text {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+
+  > .statusInfo {
+    border: 0.0625rem solid #0B005C;
+    border-radius: 0.25rem;
+    padding: 2rem 3rem 3rem;
+
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1.5rem;
+
+    > .title {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+
+    > .item {
+
+      align-items: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 1rem;
+
+      i {
+        font-size: 1.2rem;
+
+        > .text {
+          font-size: 1.1rem;
+          font-weight: 500;
+        }
+      }
+
+      > .content {
+        width: 100%;
+        height: 3rem;
+        border: 0.0625rem solid #0B005C;
+        border-radius: 0.25rem;
+
+        align-items: center;
+        display: flex;
+        justify-content: center;
+
+        > .content-text {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
 }

@@ -15,7 +15,7 @@ loginDiv.loginForm.onsubmit = (e) => {
     loginDiv.loginForm.emailLabel.setValid(loginDiv.loginForm['email'].tests());
     loginDiv.loginForm.passwordLabel.setValid(loginDiv.loginForm['password'].tests());
     if (!loginDiv.loginForm.emailLabel.isValid() || !loginDiv.loginForm.passwordLabel.isValid()) {
-        MessageObj.createSimpleOk('경고', '입력하신 이메일과 비밃번호를 확인해주세요.', () => {
+        MessageObj.createSimpleOk('경고', '입력하신 이메일과 비밀번호를 확인해주세요.', () => {
             loginDiv.loginForm['email'].focus();
             loginDiv.loginForm['password'].value = '';
         }).show();

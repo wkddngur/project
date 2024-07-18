@@ -9,26 +9,32 @@
     <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/userPage.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/assets/styles/common.css}">
 
+    <script defer th:if="${session.contractor != null}">
+        alert('협력업체 로그인 상태입니다. 협력업체 로그아웃 후 다시 시도해 주세요.');
+        location.href = '/contractor/'
+    </script>
+
+    <script defer th:if="${session.contractor == null && session.user == null}">
+        alert('로그인 후 이용해 주세요.');
+        location.href = '/access/';
+    </script>
+
     <script src="https://kit.fontawesome.com/bb143610b4.js" crossorigin="anonymous" type="text/javascript"></script>
 
     <script defer type="text/javascript" th:src="@{/assets/scripts/common.js}"></script>
+    <script defer type="text/javascript" th:src="@{/assets/scripts/userPage.refundFormDialog.js}"></script>
     <script defer type="text/javascript" th:src="@{/assets/scripts/userPage.js}"></script>
 
-    <!--        <script defer th:if="${}">-->
-    <!--            alert('로그인 후 이용해 주세요.');-->
-    <!--            location.href = '/access/';-->
-    <!--        </script>-->
-
 </head>
-<body>
-<div id="refundDialog">
-    <div class="dialog"></div>
-</div>
+<body th:if="${session.user != null && session.contractor == null}">
+<div class="_obj-cover" id="cover"></div>
+
+<th:block th:replace="~{fragments/userPage/refundFormDialog.html :: refundFormDialog}"></th:block>
 
 <div id="userPage">
 
 <!--    session 처리한 결과로 찍어줘야 될 부분-->
-    <input name="userEmail" value="jbw5387@naver.com" type="hidden">
+    <input name="userEmail" type="hidden" th:value="${session.user.getEmail()}">
 
     <div class="userPageTitleDiv">
         <div class="titleDiv">
@@ -45,8 +51,8 @@
             </label>
 
             <label class="type">
-                <input name="type" value="userDataRecover" type="radio">
-                <span class="title">회원 정보 수정</span>
+                <input name="type" value="userInfo" type="radio">
+                <span class="title">회원 정보 조회</span>
             </label>
         </div>
     </div>
@@ -54,7 +60,7 @@
 
     <th:block th:replace="~{fragments/userPage/reservedHistory.html :: reservedHistory}"></th:block>
 
-    <th:block th:replace="~{fragments/userPage/userDataRecover.html :: userDataRecover}"></th:block>
+    <th:block th:replace="~{fragments/userPage/userInfo.html :: userInfo}"></th:block>
 
 </div>
 

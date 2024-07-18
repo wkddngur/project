@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="_obj-dialog" id="generalArticleModifyFormDialog" th:fragment="generalArticleModifyFormDialog">
+    <div class="title">
+        <h2>게시글 수정</h2>
+    </div>
+
+    <form class="generalArticleModifyForm" id="generalArticleModifyForm">
+        <label class="_obj-label" rel="generalArticleModifyTitleLabel">
+            <span class="__text">문의 게시글 제목</span>
+            <input  class="_obj-input __field" minlength="1" maxlength="100" name="title" type="text">
+        </label>
+
+        <label class="_obj-label" rel="generalArticleModifyContentLabel">
+            <span class="__text">게시글 내용</span>
+            <textarea required class="_obj-input __field" name="content" minlength="1" maxlength="1000"></textarea>
+        </label>
+
+        <button class="_obj-button" type="submit">게시글 수정하기</button>
+    </form>
+
+
+    <button class="_obj-button" type="button" rel="cancelButton">게시글 수정 취소</button>
+</div>
+</html>

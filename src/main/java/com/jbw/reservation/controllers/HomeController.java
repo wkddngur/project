@@ -2,15 +2,14 @@ package com.jbw.reservation.controllers;
 
 import com.jbw.reservation.dtos.ParkingLotDto;
 import com.jbw.reservation.entities.SearchHistoryEntity;
+import com.jbw.reservation.entities.UserEntity;
 import com.jbw.reservation.services.HomeService;
+import jakarta.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -30,7 +29,8 @@ public class HomeController {
 
     @RequestMapping(value = "/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ParkingLotDto[] getSearch(SearchHistoryEntity searchHistory) {
-        return this.homeService.search(searchHistory);
+    public ParkingLotDto[] getSearch(@SessionAttribute("user") UserEntity user,
+                                     SearchHistoryEntity searchHistory) {
+        return this.homeService.search(user.getEmail(), searchHistory);
     }
 }
